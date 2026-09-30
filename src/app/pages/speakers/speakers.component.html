@@ -1,0 +1,37 @@
+<div id="template-container">
+  <div class="main-container" style="padding-bottom: 1px;">
+    <app-gravity-bg></app-gravity-bg>
+    @if (speakers?.length > 0) {
+    <div class="inspirational_speakers_container pt-5">
+      <h1 class="page-heading pt-4" style="margin-bottom: 1rem;">SPEAKERS</h1>
+      <div class="card-container">
+        @for (speaker of speakers; track $index) {
+        <app-speaker-card [speaker]="speaker"></app-speaker-card>
+        }
+      </div>
+    </div>
+    }
+    <div class="inspirational_speakers_container pt-4">
+      <h3 class="page-heading pt-4" style="margin-bottom: 1rem;">PAST SPEAKERS</h3>
+      <div class="card-container">
+        @for(speaker of pastSpeakers; track $index){
+        <app-speaker-card [speaker]="speaker"></app-speaker-card>
+        }
+      </div>
+
+    </div>
+
+
+    <div class="contact-card-container pt-5 pb-5" style="background: transparent;">
+      <h3 class="contact-section-heading">Contact Us</h3>
+
+      <div class="contact">
+        @for(cr of crData; track $index){
+        <app-square-contact [email]="cr.mail" [linkedin]="cr.linkedin" [img_url]="cr.profile" [name]="cr.name"
+          [designation]="cr.designation"></app-square-contact>
+        }
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

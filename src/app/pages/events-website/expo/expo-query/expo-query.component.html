@@ -1,0 +1,11 @@
+<app-auto-form 
+  [questions]="questions" 
+  [options]="options"
+  [steps]="stepNames"
+  [stepQuestions]="stepQuestions"
+  [prefillData]="userPrefillData"
+  heading="Expo Query Form"
+  description="If you have any queries or need assistance, please reach out to us at startupexpo@ecell.in or fill in the details, our team will get back to you shortly.
+"
+  (regResponse)="onQuerySubmit($event)">
+</app-auto-form>

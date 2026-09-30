@@ -1,0 +1,153 @@
+@if (isVisible) {
+<div [ngClass]="{ 'mb-3': !noMargin }" [formGroup]="form">
+  @if(question.label) {
+  <div class="label-container">
+    <label [attr.for]="questionKey" class="form-label"
+      >{{ label }}@if (!isValid || required) {<span [class.error]="!isValid"
+        >*</span
+      >}</label
+    >
+    @if (question.info && !supressInfo) {
+    <span class="info-button tooltip-button"
+      ><i class="bi bi-info-circle-fill"></i>
+      <div
+        class="tooltip info-tooltip"
+        [innerHTML]="question.info"
+      ></div> </span
+    >} @if (!isValid && control.errors) {
+    <span class="error-button tooltip-button"
+      ><i class="bi bi-exclamation-diamond-fill"></i>
+      <div
+        class="tooltip error-tooltip"
+        [innerHTML]="control.errors | valerrors"
+      ></div> </span
+    >}
+  </div>
+  }
+  <div>
+    @switch (question.controlType) { @case ('textbox') {
+      @if(question.textBoxOptions.uppercase){
+        <input
+          class="form-control"
+          [class.is-invalid]="!isValid && control.touched"
+          [id]="questionKey"
+          [formControlName]="question.key"
+          [type]="question.type"
+          [placeholder]="placeholder"
+          [attr.data-field]="question.key"
+          (input)="makeInputUpperCase($event)"
+        />
+      }@else {
+        <input
+          class="form-control"
+          [class.is-invalid]="!isValid && control.touched"
+          [formControlName]="question.key"
+          [id]="questionKey"
+          [type]="question.type"
+          [placeholder]="placeholder"
+          [attr.data-field]="question.key"
+        />
+      }
+    } @case ('textarea') {
+    <textarea
+      class="form-control"
+      [class.is-invalid]="!isValid && control.touched"
+      [formControlName]="question.key"
+      [id]="questionKey"
+      [placeholder]="placeholder"
+      [rows]="question.cols"
+      [attr.data-field]="question.key"
+    ></textarea>
+    } @case ('dropdown') {
+    <select
+      class="form-select custom-select"
+      [class.is-invalid]="!isValid && control.touched"
+      [id]="questionKey"
+      [formControlName]="question.key"
+      [attr.data-field]="question.key"
+    >
+      @if(question.placeholder) {
+      <option value="" disabled selected>{{ placeholder }}</option>
+      } @for (opt of question.options; track opt) {
+      <option [value]="opt.value">{{ opt.viewValue }}</option>
+      }
+    </select>
+    } @case ('radio') {
+    <div
+      class="radio"
+      [class.radio-vertical]="question.type === 'vertical'"
+      [id]="questionKey"
+    >
+      @for(opt of question.options; track opt.value) {
+      <label class="radio-option">
+        <input
+          [formControlName]="question.key"
+          type="radio"
+          [value]="opt.value"
+        />
+        <span>{{ opt.viewValue }}</span>
+      </label>
+      }
+    </div>
+    } @case ('checkbox') {
+      <app-multi-select [form]="form" [question]="question"></app-multi-select>
+    }@case('otp'){
+    <app-otp (onOtpChange)="onOtpChange($event)"></app-otp>
+    } @case ('line-group') {
+    <div class="row" [id]="questionKey">
+      @for(childQuestion of question.subQuestions; track childQuestion.key ) {
+      <div class="col">
+        <app-question
+          [question]="childQuestion"
+          [form]="form"
+          [noMargin]="true"
+        />
+      </div>
+      }
+    </div>
+    } @case ('list') {
+    <!-- Gurantees that the question.options is an array, and that the control is a FormArray -->
+    <!-- Render all the question for each item in the question.options array, for each element in the formArray -->
+    <div [formArrayName]="question.key">
+      @for(child of controlChildren; track child; let idx = $index) {
+      <div class="list-item mb-3">
+        <div class="list-item-questions">
+          @for(childQuestion of question.subQuestions; track childQuestion.key)
+          {
+          <app-question
+            [question]="childQuestion"
+            [prefix]="questionKey"
+            [index]="controlChildren.length > 1 ? idx : undefined"
+            [noMargin]="$last"
+            [form]="child"
+            [_rootForm]="rootForm"
+          ></app-question
+          >}
+        </div>
+        <button (click)="removeElement($index)">
+          <i class="bi bi-x-square-fill"></i>
+        </button>
+      </div>
+      }
+      <button class="add" (click)="addElement()">
+        Add{{ question.type ? " " + question.type : "" }}
+      </button>
+    </div>
+    } @case ('file') {
+    <app-file-upload
+      [fileName]="fileName"
+      (fileDropped)="uponFileSelect($event)"
+      [options]="question.fileOptions"
+    ></app-file-upload>
+    } @case ('ordering') {
+    <app-ordering-question
+      [question]="question"
+      [form]="form"
+    ></app-ordering-question>
+    } }
+    @if (question.note) {
+      <div class="field-note" [innerHTML]="question.note"></div>
+    }
+  </div>
+</div>
+}

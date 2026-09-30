@@ -1,0 +1,51 @@
+<div class="payment-container">
+  <div class="left-side">
+    <img src="images/logos/Workshop.jpg" alt="Workshop Logo" class="logo">
+    <div class="content">
+      <h1>Workshop Payment</h1>
+      <p>Complete Your Payment</p>
+    </div>
+  </div>
+  
+  <div class="right-side">
+    <div class="payment-content">
+      <div *ngIf="isLoading" class="loading">
+        <p>Loading your registrations...</p>
+      </div>
+      
+      <div *ngIf="!isLoading && userRegistrations.length > 0" class="registrations">
+        <h2>Your Workshop Registrations</h2>
+        
+        <div *ngFor="let registration of userRegistrations" class="registration-card">
+          <div class="workshop-info">
+            <h3>{{ registration.name }}</h3>
+            <p class="amount">Amount: ₹{{ registration.amount }}</p>
+            <p class="status" [class.paid]="registration.isPaid" [class.unpaid]="!registration.isPaid">
+              Status: {{ registration.isPaid ? 'Paid' : 'Payment Pending' }}
+            </p>
+          </div>
+          
+          <div class="actions">
+            <button 
+              *ngIf="!registration.isPaid" 
+              (click)="proceedToPayment(registration)"
+              [disabled]="isProcessingPayment"
+              class="pay-btn">
+              {{ isProcessingPayment ? 'Processing...' : 'Pay Now' }}
+            </button>
+            <span *ngIf="registration.isPaid" class="paid-badge">✓ Paid</span>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!isLoading && userRegistrations.length === 0" class="no-registrations">
+        <h2>Coming Soon!</h2>
+        <p>Workshop payments will be available soon. Stay tuned!</p>
+      </div>
+      
+      <div class="form-actions">
+        <button (click)="goBack()" class="back-btn">Back to Workshops</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div id="template-container">
+<app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <!-- <app-na-logo></app-na-logo> -->
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/compi_logo.png'" [buttons]="compiButtons" [backgroundImage]="BackgroundImages.BID" (buttonClick)="handleButtonClick($event)"></app-events-bg>      
+      </div>
+
+    </div>
+    <div class="about-container">
+      <h3 class="heading-primary" style="margin-bottom: -1rem;">Cash Prize: Upto INR 1 Lakh</h3>
+      <p>
+        Entrepreneurship is about dedicating a few years of your life to challenges and sacrifices that most people
+        avoid, so you can enjoy a life that few ever achieve. If you're going to think, think big. One of the most
+        effective ways to enhance your critical thinking skills is by participating in <span class="event-name-highlight"> Competitions</span> that test your expertise in business, analytics, marketing,
+        strategy, finance, and all the essential facets of an entrepreneur's journey.
+      </p>
+    </div>
+    <div class="details-container">
+      <h3 class="heading-primary" style="margin-bottom: 0;">Competitions</h3>
+
+      <div class="cards-container" >
+        <div class="cards" *ngFor="let compi of compi_list; let i = index" style="backdrop-filter: blur(30px);">
+          <img style="object-fit: contain;" [src]="compi.image" alt="" />
+          <div class="know-more">
+            <button (click)="goToCompi(compi.link)">Know More</button>
+          </div>
+          <div class="text">{{ compi.name }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary pt-4" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="compi-faqs"></app-accordion>
+  </div>
+  <div class="contact-card-container pb-5">
+    <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [email]="'mrunal@ecell.in'" [contact]="'918788331620'" [linkedin]="'https://www.linkedin.com/in/mrunal-pachpande/?originalSubdomain=in'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/WhatsApp_Image_2025-09-09_at_20.26.22_0f2378e2-removebg-preview.png'" [name]="'Mrunal Pachpande'"
+        [designation]="'Events & PR Head'"></app-square-contact>
+      <app-square-contact [contact]="'919881092549'" [email]="'prathmesh@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/prathmeshwalimbe28/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/walimbe_website.png'" [name]="'Prathmesh Walimbe'"
+        [designation]="'Events & PR Head'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

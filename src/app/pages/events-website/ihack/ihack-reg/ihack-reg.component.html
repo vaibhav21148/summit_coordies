@@ -1,0 +1,12 @@
+@if (options) {
+<app-auto-form 
+  [options]="options" 
+  [questions]="questions"
+  [steps]="stepNames"
+  [stepQuestions]="stepQuestions"
+  [heading]="heading"
+  [description]="description"
+  [prefillData]="userPrefillData"
+  (regResponse)="onRegistrationComplete($event)">
+</app-auto-form>
+}

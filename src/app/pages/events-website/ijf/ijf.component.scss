@@ -1,0 +1,149 @@
+#template-container .main-container .statwork-container {
+  display: flex;
+  // width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+#template-container .main-container .hero-container .reg-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow buttons to wrap for smaller screens */
+  position: relative;
+}
+#template-container .main-container .hero-container .reg-button button {
+  margin: 10px;
+  margin-top: 30rem;
+}
+
+@media screen and (max-width: 600px) {
+  #template-container .main-container .hero-container .reg-button {
+    display: flex !important;
+
+    flex-direction: column !important;
+    align-items: center;
+    margin-top: 30rem;
+  }
+  #template-container .main-container .hero-container .reg-button button {
+    margin-top: 0;
+  }
+}
+
+// selection container
+#template-container .main-container .why-container .selection-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  gap: 20px;
+  margin-top: -5rem;
+}
+#template-container .main-container .why-container .selection-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+  // font-size: 25px;
+}
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection
+  .cards {
+  width: 320px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  color: white;
+}
+
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection
+  .cards
+  .main {
+  color: #fff;
+  font-size: 90px;
+  line-height: 100px;
+  font-family: "Fellix", sans-serif;
+}
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection
+  .cards
+  .content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection
+  .cards
+  .content
+  .heading {
+  color: #a26ce5;
+  font-size: 20px;
+  font-weight: 600;
+}
+#template-container
+  .main-container
+  .why-container
+  .selection-container
+  .selection
+  .cards
+  .content
+  .text {
+  color: #fff;
+  font-size: 16px;
+  // font-weight: 600;
+}
+// selection container
+
+@media screen and (max-width: 786px) {
+  #template-container
+    .main-container
+    .why-container
+    .selection-container
+    .selection {
+    row-gap: 0;
+  }
+}
+
+#template-container .speakers-container .speakers .cards {
+  height: 300px;
+}

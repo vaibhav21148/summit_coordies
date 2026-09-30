@@ -1,0 +1,129 @@
+<div id="template-container">
+    <!-- <div class="template-navbar" [class.scrolled-nav]="isScrolled">
+  </div> -->
+
+    <div class="main-container">
+        <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+       <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/vsm_logo.png'" [buttons]="vsmButtons" [backgroundImage]="backgroundImage.VSM" (buttonClick)="onButtonClick($event)"></app-events-bg>      
+      </div>
+        </div>
+
+        <div style="position: relative;">
+            <app-vanta-bg height="820vh" gradientHeight="820vh"></app-vanta-bg>
+
+            <div class="join-container"
+                style="display: flex; margin: auto; justify-content: center; flex-direction: column; position: relative; z-index: 1;">
+                <div
+                    style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;">
+                </div>
+                <div style="display: flex; margin: auto; justify-content: center">
+                    <!-- <h2 style=" padding-top: 3px;" class="prize font">
+          Join <span style="background-image: linear-gradient(180deg, #9b5fd9 50%, #caa9ed 100%);
+          color: transparent;
+          background-clip: text;">The Ten Minute Million</span> <br> India’s top on-spot funding event
+
+        </h2> -->
+                    <h2 style=" padding-top: 10px; background-image: linear-gradient(180deg, #FFE100 50%, #bba500 100%);"
+                        class="heading-primary">
+                        Join <strong>Virtual Stock Market<br> India’s premier finance & trading simulation</strong>
+                    </h2>
+                    <!-- <h1 class="prize font" >The Ten Minute Million</h1> -->
+                </div>
+                <!-- <div style="display: flex; margin: auto; justify-content: center">
+      <h2 class="prize font">
+        India’s top on-spot pitching event
+      </h2>
+    </div> -->
+            </div>
+            <div class="about-container">
+                <p style="text-align: center;">
+                    Step into an immersive, fast-paced <strong>virtual trading simulation</strong> where you take on the
+                    roles of a Hedge Fund and Market Maker.
+                    <br>
+                    Analyze markets, spot high-value opportunities, and manage risk in real time as you compete with top
+                    participants nationwide.
+                </p>
+                <h2 style="text-align: center; max-width: 90vw;">
+                    <strong>Your journey to becoming a market leader starts here!</strong>
+                </h2>
+
+            </div>
+
+            <div class="line" style="display: flex; margin-bottom: -0.5rem; justify-content: center">
+                <hr style="width: 80%; color: white; height: 5px;">
+            </div>
+
+
+            <div class="why-container pt-4">
+                <h3 class="heading-primary"
+                    style="margin-bottom: 0; background-image: linear-gradient(180deg, #FFE100 50%, #bba500 100%);">
+                    <span> Why apply for Virtual Stock Market?</span>
+                </h3>
+                <div class="card-container">
+                    <div class="cards" id="ev1">
+                        <app-evervault-card>
+                            <img src='images/events/info-icons/rupee.png' alt="" width="185px" /></app-evervault-card>
+
+
+                        <div class="content">
+                            <p class="text">
+                                Compete for top prizes including <strong>iPads</strong>, awarded to the top three
+                                performers.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cards" id="ev2">
+                        <app-evervault-card>
+                            <img src='images/events/info-icons/meter.png' alt="" width="185px" />
+                        </app-evervault-card>
+                        <div class="content">
+                            <p class="text">
+                                Build real trading instincts through a fast-paced market simulation.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cards" id="ev3">
+                        <app-evervault-card>
+                            <img src='images/events/info-icons/medal.png' alt="" width="185px" />
+                        </app-evervault-card>
+                        <div class="content">
+                            <p class="text">
+                                Boost your profile with a nationally recognized competition.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <app-timeline [events]="events"></app-timeline>
+
+
+    <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+        <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+        <app-accordion [items]="faqs" accordionId="ttmm-faqs"></app-accordion>
+    </div>
+
+
+    <div class="contact-card-container pb-5">
+        <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+        <div class="contact">
+            <app-square-contact [contact]="'916375028382'" [email]="'mridul@ecell.in'" [linkedin]="
+          'https://www.linkedin.com/in/mridul-mantri'
+        " [img_url]="'https://2k21.s3.amazonaws.com/images/mantri.png'" [name]="'Mridul Mantri'"
+                [designation]="'Marketing Head'"></app-square-contact>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -1,0 +1,61 @@
+/* MUN Registration Details Styles */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form styling */
+select, input, textarea {
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+select:focus, input:focus, textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Preference cards */
+.border-gray-200 {
+  transition: border-color 0.2s ease-in-out;
+}
+
+.border-gray-200:hover {
+  border-color: #d1d5db;
+}
+
+/* Button hover effects */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Status indicators */
+.bg-green-50 {
+  background-color: #f0fdf4;
+}
+
+.bg-blue-50 {
+  background-color: #eff6ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}

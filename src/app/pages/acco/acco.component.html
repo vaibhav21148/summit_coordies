@@ -1,0 +1,204 @@
+<!-- Coming Soon page - always visible as background behind the SweetAlert -->
+@if (showComingSoon) {
+<div class="coming-soon-overlay">
+  <img src="images/backgrounds/coming.png" alt="Coming Soon Background" class="coming-bg-image">
+  <div class="coming-content-wrapper">
+    <h1 class="coming-text">COMING<br>SOON</h1>
+  </div>
+</div>
+}
+
+<!-- Original acco page content -->
+@if (!showComingSoon) {
+<app-greenovation-hero></app-greenovation-hero>
+
+<div id="template-container">
+  <div class="main-container container-bg">
+
+    <!-- General Information Section -->
+    <section class="section" style="gap: 0;" data-aos="zoom-in">
+      <h2 class="heading-primary section-heading" style="margin-bottom: 2rem;">General Information</h2>
+
+      <div class="stats-container">
+        <div class="card-container card-1" data-aos="flip-left" data-aos-delay="100">
+          <div class="content">
+            <p class="stats-heading">LOCATION</p>
+            <div class="stats-details">
+              <p class="stats-text">Stay will be provided inside IIT Bombay Campus</p>
+              <p class="stats-note">We have limited number of rooms and would be provided on first come first serve
+                basis.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container card-2" data-aos="flip-up" data-aos-delay="200">
+          <div class="content">
+            <p class="stats-heading">CHARGES</p>
+            <div class="stats-details">
+              <p class="stats-text"><span class="strikethrough">₹3800</span> ₹3100 per person for a 4-day, 4-night stay
+              </p>
+              <p class="stats-note">Don't miss the early bird offer - Register now!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-container card-3" data-aos="flip-right" data-aos-delay="300">
+          <div class="content">
+            <p class="stats-heading">DURATION</p>
+            <div class="stats-details">
+              <p class="stats-text">Accommodation will be provided from 10:00 AM on 10th December to 10:00 AM on 14th
+                December</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perks & Benefits Section -->
+    <div class="why-container section" data-aos="fade-right">
+      <h2 class="heading-primary section-heading" style="margin-bottom: 2.5rem;">Perks & Benefits</h2>
+      <div class="perks-grid">
+        <div class="cards" data-aos="draw-border" data-aos-delay="100">
+          <div class="card-content">
+            <h3 class="heading1"><span class="word" style="--i:1"> In </span> <span class="word"
+                style="--i:2">Campus</span> <span class="word" style="--i:3">Stay</span></h3>
+            <p class="text"><span class="word" style="--i:1">Stay</span> <span class="word" style="--i:2">right</span>
+              <span class="word" style="--i:3">where</span> <span class="word" style="--i:4">the</span> <span
+                class="word" style="--i:5">action</span> <span class="word" style="--i:6">is.</span> <span class="word"
+                style="--i:7">No</span> <span class="word" style="--i:8">Mumbai</span> <span class="word"
+                style="--i:9">traffic,</span> <span class="word" style="--i:10">no</span> <span class="word"
+                style="--i:11">extra</span> <span class="word" style="--i:12">travel</span> <span class="word"
+                style="--i:13">costs—just</span> <span class="word" style="--i:14">seamless</span> <span class="word"
+                style="--i:15">access</span> <span class="word" style="--i:16">to</span> <span class="word"
+                style="--i:17">every</span> <span class="word" style="--i:18">event</span> <span class="word"
+                style="--i:19">and</span> <span class="word" style="--i:20">the</span> <span class="word"
+                style="--i:21">full</span> <span class="word" style="--i:22">E-Summit</span> <span class="word"
+                style="--i:23">experience.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="cards" data-aos="draw-border" data-aos-delay="200">
+          <div class="card-content">
+            <h3 class="heading1"><span class="word" style="--i:1">Cost-Effective</span></h3>
+            <p class="text"><span class="word" style="--i:1">A</span> <span class="word"
+                style="--i:2">cost-effective</span> <span class="word" style="--i:3">alternative</span> <span
+                class="word" style="--i:4">to</span> <span class="word" style="--i:5">nearby</span> <span class="word"
+                style="--i:6">hotels</span> <span class="word" style="--i:7">and</span> <span class="word"
+                style="--i:8">residences,</span> <span class="word" style="--i:9">ensuring</span> <span class="word"
+                style="--i:10">a</span> <span class="word" style="--i:11">comfortable</span> <span class="word"
+                style="--i:12">stay</span> <span class="word" style="--i:13">without</span> <span class="word"
+                style="--i:14">straining</span> <span class="word" style="--i:15">your</span> <span class="word"
+                style="--i:16">budget.</span></p>
+          </div>
+        </div>
+
+        <div class="cards" data-aos="draw-border" data-aos-delay="300">
+          <div class="card-content">
+            <h3 class="heading1"><span class="word" style="--i:1">Gold Pass</span> <span class="word"
+                style="--i:2">Access</span></h3>
+            <p class="text"><span class="word" style="--i:1">With</span> <span class="word"
+                style="--i:2">Accommodation</span> <span class="word" style="--i:3">get</span> <span class="word"
+                style="--i:4">access</span> <span class="word" style="--i:5">to</span> <span class="word"
+                style="--i:6">all</span> <span class="word" style="--i:7">Summit</span> <span class="word"
+                style="--i:8">events</span> <span class="word" style="--i:9">under</span> <span class="word"
+                style="--i:10">Gold</span> <span class="word" style="--i:11">pass</span></p>
+          </div>
+        </div>
+
+        <div class="cards" data-aos="draw-border" data-aos-delay="400">
+          <div class="card-content">
+            <h3 class="heading1"><span class="word" style="--i:1">Hospitality</span> <span class="word"
+                style="--i:2">Kit</span></h3>
+            <p class="text"><span class="word" style="--i:1">Receive</span> <span class="word" style="--i:2">a</span>
+              <span class="word" style="--i:3">comprehensive</span> <span class="word" style="--i:4">hospitality</span>
+              <span class="word" style="--i:5">kit</span> <span class="word" style="--i:6">with</span> <span
+                class="word" style="--i:7">essential</span> <span class="word" style="--i:8">items</span> <span
+                class="word" style="--i:9">for</span> <span class="word" style="--i:10">your</span> <span class="word"
+                style="--i:11">stay.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- How to Reach Section -->
+    <section class="reach section" data-aos="slide-right" style="position: relative; padding: 4rem 0;">
+
+
+      <h2 class="heading-primary section-heading" style="margin-bottom: 2.5rem; position: relative; z-index: 2;">HOW
+        TO
+        REACH</h2>
+      <div class="reach-container" data-aos="zoom-in-up" data-aos-delay="100"
+        style="backdrop-filter: blur(20px); background: rgba(0,0,0,0.4); position: relative; z-index: 2;">
+        <div class="reach-content">
+          <p class="reach-item">Transportation in Mumbai is accessible and diverse, including taxis,
+            auto-rickshaws, local trains, and buses. IIT Bombay, located in Powai, is part of the North-Eastern
+            suburbs
+            along the Central Railway Line of Mumbai.</p>
+
+          <div class="reach-section">
+            <h4 class="reach-heading"># Nearest Train Stations:</h4>
+            <ul class="reach-list">
+              <li class="reach-item"><strong class="reach-strong">Local Train:</strong> Kanjur Marg</li>
+              <li class="reach-item"><strong class="reach-strong">National Railway:</strong> Thane (nearest), Lokmanya
+                Tilak Terminus (LTT) and Dadar</li>
+            </ul>
+          </div>
+
+          <div class="reach-section">
+            <h4 class="reach-heading"># Navigational Tip:</h4>
+            <p class="reach-text">Specify "IIT Main Gate, Powai" as your destination for auto-rickshaws or buses.</p>
+          </div>
+
+          <div class="reach-section">
+            <h4 class="reach-heading"># Resource:</h4>
+            <p class="reach-text">Use the Taxi Auto Fare Calculator to estimate fares or download the "m-indicator"
+              app
+              for comprehensive travel assistance.</p>
+          </div>
+        </div>
+        <div class="reach-image">
+          <img src="images/acco/reach_bg.png" alt="How to reach IIT Bombay" class="reach-img">
+        </div>
+      </div>
+    </section>
+
+
+    <div class="faq-con faq-bg">
+      <h3 class="heading-primary section-heading" style="margin-bottom: 2rem;">FAQS</h3>
+      <app-accordion [items]="mappedFaqs"></app-accordion>
+    </div>
+
+
+    <div class="contact-card-container pb-5 contact-bg">
+      <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+      <div class="contact" data-aos="flip-up" data-aos-delay="100">
+        <app-square-contact [contact]="'+919680745354'" [email]="'shiv@ecell.in'"
+          [linkedin]="'https://www.linkedin.com/in/shiv-raj-beniwal-3b5a5432a/'"
+          [img_url]="'https://2k21.s3.amazonaws.com/images/IMG_6186.PNG'" [name]="'Shiv Raj Beniwal '"
+          [designation]="'Hospitality and PR Head'"></app-square-contact>
+      </div>
+    </div>
+  </div>
+  <!-- main container ends -->
+</div>
+<app-footer class="footer-bg"></app-footer>
+
+<!-- expo detail popup -->
+<div class="incubator_popup flex justify-content-center">
+  <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '5000px': '500px', '1199px': '60vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="header font-bold white-space-nowrap">{{title}}</span>
+      </div>
+    </ng-template>
+    <p class="m-0 content" [innerHTML]="description">
+      {{ description }}
+    </p>
+  </p-dialog>
+</div>
+<!-- expo detail popup -->
+}

@@ -1,0 +1,11 @@
+<!-- ...existing code... -->
+<ul class="ordering-list">
+  @for(opt of options; track opt.value){
+  <li class="ordering-list-item">
+    {{ opt.viewValue }}
+    <div class="buttons">
+      <button (click)="moveUp($index)" [disabled]="$first">↑</button>
+      <button (click)="moveDown($index)" [disabled]="$last">↓</button>
+    </div>
+  </li>}
+</ul>

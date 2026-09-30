@@ -1,0 +1,29 @@
+<div class="events-bg-container">
+    <div class="left-circle">
+        <div class="content">
+
+            <div class="logo" *ngIf="logoImage">
+                <img [src]="logoImage" alt="Logo">
+            </div>
+
+            
+
+            <div class="buttons" *ngIf="buttons.length > 0" [ngClass]="{'single-button': buttons.length === 1, 'double-button': buttons.length === 2}">
+                <button *ngFor="let button of buttons" 
+                        [routerLink]="button.routerLink || null" 
+                        (click)="button.clickHandler ? onButtonClick(button.clickHandler) : null" style="background: transparent;">
+                    {{ button.text }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="circle1">
+        <!-- <div class="circle2"> -->
+            <!-- <div class="circle3"> -->
+                <div class="circle4">
+                    <img [src]="backgroundImage" alt="Event Image" draggable="false">
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+    </div>
+</div>

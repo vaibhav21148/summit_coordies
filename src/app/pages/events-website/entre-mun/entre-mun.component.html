@@ -1,0 +1,210 @@
+<div id="template-container">
+  <!-- Instagram Link -->
+  <a href="https://www.instagram.com/entremun.iitb/" target="_blank" class="instagram-link">
+    <i class="bi bi-instagram"></i>
+    <span class="follow-text">Follow</span>
+  </a>
+
+  <!-- Query Flag -->
+  <div class="query-flag" (click)="showQueryDialog()">
+    <i class="bi bi-question-circle"></i>
+    <span class="query-text">Query</span>
+  </div>
+
+
+
+
+  <div class="main-container">
+
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo hero-logo-wrapper"
+        style="position: relative; width: 100%; height: 100vh; overflow: hidden; background-color: black; display: flex; justify-content: center; align-items: flex-end;">
+
+        <!-- Full Background Image -->
+        <div id="hero-bg">
+        </div>
+
+        <!-- Smooth Dark Vignette Overlay -->
+        <div
+          style="position: absolute; bottom: 0; left: 0; width: 100%; height: 70vh; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(30,10,0,0.8) 50%, transparent 100%); z-index: 2; pointer-events: none;">
+        </div>
+
+        <!-- Center Content: Logo and Register Button -->
+        <div class="hero-center-content"
+          style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-bottom: 12vh;">
+
+          <img src="images/mun.png" alt="ENTRE-MUN" class="hero-logo-img"
+            style="width: 58vw; min-width: 360px; max-width: 720px; height: auto; margin-bottom: 30px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(255,122,26,0.3)); will-change: transform, opacity;" />
+
+          <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <a *ngFor="let btn of munButtons" class="btn hero-action-btn"
+              [routerLink]="btn.routerLink ? btn.routerLink : null"
+              (click)="btn.isGroup ? onGroupRegistrationClick($event) : null" style="text-decoration: none;">
+              {{ btn.text }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-container">
+      <h3 class="heading-primary" style="margin-bottom: 0;">Diplomacy. Innovation. Entrepreneurship.</h3>
+      <h3 class="heading-primary">
+        Part of the 22nd E-Summit, IIT Bombay
+      </h3>
+      <p>
+        The <span class="event-name-highlight">7th Edition of Entre MUN</span> (Model United Nations) brings to you an
+        exciting platform where diplomacy meets entrepreneurship, organized as part of the highly anticipated 22nd
+        E-Summit at IIT Bombay. Step into a world where global diplomacy intersects with innovation and entrepreneurial
+        thinking. Entre-MUN offers a unique platform for delegates to tackle pressing global challenges, negotiate
+        solutions, and shape policies alongside nations, corporations, and key stakeholders.
+      </p>
+      <p>
+        Debate, collaborate, and innovate on topics like:
+        Technological breakthroughs & the digital future;
+        Global trade policies & economic strategies;
+        Sustainable development & environmental responsibility;
+        Entrepreneurship as a driver of global change
+
+      </p>
+      <p>
+        Whether you’re a first-time delegate or a seasoned MUNer, Entre-MUN will enhance your leadership, sharpen
+        critical thinking, and empower you to make a real-world impact.
+      </p>
+    </div>
+
+
+
+
+    <div class="why-container pt-4">
+      <h3 class="heading-primary why-heading"
+        style="margin-bottom: 0.75rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;">
+        <span>Why Entre-MUN?</span>
+      </h3>
+      <div class="why-cards-grid" id="why-cards-container">
+        <div class="why-card">
+          <div class="icon-wrapper">
+            <img src='images/events/info-icons/people.png' alt="" />
+          </div>
+          <h4 class="card-title">400+ delegates</h4>
+        </div>
+        <div class="why-card">
+          <div class="icon-wrapper">
+            <img src='images/events/info-icons/medal.png' alt="" />
+          </div>
+          <h4 class="card-title">Cash pool of ₹72K</h4>
+          <p class="card-description">Best Delegate: ₹7000<br>High Commendation: ₹3000</p>
+        </div>
+        <div class="why-card">
+          <div class="icon-wrapper">
+            <img src='images/events/info-icons/rupee.png' alt="" />
+          </div>
+          <h4 class="card-title">Registration Fee: ₹2200</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="details-container pt-5">
+      <h3 class="heading">
+        Committees
+      </h3>
+      <h3 class="heading-primary">For Colleges</h3>
+      <div class="cards-container pt-4">
+        <div class="cards" *ngFor="let event of college_committees; let i = index">
+          <div class="img-container1">
+            <img [src]="event.image" alt="" class="expo-img" />
+            <div class="text">{{ event.name }}</div>
+          </div>
+          <div class="info-cta-container">
+            <p class="title" aria-hidden="false">{{event.name}}</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="heading-primary">For Schools</h3>
+      <div class="cards-container pt-4">
+        <div class="cards" *ngFor="let event of school_committees; let i = index">
+          <div class="img-container1">
+            <img [src]="event.image" alt="" class="expo-img" />
+            <div class="text">{{ event.name }}</div>
+          </div>
+
+          <div class="info-cta-container">
+            <p class="title" aria-hidden="false">{{event.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="details-container pt-5 committee-cards">
+      <h3 class="page-heading" style="margin-bottom: 0; font-size: clamp(4rem, 8vw, 6rem);">Committees</h3>
+      <h3 class="heading-primary">For Colleges</h3>
+      <app-mun-committee-card [committees]="college_committees" title="For Colleges"
+        (showAgenda)="showCommitteeAgenda($event)"></app-mun-committee-card>
+
+      <h3 class="heading-primary">For Schools</h3>
+      <app-mun-committee-card [committees]="school_committees" title="For Schools"
+        (showAgenda)="showCommitteeAgenda($event)"></app-mun-committee-card>
+    </div>
+  </div>
+  <!-- main container ends -->
+
+
+  <app-timeline [events]="events"></app-timeline>
+
+
+  <div class="partners-container pt-5" *ngIf="munPartner.length > 0">
+    <h3 class="heading-primary">Partners</h3>
+    <app-sponsorcard [sponsors]="munPartner"></app-sponsorcard>
+  </div>
+
+  <div class="white-bg">
+    <div class="faq-container pt-5" style="background: none;" *ngIf="faqs && faqs.length > 0">
+      <h3 class="heading-primary">FAQs</h3>
+      <app-accordion [items]="faqs" accordionId="mun-faqs"></app-accordion>
+    </div>
+
+
+    <div class="gallery-container pt-5">
+      <h3 class="heading-primary">MUN Gallery</h3>
+      <app-gallery-carousel [images]="munGallery" title="MUN Gallery"></app-gallery-carousel>
+      <!-- <div class="gallery-grid pt-4">
+        <div class="gallery-item" *ngFor="let photo of munGallery; let i = index">
+          <img [src]="photo.image" [alt]="photo.name || 'MUN Gallery Image'" class="gallery-img" />
+          <div class="gallery-overlay" *ngIf="photo.name">
+            <p class="gallery-caption">{{ photo.name }}</p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="contact-card-container pt-5 pb-5">
+
+
+      <!-- <h3 class="heading-primary">Meet the Secretariat</h3> -->
+
+      <div class="contact secretariat">
+        @for(member of secretariat; track member.id){
+        <app-square-contact [contact]="member.metadata" [img_url]="member.image" [name]="member.name"
+          img_style="top center" [designation]="member.designation"></app-square-contact>}
+      </div>
+
+      <h3 class="heading-primary">Contact Us</h3>
+      <div class="contact">
+        <app-square-contact [contact]="'+918708714591'" [email]="'milan@ecell.in'"
+          [linkedin]="'https://www.linkedin.com/in/milan-bhujeja-2431a3313/'"
+          [img_url]="'https://2k21.s3.amazonaws.com/images/file_0000000039e881f581b3d176b4f39ed0.png'"
+          [name]="'Milan Bhujeja'" [designation]="'Events & PR Head'"></app-square-contact>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

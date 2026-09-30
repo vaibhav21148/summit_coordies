@@ -1,0 +1,45 @@
+<div id="template-container">
+  <app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/ipl_auction.png'" [buttons]="compiButtons" [backgroundImage]="BackgroundImages.BID" (buttonClick)="handleButtonClick($event)"></app-events-bg>      
+      </div>
+    </div>
+    <div class="about-container">
+      <p>
+        Step into the arena of pure entrepreneurial adrenaline! This multi-round challenge will stretch your strategy,
+        speed, and smarts - from tackling rapid-fire business quizzes to dissecting real-world data and building
+        razor-sharp solutions. And the climax? A high-stakes virtual <span class="event-name-highlight">IPL auction</span> where strategy collides with intuition,
+        and every bid counts. It’s a test of intellect, teamwork, and nerve - where true champions don’t emerge by
+        chance, but by choice.
+      </p>
+    </div>
+  </div>
+
+
+
+  <!-- main container ends -->
+  <app-timeline [events]="events"></app-timeline>
+
+
+
+  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+  </div>
+
+
+  <div class="contact-card-container pb-5">
+    <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'9729009724'"
+        [name]="'Mudil Goel'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,93 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-lg bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://www.ecell.in">
+        <img id="ecell-logo" src="images/favicon/logo.webp" alt="" />
+      </a>
+      <div class="combine d-flex justify-content-center align-items-center ">
+        <button class="navbar-toggler no-hightlight hamburger" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul id="main-items" class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a routerLink="/" routerLinkActive="active-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/events" routerLinkActive="active-link">Events</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a routerLink="/acco" routerLinkActive="active-link">Accommodation</a>
+          </li> -->
+          <li class="nav-item">
+            <a routerLink="/sponsor" routerLinkActive="active-link">Sponsors</a>
+          </li>
+          <!-- <li class="nav-item center-logo" style="max-height: 50px;">
+            <a routerLink="/"><img src="images/logos/logo-element.svg" alt="E-Summit Logo" [style.transform]="'rotate(' + logoRotation + 'deg)'" /></a>
+          </li> -->
+          <li class="nav-item">
+            <a routerLink="/speakers" routerLinkActive="active-link">Speakers</a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a routerLink="/agenda" routerLinkActive="active-link">Agenda</a>
+          </li> -->
+          <li class="nav-item">
+            <a routerLink="/contact" routerLinkActive="active-link">Contact Us</a>
+          </li>
+          @if(!isLoggedIn){
+          <li class="nav-item">
+            <a routerLink="/register" routerLinkActive="active-link" style="cursor: pointer;">Register</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/login" routerLinkActive="active-link" style="cursor: pointer;">Login</a>
+          </li>}@else {
+          <li class="nav-item">
+            <a routerLink="/dashboard" routerLinkActive="active-link">Dashboard</a>
+          </li>
+
+          <li class="nav-item mobile-nav">
+            <a routerLink="/coming-soon" routerLinkActive="active-link">Passes</a>
+          </li>
+          }
+          <!-- <li class="nav-item">
+              <a id="agenda" href="agenda" routerLinkActive="active-link">agenda</a>
+            </li> -->
+          @if(isLoggedIn){
+          <li class="nav-item mobile-nav logout"><a (click)="Logout()" routerLinkActive="active-link">Logout</a></li>
+          <li class="dropdown profile-dropdown">
+            <img height="35px" width="35px" style="border-radius: 50%; border: 1px solid var(--golden-color)"
+              [src]="profile" alt="" class="dropbtn m-0 p-0" />
+            <div class="dropdown-content p-2">
+              <div class="profile-container">
+                <img [src]="profile" alt="" class="dropbtn m-0 p-0" />
+                <p class="name text-center">{{ firstName }} {{ lastName }}</p>
+                <p class="text-center">{{ summit_id }}</p>
+                <p class="pass text-center" *ngIf="summit_pass == 'lvl2'">
+                  Gold Pass
+                </p>
+                <p class="pass text-center" *ngIf="summit_pass == 'lvl3'">
+                  Platinum Pass
+                </p>
+                <p class="pass text-center" *ngIf="summit_pass == 'lvl1'">
+                  Silver Pass
+                </p>
+                <p class="email text-center">{{ email }}</p>
+                <hr />
+                <!-- <a href="dashboard/post">Create Post</a> -->
+                <a class="logout" (click)="Logout()">Logout</a>
+              </div>
+            </div>
+            &nbsp;<i class="bi bi-caret-down-fill"></i>
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

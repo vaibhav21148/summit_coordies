@@ -1,0 +1,18 @@
+<div class="media-section">
+  <div class="line">
+    <hr>
+  </div>
+  <h3 class="heading-primary">Media Partners</h3>
+  <div class="media-partners">
+    <div class="media-card" *ngFor="let partner of mediaPartners">
+      <a [href]="partner.link" target="_blank">
+        <div class="img">
+          <img [src]="partner.image" [alt]="partner.name" class="media-image">
+        </div>
+      </a>
+      <div class="card-info">
+        <div class="title">{{ partner.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>

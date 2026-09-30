@@ -1,0 +1,21 @@
+<div class="timeline-wrapper">
+  <h3 class="heading-primary">{{ heading }}</h3>
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
+    <div class="timeline-item" *ngFor="let event of events; let i = index" 
+         [class.right]="i % 2 === 1"
+         [attr.data-aos]="i % 2 === 0 ? 'fade-right' : 'fade-left'"
+         [attr.data-aos-delay]="(i + 1) * 20">
+      <div class="timeline-card">
+        <div class="card-header">
+          <div class="phase-number">{{ (i + 1).toString().padStart(2, '0') }}</div>
+          <div class="card-content">
+            <h3 class="timeline-title">{{ event.status }}</h3>
+            <p class="timeline-date">{{ event.date }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-circle"></div>
+    </div>
+  </div>
+</div>

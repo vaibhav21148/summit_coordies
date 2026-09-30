@@ -1,0 +1,11 @@
+<app-auto-form
+  [questions]="allQuestions"
+  [steps]="steps"
+  [stepQuestions]="stepQuestions"
+  [options]="options"
+  [heading]="'Influencer Summit Registration'"
+  [description]="'Nominate your favorite influencer in 3 quick steps!!'"
+  [showSkipButton]="true"
+  (regResponse)="handleFormResponse($event)"
+  (skipClick)="skipToNomination()">
+</app-auto-form>

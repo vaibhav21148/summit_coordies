@@ -1,0 +1,227 @@
+<div id="template-container">
+
+  <app-vanta-bg></app-vanta-bg>
+
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;" id="hero">
+      <div aria-hidden="true" class="hero-spotlight"></div>
+      <div aria-hidden="true" class="hero-overlay">
+        <div class="overlay-img">
+          <img src="images/elements/heart.svg" alt="">
+        </div>
+        <div class="overlay-img">
+          <img src="images/elements/msg.svg" alt="">
+        </div>
+        <div class="overlay-img">
+          <img src="images/elements/share-icon.svg" alt="">
+        </div>
+        <div class="overlay-img">
+          <img src="images/elements/yt.svg" alt="">
+        </div>
+        <div class="overlay-img">
+          <img src="images/elements/like.svg" alt="">
+        </div>
+        <div class="glitter-layer">
+          <div id="glitter-22"></div>
+        </div>
+      </div>
+
+      <div class="logo" style="display:flex; justify-content: center; height: 10%;">
+        <img class="logo_img" src="images/inf_logo.png" alt="Influencer Summit Logo" />
+      </div>
+
+      <div class="about-container" style="margin-top: 2vw;">
+        <p>
+          Beyond likes and follows: Build your brand at the <span class="event-name-highlight">Influencer Summit.</span>
+        </p>
+      </div>
+      <div class="reg-button" style="display: flex; gap: 1rem; order: 3; margin-top: 0;">
+        <button style="margin-top: 0;" routerLink="/infsummit/attend">Attend</button>
+        <button style="margin-top: 0;" routerLink="/infsummit/nominate">Nominate</button>
+        <button style="margin-top: 0;" (click)="openVoteForm()">Vote</button>
+      </div>
+
+    </div>
+
+    <div class="details-container pt-6">
+      <div class="heading-two-line">
+        <span class="line-primary" style="margin-bottom: -1rem;">Why Attend</span>
+        <span class="line-secondary" style="margin-bottom: -0.5rem;">Influencer Summit?</span>
+      </div>
+
+      <div class="why-container">
+        <div class="card-container" style="display: flex; flex-wrap: wrap; justify-content: center;">
+        <div class="cards" id="ev1">
+                <app-evervault-card>
+            <img src='images/events/info-icons/plant.png' alt="" width="185px" /></app-evervault-card>
+
+          <div class="content">
+            <p class="text">
+              Networking with industry leaders
+            </p>
+          </div>
+        </div>
+        <div class="cards" id="ev2">
+          <app-evervault-card>
+            <img src='images/events/info-icons/medal.png' alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">
+             Awards and Recognition
+            </p>
+          </div>
+        </div>
+        <div class="cards" id="ev3">
+          <app-evervault-card>
+            <img src='images/events/info-icons/meter.png' alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">
+              Get notified by brands and agencies
+            </p>
+          </div>
+        </div>
+        <div class="cards" id="ev4">
+          <app-evervault-card>
+            <img src='images/events/info-icons/notes.png' alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">
+              Insightful panel discussions and speaker sessions
+            </p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+
+    <div class="details-container pt-6" id="awards">
+      <h3 class="heading-primary" style="margin-bottom: 0rem;">Award Categories</h3>
+      <div class="cards-container">
+        @for(event of arena_events_details; track $index){
+        <app-grad-card [event]="event"></app-grad-card>
+        }
+      </div>
+
+    </div>
+
+  <app-timeline [events]="agenda" style="width: 95%;" [heading]="'Agenda'"></app-timeline>
+
+  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="influencer-faqs"></app-accordion>
+  </div>
+
+
+    <div class="contact-card-container pb-5" id="contact">
+      <h3 class="heading-primary" style="margin-bottom: -0.5rem;">Contact US</h3>
+      <div class="contact">
+        <app-square-contact [contact]="'6376161627'" [email]="'priyanshu@ecell.in'"
+          [linkedin]="'https://www.linkedin.com/in/priyanshu-gehlot-pghlt/'"
+          [img_url]="'https://2k21.s3.amazonaws.com/s3uploadapi/WhatsApp_Image_2025-07-04_at_15.23.47-removebg-preview.png'" [name]="'Priyanshu Gehlot'"
+          [designation]="'Events & PR Head'"></app-square-contact>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <app-footer></app-footer>
+</div>
+
+<!-- arena events detail popup -->
+<div class="incubator_popup flex justify-content-center">
+  <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '5000px': '500px', '1199px': '60vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="header font-bold white-space-nowrap">{{
+          event_title
+          }}</span>
+      </div>
+    </ng-template>
+
+    <p class="m-0 content">
+      {{ event_description }}
+    </p>
+  </p-dialog>
+</div>
+<!-- arena events detail popup -->
+
+<!-- Vote Modal -->
+<div class="vote-modal" *ngIf="voteVisible">
+  <div class="modal-overlay" (click)="closeVoteModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Vote for Awards</h3>
+        <button class="close-btn" (click)="closeVoteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Your Email ID</label>
+          <div class="email-row">
+            <input type="email" [(ngModel)]="voteForm.email" placeholder="Enter your email" class="form-input">
+            <button (click)="sendOTP()" [disabled]="!voteForm.email || otpSent" class="otp-btn">
+              {{ otpSent ? 'OTP Sent' : 'Send OTP' }}
+            </button>
+          </div>
+        </div>
+        
+        <div class="form-group" *ngIf="otpSent">
+          <label>Enter OTP</label>
+          <input type="text" [(ngModel)]="voteForm.otp" placeholder="Enter 6-digit OTP" class="form-input">
+        </div>
+        
+        <div class="form-group">
+          <label>Nominee Code</label>
+          <input type="text" [(ngModel)]="voteForm.nomineeCode" placeholder="Enter nominee's code" class="form-input">
+        </div>
+        
+        <div class="form-group">
+          <label>Award Category</label>
+          <select [(ngModel)]="voteForm.award" class="form-select">
+            <option value="">Select Award Category</option>
+            <option *ngFor="let award of awardOptions" [value]="award.value">{{ award.viewValue }}</option>
+          </select>
+        </div>
+        
+        <div class="terms-section">
+          <h4>Voting Terms & Conditions:</h4>
+          <ul>
+            <li>Each creator must secure a minimum of 800 authentic votes to qualify.</li>
+            <li>Final selections and decisions will be made by the panel and judges, whose verdict will be considered final.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="closeVoteModal()" class="btn-secondary">Cancel</button>
+        <button (click)="submitVote()" [disabled]="!isVoteFormValid()" class="btn-primary">Register Vote</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Vote Modal -->

@@ -1,0 +1,105 @@
+<!-- Dark Overlay -->
+<div class="dark-overlay" *ngIf="visible"></div>
+
+<div id="mySidenav" class="sidenav">
+    <button id="passes" (click)="checkLoginAndNavigate()"> <i class="bi bi-ticket-detailed-fill"></i><p>Passes</p></button>
+</div>
+
+
+<!-- [breakpoints]="{ '5000px': '500px', '1199px': '60vw', '575px': '90vw' }" -->
+<div class="incubator_popup flex justify-content-center">
+    <!--       header="Header" -->
+    <p-dialog
+
+      [(visible)]="visible"
+      [modal]="true"
+      [style]="{ width: '50rem', scrollbarColor: '#FF7A1A rgb(245,245,245)' }"
+      [breakpoints]="{ '5000px': '70rem', '1199px': '80vw', '575px': '90vw' }"
+
+      (onHide)="closePopup()"
+    >
+      <!-- <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+          <span class="header font-bold white-space-nowrap">
+            <h1  style="font-size: 20px; margin:0;">
+                Grab Your <span style="color: #F77845">Early Bird</span> Discount Now!
+              </h1>
+          </span>
+        </div>
+      </ng-template> -->
+
+
+      <div class="plan-container">
+        <h1 class="mb-5">
+        <!-- <h1 > -->
+          Grab Your <span style="color: #702AC6;">Passes</span> Now!
+        </h1>
+        <div class="reg-button">
+          <div class="button mt-3">
+            <!-- <button (click)="checkLoginAndNavigate(); closePopup()"> Get Passes</button> -->
+          </div>
+        </div>
+
+        <div class="pricing">
+          <!-- <div class="plan" id="silver" style="background: #A8A9AD;"> -->
+          <div class="plan" id="silver">
+
+            <h2>Silver Pass</h2>
+            <div class="price"><del>₹199</del> FREE</div>
+            <ul class="features">
+              <li><i class="bi bi-check-circle-fill"></i> Startup Expo</li>
+              <li><i class="bi bi-check-circle-fill"></i> LHC Speakers Sessions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Informals </li>
+              <li><i class="bi bi-x-circle-fill"></i> OAT Event</li>
+              <li><i class="bi bi-x-circle-fill"></i> Hightlight Speaker Sessions</li>
+              <li><i class="bi bi-x-circle-fill"></i> Internship & Job Fair</li>
+              <li><i class="bi bi-x-circle-fill"></i> Competitions</li>
+              <li><i class="bi bi-x-circle-fill"></i> Networking Arena</li>
+              <li><i class="bi bi-x-circle-fill"></i> Incubator Summit</li>
+              <li><i class="bi bi-x-circle-fill"></i> Seed Stars</li>
+            </ul>
+          </div>
+          <!-- <div class="plan popular" id="gold" style="background: #DAA511;"> -->
+          <div class="plan popular" id="gold" >
+
+            <span>Most Popular</span>
+            <h2>Gold Pass</h2>
+            <div class="price">₹ <del>999</del> 499</div>
+            <ul class="features">
+              <li><i class="bi bi-check-circle-fill"></i> Startup Expo</li>
+              <li><i class="bi bi-check-circle-fill"></i> LHC Speakers Sessions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Informals </li>
+              <li><i class="bi bi-check-circle-fill"></i> OAT Event</li>
+              <li><i class="bi bi-check-circle-fill"></i> Hightlight Speaker Sessions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Internship & Job Fair</li>
+              <li><i class="bi bi-check-circle-fill"></i> Competitions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Networking Arena</li>
+              <li><i class="bi bi-x-circle-fill"></i> Incubator Summit</li>
+              <li><i class="bi bi-x-circle-fill"></i> Seed Stars</li>
+            </ul>
+
+          </div>
+          <!-- <div class="plan" id="platinum" style="background: #E5E3E0;"> -->
+          <div class="plan" id="platinum" >
+
+            <h2>Platinum Pass</h2>
+            <div class="price">₹ <del>1499</del> 999</div>
+            <ul class="features">
+              <li><i class="bi bi-check-circle-fill"></i> Startup Expo</li>
+              <li><i class="bi bi-check-circle-fill"></i> LHC Speakers Sessions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Informals </li>
+              <li><i class="bi bi-check-circle-fill"></i> OAT Event</li>
+              <li><i class="bi bi-check-circle-fill"></i> Hightlight Speaker Sessions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Internship & Job Fair</li>
+              <li><i class="bi bi-check-circle-fill"></i> Competitions</li>
+              <li><i class="bi bi-check-circle-fill"></i> Networking Arena</li>
+              <li><i class="bi bi-check-circle-fill"></i> Incubator Summit</li>
+              <li><i class="bi bi-check-circle-fill"></i> Seed Stars <br></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </p-dialog>
+</div>
+

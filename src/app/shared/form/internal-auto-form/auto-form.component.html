@@ -1,0 +1,22 @@
+<form #formElement [formGroup]="regForm">
+  @for (question of questions; track question.key) {
+  <app-question [question]="question" [form]="regForm" />
+  }
+  
+  <div class="form-navigation mt-4">
+    @if(totalSteps && totalSteps > 1 && currentStep && currentStep > 1) {
+      <button type="button" class="btn-secondary" (click)="previousStep.emit()">
+        Previous
+      </button>
+    }
+    <button type="submit" 
+            class="text-white" 
+            [class.full-width]="!totalSteps || totalSteps <= 1 || !currentStep || currentStep <= 1"
+            [class.submitting]="isSubmitting" 
+            [disabled]="isSubmitting"
+            (click)="register($event)">
+      <span *ngIf="isSubmitting" class="spinner"></span>
+      {{ isSubmitting ? 'Please wait...' : (options.submitText || 'Submit') }}
+    </button>
+  </div>
+</form>

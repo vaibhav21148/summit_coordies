@@ -1,0 +1,361 @@
+<div id="template-container">
+  <div class="main-container">
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo hero-logo-wrapper"
+        style="position: relative; width: 100%; height: 100vh; overflow: hidden; background-color: black; display: flex; justify-content: center; align-items: flex-end;">
+
+        <!-- Full Background Image -->
+        <div id="hero-bg">
+        </div>
+
+        <!-- Smooth Dark Vignette Overlay -->
+        <div
+          style="position: absolute; bottom: 0; left: 0; width: 100%; height: 70vh; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(30,10,0,0.8) 50%, transparent 100%); z-index: 2; pointer-events: none;">
+        </div>
+
+        <!-- Center Content: Logo and Buttons -->
+        <div class="hero-center-content"
+          style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-bottom: 13vh;">
+          <img src="images/startup.png" class="hero-logo-img" alt="Startup Expo"
+            style="width: 48vw; min-width: 440px; max-width: 720px; height: auto; margin-bottom: 25px; opacity: 0; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(255,122,26,0.35)); will-change: transform, opacity;" />
+
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 0;">
+            <button *ngFor="let btn of expoButtons" class="btn hero-action-btn"
+              [routerLink]="btn.routerLink ? btn.routerLink : null"
+              (click)="btn.clickHandler ? handleButtonClick(btn.clickHandler) : null">
+              {{ btn.text }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="reveal-wrapper" style="position: relative; width: 100%; padding-top: 10vh; margin-top: 0;">
+      <div id="reveal-content" style="position: relative; width: 100%;">
+
+        <div style="position: relative;">
+          <div class="join-container"
+            style="display: flex; margin: auto; justify-content: center; flex-direction: column; position: relative; z-index: 1;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;">
+            </div>
+            <div style="display: flex; margin: auto; justify-content: center">
+              <h2
+                style="padding-top: 10px; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;"
+                class="heading-primary">
+                STARTUP EXPO<br> <strong>A PLATFORM FOR TODAY’S INNOVATORS, TOMORROW’S IMPACT</strong>
+              </h2>
+            </div>
+          </div>
+          <div class="about-container">
+            <p style="text-align: center;">
+              The <span class="event-name-highlight">Startup Expo</span> is not just an event – it’s a gateway into the
+              transformative world of entrepreneurship. Designed as a vibrant platform, it brings together pioneering
+              startups from across the country with thousands of potential customers, visionary entrepreneurs, investors
+              and thought leaders. The Expo sparks meaningful connections, drives collaboration and unlocks
+              opportunities for growth. Beyond networking, it also offers attendees exclusive insights into the
+              innovative strategies and bold journeys that have shaped these startups’ success stories.
+              <br><br>
+              The Startup Expo welcomes all E-Summit visitors to explore, engage and discover the future of innovation.
+            </p>
+            <h2 style="text-align: center; max-width: 90vw;">
+              <strong>Where Startups Meet the Spotlight.</strong>
+            </h2>
+          </div>
+
+          <div class="line" style="display: flex; margin-bottom: 2rem; justify-content: center">
+            <hr style="width: 80%; color: white; height: 5px;">
+          </div>
+          <div class="statwork-container">
+            <div class="stats-container">
+              <div class="card-container card-1">
+                <div class="content">
+                  <p class="heading">Attendee count:</p>
+                  <p class="text">50K+</p>
+                </div>
+              </div>
+              <div class="card-container card-2">
+                <div class="content">
+                  <p class="heading">Venue:</p>
+                  <p class="text">IIT Bombay</p>
+                </div>
+              </div>
+              <div class="card-container card-3">
+                <div class="content">
+                  <p class="heading">Professionals Count:</p>
+                  <p class="text">1000+</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="why-container pt-5 pb-4">
+            <h3 class="heading-primary" style="margin-bottom: 2rem; text-align: center;">
+              <span>Why Attend Startup Expo?</span>
+            </h3>
+            <div class="why-cards-grid" id="why-cards-container">
+              <div *ngFor="let event of expo_details; let i = index" class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="icon-wrapper">
+                      <img [src]="event.image" [alt]="event.title" />
+                    </div>
+                    <p class="title">{{ event.title }}</p>
+                  </div>
+                  <div class="flip-card-back">
+                    <h4 class="back-title">{{ event.title }}</h4>
+                    <p class="back-description">{{ event.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stalls-container pt-5">
+            <h3 class="heading-primary">Stalls Category</h3>
+            <div class="stalls-content">
+              <div class="stalls">
+                <div class="top">
+                  <!-- <img src="assets/images/stalls_top.png" alt="" /> -->
+                  <h2>Silver</h2>
+                </div>
+                <div class="plan">
+                  <ul class="features">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Incubators and VCs Mentorship Access</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 3m x 3m Stall</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 2 Chairs, 1 Table and Dustbin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Light and Electricity Socket</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Fascia (Name of the Startup)</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Mention in Expo Pamphlet included in Summit Registration Kit
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Exclusive interaction in Investor’s Arena with booked slots
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Invitation to Networking Snacks </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-x-circle-fill"></i>
+                      <span>
+                        30 seconds Product video played once on the main screens on both
+                        the days
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-x-circle-fill"></i>
+                      <span> LED Screen </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="stalls">
+                <div class="top">
+                  <!-- <img src="assets/images/stalls_top.png" alt="" /> -->
+                  <h2>Gold</h2>
+                </div>
+                <div class="plan">
+                  <ul class="features">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Incubators and VCs Mentorship Access</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 3m x 3m Stall</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 2 Chairs, 1 Table and Dustbin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Light and Electricity Socket</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Fascia (Name of the Startup)</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Mention in Expo Pamphlet included in Summit Registration Kit
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Exclusive interaction in Investor’s Arena with booked slots
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Invitation to Networking Snacks </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        30 seconds Product video played once on the main screens on both
+                        the days
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-x-circle-fill"></i>
+                      <span> LED Screen </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="stalls">
+                <div class="top">
+                  <!-- <img src="assets/images/stalls_top.png" alt="" /> -->
+                  <h2>Platinum</h2>
+                </div>
+                <div class="plan">
+                  <ul class="features">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Incubators and VCs Mentorship Access</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 3m x 3m Stall</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> 2 Chairs, 1 Table and Dustbin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Light and Electricity Socket</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Fascia (Name of the Startup)</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Mention in Expo Pamphlet included in Summit Registration Kit
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        Exclusive interaction in Investor’s Arena with booked slots
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> Invitation to Networking Snacks </span>
+                    </li>
+
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span>
+                        60 seconds Product video played once on the main screens on both
+                        the days
+                      </span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i>
+                      <span> LED Screen </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="speakers-container pt-6" *ngIf="speakers?.length > 0">
+            <h3 class="heading-primary" style="margin-bottom: 0rem;">OUR EXHIBITORS</h3>
+            <div class="speakers">
+              <div class="cards" *ngFor="let speaker of speakers">
+                <div class="logo">
+                  <img [src]="speaker.image" alt="" draggable="false" />
+                </div>
+                <div class="content mt-2">
+                  <div class="name">{{ speaker.name }}</div>
+                  <div class="designation">{{ speaker.designation }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- main container ends -->
+
+        <app-timeline [events]="events"></app-timeline>
+
+        <div class="faq-container pt-6" *ngIf="faqs && faqs.length > 0">
+          <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+          <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+        </div>
+
+        <div class="contact-card-container pb-5">
+          <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+          <div class="contact">
+            <app-square-contact [contact]="'918928490109'" [email]="'adityapund@ecell.in'"
+              [linkedin]="'https://www.linkedin.com/in/aditya-pund-a53b03325/'"
+              [img_url]="'https://2k21.s3.amazonaws.com/images/file_00000000b2b8820bb5ac6123c13b74ce.png'"
+              [name]="'Aditya Pund'" [designation]="'Events & PR Head'"></app-square-contact>
+          </div>
+        </div>
+        <!-- contact-card-container ends -->
+
+      </div>
+      <!-- reveal-content ends -->
+    </div>
+    <!-- reveal-wrapper ends -->
+
+    <app-footer></app-footer>
+  </div>
+
+  <!-- expo detail popup -->
+  <div class="incubator_popup flex justify-content-center">
+    <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+      [breakpoints]="{ '5000px': '500px', '1199px': '60vw', '575px': '90vw' }">
+      <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+          <span class="header font-bold white-space-nowrap">{{
+            expo_title
+            }}</span>
+        </div>
+      </ng-template>
+
+      <p class="m-0 content">
+        {{ expo_description }}
+      </p>
+    </p-dialog>
+  </div>
+  <!-- expo detail popup -->

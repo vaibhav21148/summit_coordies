@@ -1,0 +1,120 @@
+@import "./_form_host.scss";
+
+form {
+  z-index: 1;
+  width: 100%;
+  color: var(--form-color);
+  font-family: 'Satoshi', sans-serif !important;
+}
+
+button[type="submit"] {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #FF7A1A 0%, #d45800 100%);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1.5rem;
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Satoshi', sans-serif !important;
+  box-shadow: 0 4px 16px rgba(255, 122, 26, 0.35);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #ff913d 0%, #FF7A1A 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 22px rgba(255, 122, 26, 0.55);
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:disabled {
+  background: #333338;
+  color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button[type="submit"].full-width {
+  width: 100%;
+}
+
+.form-navigation {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-navigation button[type="submit"] {
+  flex: 1;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #FF7A1A;
+  border: 1.5px solid #FF7A1A;
+  padding: 0.75rem 1.5rem;
+  height: 48px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  font-family: 'Satoshi', sans-serif !important;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 122, 26, 0.15);
+  color: #FFFFFF;
+}
+
+// Loading spinner
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: currentColor;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Submitting state styling
+button[type="submit"].submitting {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.text-center p {
+  font-size: 1rem;
+  font-family: 'Satoshi', sans-serif !important;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 3rem;
+  color: gray;
+  line-height: 1.5;
+}
+
+

@@ -1,0 +1,354 @@
+.events-bg-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 50px;
+  overflow: hidden;
+}
+
+.events-bg-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, transparent 90%, rgba(0, 0, 0, 1) 100%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+.circle1 {
+position: absolute;
+  right: -250px;
+  top: 0;
+  transform: translateY(-30%);
+  width: 1400px;
+  height: 1500px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: #1e1e1e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle4 {
+  width: 1300px;
+  height: 1400px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  overflow: hidden;
+}
+
+.circle4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  // image-rendering: pixelated;
+  // border-radius: 50%;
+  animation: parallaxMove 20s ease-in-out infinite;
+}
+
+@keyframes parallaxMove {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-10px);
+  }
+}
+
+.left-circle {
+  position: absolute;
+  left: -300px;
+  top: 50%;
+  transform: translateY(-30%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  border: 2px solid #FFF;
+  background: radial-gradient(39.32% 33.69% at 99.05% 42.5%, #3B3B3B 0%, #000 100%);
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0rem;
+  box-sizing: border-box;
+  padding-left: 52rem;
+}
+
+.logo{
+  width: 630px;
+  height: 70%;
+  transform: scale(0.7);
+}
+
+
+.logo img{
+  max-width: 550px;
+  height: 80%;
+  // transform: scale(0.8);
+  object-fit: contain;
+}
+
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.left-circle .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: -7rem;
+  z-index: 7;
+}
+
+.left-circle button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-family: "GTA6-Heading", sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  color: #FFE100;
+  transition: all 1000ms;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #f1c40f;
+}
+
+.left-circle button:hover {
+  color: #ffffff;
+  transform: scale(1.1);
+  outline: 2px solid #FFE100;
+  box-shadow: 4px 5px 17px -4px #e67e22;
+}
+
+.left-circle button::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #f1c40f;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.left-circle button:hover::before {
+  width: 250%;
+}
+
+.left-circle .buttons.single-button {
+  align-items: center;
+}
+
+.left-circle .buttons.single-button button {
+  font-size: 1.8rem;
+  background: linear-gradient(45deg, #FFE100, #f39c12);
+  outline: 3px solid #FFE100;
+}
+
+.left-circle .buttons.single-button button:hover {
+  background: linear-gradient(45deg, #f39c12, #FFE100);
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(255, 225, 0, 0.4);
+}
+
+.left-circle .buttons.double-button {
+    // margin-top: -1.5rem;
+
+  // flex-direction: row;
+  gap: 2.5rem;
+  // justify-content: center;
+}
+
+.left-circle .buttons.double-button button {
+  margin-top: -2rem;
+  padding: 12px 20px;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+  .events-bg-container {
+    padding: 20px;
+  }
+
+  .circle4 img{
+    object-fit: cover;
+  }
+
+  .left-circle {
+    width: 600px;
+    height: 600px;
+    transform: translateY(0%) translateX(-50%);
+    left: 50%;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .logo{
+  width: 550px;
+  height: 70%;
+  transform: scale(0.8);
+  padding: 0;
+  margin: 0;
+}
+
+  .logo img{
+  width: 550px;
+  height: 70%;
+  transform: scale(0.8);
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  gap: 0rem;
+}
+
+.left-circle .buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: -3rem;
+  z-index: 7;
+}
+
+.left-circle .buttons.single-button {
+  justify-content: center;
+}
+
+.left-circle .buttons.single-button button {
+  width: 180px;
+  padding: 14px 28px;
+  font-size: 1.6rem;
+}
+
+.left-circle .buttons.double-button {
+  gap: 0.8rem;
+}
+
+.left-circle .buttons.double-button button {
+  margin-top: auto;
+  width: 140px;
+  padding: 10px 16px;
+  font-size: 1.3rem;
+}
+
+.left-circle button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #f1c40f;
+  transition: all 1000ms;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #f1c40f;
+}
+
+}
+
+@media (max-width: 480px) {
+  .left-circle {
+    width: 800px;
+    height: 800px;
+    transform: translateY(0%) translateX(-50%);
+    left: 50%;
+  }
+
+  .logo{
+  width: 550px;
+  height: 45%;
+  transform: scale(0.8);
+  padding: 0;
+  margin: 0;
+}
+//   .logo img{
+//   width: 550px;
+//   height: 45%;
+//   transform: scale(0.8) translateY(-2.5rem);
+//   padding: 0;
+//   margin: 0;
+// }
+
+.content {
+  gap: 0rem;
+}
+
+.left-circle .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: -7rem;
+  z-index: 7;
+}
+
+.left-circle .buttons.single-button {
+  align-items: center;
+}
+
+.left-circle .buttons.single-button button {
+  width: 160px;
+  padding: 10px 20px;
+  font-size: 1.6rem;
+}
+
+.left-circle .buttons.double-button {
+  gap: 0.8rem;
+}
+
+.left-circle .buttons.double-button button {
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 1.2rem;
+}
+
+.left-circle button {
+  padding: 6px 14px;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #f1c40f;
+  transition: all 1000ms;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #f1c40f;
+}
+
+.circle1 {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: 0;
+}
+
+.circle4 {
+  width: 100vw;
+  border: 0;
+  border-radius: 0;
+  height: 100vh;
+}
+}

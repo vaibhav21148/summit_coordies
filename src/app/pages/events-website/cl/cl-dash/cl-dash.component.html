@@ -1,0 +1,213 @@
+
+<div class="cl-dash page-view ">
+  <app-vanta-bg></app-vanta-bg>
+  @if(pageState === pageStates.LOADING){
+  <div class=" centered-content loading">
+    <p>Loading...</p>
+  </div>
+  }@else if (pageState == pageStates.EMPTY) {
+  <div class="centered-content empty">
+    <p>You don't belong to a contingent just yet.</p>
+
+    <button class="primary-btn" (click)="getContingent()">Check again</button>
+    <button class="primary-btn" (click)="makeContingent()">Become a Contingent Leader</button>
+  </div>
+  }@else if (pageState == pageStates.LEADER) {
+  <div class="leader">
+    <h1 class="heading-primary">CONTINGENT LEADER</h1>
+    <p>Manage your contingent and view your contingent members.</p>
+    <div class="add-member">
+      <input type="text" placeholder="Add a member by email" [(ngModel)]="member_email" />
+      <button (click)="addMember()">Add</button>
+    </div>
+    
+    <h2 class="mt-3">Contingent Member Details</h2>
+    <div class="detailstable">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Registered</th>
+          <th>Current Pass</th>
+          <th>Upgrade to Pass</th>
+          <th>Paid via Contingent</th>
+          <th>Action</th>
+        </tr>
+
+        <tr *ngFor="let member of pricingData?.breakdown" [class.unregistered]="!member.entered_contingent" [class.leader-row]="member.is_leader">
+          <td>
+            <span *ngIf="member.member_name">{{member.member_name}}</span>
+            <span *ngIf="!member.member_name">Not Registered</span>
+          </td>
+          <td>
+            <span>{{member.member_email}}</span>
+          </td>
+          <td>
+            <span *ngIf="member.member_phone">{{member.member_phone}}</span>
+            <span *ngIf="!member.member_phone">N/A</span>
+          </td>
+          <td>
+            <i *ngIf="!member.entered_contingent" class="bi bi-x-square-fill status-icon unregistered"></i>
+            <i *ngIf="member.entered_contingent" class="bi bi-check-square-fill status-icon registered"></i>
+          </td>
+          <td>
+            <div *ngIf="!member.entered_contingent && member.bought_by_contingent && getPendingPassForMember(member)" class="pass-display">
+              <span class="pass-type" 
+                    [class.pass-type-silver]="getPendingPassForMember(member) == 'lvl1'"
+                    [class.pass-type-gold]="getPendingPassForMember(member) == 'lvl2'"
+                    [class.pass-type-plat]="getPendingPassForMember(member) == 'lvl3'"
+                    [class.pass-type-signature]="getPendingPassForMember(member) == 'lvl4'">
+                {{getPendingPassForMember(member) == 'lvl1' ? 'Silver' : (getPendingPassForMember(member) == 'lvl2' ? 'Gold' : (getPendingPassForMember(member) == 'lvl3' ? 'Platinum' : 'Signature'))}}
+              </span>
+              <small class="pending-label">Pending</small>
+            </div>
+            <div *ngIf="member.entered_contingent || !member.bought_by_contingent || !getPendingPassForMember(member)">
+              <span class="pass-type" *ngIf="member.current_pass == 'none'">None</span>
+              <span class="pass-type pass-type-silver" *ngIf="member.current_pass == 'lvl1'">Silver</span>
+              <span class="pass-type pass-type-gold" *ngIf="member.current_pass == 'lvl2'">Gold</span>
+              <span class="pass-type pass-type-plat" *ngIf="member.current_pass == 'lvl3'">Platinum</span>
+              <span class="pass-type pass-type-signature" *ngIf="member.current_pass == 'lvl4'">Signature</span>
+            </div>
+          </td>
+          <td>
+            <select *ngIf="member.current_pass != 'lvl4'" 
+                    [(ngModel)]="memberUpgrades[member.member_id]" 
+                    (change)="updatePricing()" 
+                    class="pass-upgrade-select">
+              <option value="no_upgrade">No Upgrade</option>
+              <option value="lvl2" *ngIf="member.current_pass == 'none' || member.current_pass == 'lvl1'" [selected]="member.current_pass == 'none'">Gold</option>
+              <option value="lvl3" *ngIf="member.current_pass != 'lvl3' && member.current_pass != 'lvl4'">Platinum</option>
+              <option value="lvl4">Signature</option>
+            </select>
+            <span class="already-has-pass" *ngIf="member.current_pass == 'lvl4'">Already has Signature</span>
+            <small class="unregistered-note" *ngIf="!member.entered_contingent">Will activate when they register</small>
+          </td>
+          <td>
+            <span class="paid-status" *ngIf="member.bought_by_contingent">Yes</span>
+            <span class="not-paid-status" *ngIf="!member.bought_by_contingent">No</span>
+          </td>
+          <td>
+            <span class="leader-badge" *ngIf="member.is_leader">LEADER</span>
+            <button class="delete-btn" *ngIf="canDeleteMember(member)" (click)="deleteMember(member.member_id)">
+              Delete Member
+            </button>
+            <span class="paid-member" *ngIf="!member.is_leader && member.bought_by_contingent">Paid Member</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- Progressive Discount Info -->
+    <div class="progressive-discount-card" *ngIf="pricingData">
+      <div class="discount-header">
+        <h3>Discount Info</h3>
+      </div>
+      <div class="discount-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{pricingData.already_purchased_count}}</span>
+          <span class="stat-label">Already Purchased</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{pricingData.new_purchase_count}}</span>
+          <span class="stat-label">New Purchases</span>
+        </div>
+        <div class="stat-item highlight">
+          <span class="stat-number">{{pricingData.total_purchased_after}}</span>
+          <span class="stat-label">Total After Purchase</span>
+        </div>
+      </div>
+      <div class="discount-tier">
+        <span class="tier-label">Current Discount Tier</span>
+        <span class="tier-percentage">{{pricingData.auto_discount_percent}}%</span>
+      </div>
+      <p class="discount-explanation">New members receive {{pricingData.auto_discount_percent}}% discount based on total contingent size</p>
+    </div>
+    
+    <!-- Checkout Section -->
+    <div class="checkout-section">
+      <h3>Payment Summary</h3>
+      
+      <!-- Coupon Code Input -->
+      <div class="coupon-section">
+        <label for="couponCode">Coupon Code (Optional)</label>
+        <div class="coupon-input-group">
+          <input 
+            type="text" 
+            id="couponCode" 
+            [(ngModel)]="couponCode" 
+            placeholder="Enter coupon code"
+            class="coupon-input"
+          />
+          <button 
+            type="button" 
+            (click)="updatePricing()" 
+            [disabled]="isLoadingPrice"
+            class="apply-coupon-btn"
+          >
+            {{isLoadingPrice ? 'Checking...' : 'Apply'}}
+          </button>
+        </div>
+      </div>
+
+      <div class="checkout-details" *ngIf="pricingData">
+        <div class="checkout-row">
+          <span>Subtotal ({{pricingData.new_purchase_count}} members)</span>
+          <span class="amount">₹{{(pricingData.pre_amount / 100) | number:'1.2-2'}}</span>
+        </div>
+        <div class="checkout-row" *ngIf="pricingData.auto_discount_percent > 0">
+          <span>Auto Discount ({{pricingData.auto_discount_percent}}%)</span>
+          <span class="discount-amount">-₹{{((pricingData.amount_before_auto_discount - pricingData.amount_after_auto_discount) / 100) | number:'1.2-2'}}</span>
+        </div>
+        <div class="checkout-row" *ngIf="pricingData.discount_percent && pricingData.code">
+          <span>Coupon Discount ({{pricingData.discount_percent}}% - {{pricingData.code}})</span>
+          <span class="discount-amount">-₹{{((pricingData.pre_amount - pricingData.final_amount) / 100) | number:'1.2-2'}}</span>
+        </div>
+        <div class="checkout-row total-row">
+          <span class="total-label">Total Amount</span>
+          <span class="total-amount">₹{{(pricingData.final_amount / 100) | number:'1.2-2'}}</span>
+        </div>
+      </div>
+      
+      <button 
+        class="checkout-btn" 
+        (click)="processPayment()"
+        [disabled]="!pricingData || pricingData.final_amount === 0"
+      >
+        {{!pricingData ? 'Loading...' : pricingData.final_amount === 0 ? 'No Payment Required' : 'Pay Now ₹' + (pricingData.final_amount / 100 | number:'1.2-2')}}
+      </button>
+    </div>
+    <button class="danger-btn" *ngIf="!hasAnyPayments" (click)="deleteContingent()">Delete Contingent</button>
+    <p *ngIf="hasAnyPayments" class="payment-notice">Cannot delete contingent - payments have been processed. Contact support for assistance.</p>
+    <p>Regarding CL payments, please contact:</p>
+    
+    <div class="contact-card-container">
+      <app-square-contact [contact]="'+918058352005'" [email]="'rohit@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/rohitsharma005/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/rohit_website_img.png'" [name]="'Rohit Sharma'"
+        [designation]="'Events & PR Head'"></app-square-contact>
+      <app-square-contact [contact]="'+919319401143'" [email]="'sunil@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/sunil57/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/Untitled_design-removebg-preview.png'" [name]="'Sunil Meena'"
+        [designation]="'Hospitality & PR Head'"></app-square-contact>
+    </div>
+  </div>
+  }@else if(pageState == pageStates.MEMBER){
+  <div class="leader">
+    <h1 class="heading-primary">CONTINGENT MEMBER</h1>
+    <p>View your contingent leader details.</p>
+    
+    <div class="leader-card" *ngIf="leaderInfo">
+      <h3>Contingent Leader</h3>
+      <div class="leader-details">
+        <p><strong>Name:</strong> {{leaderInfo.firstName}} {{leaderInfo.lastName}}</p>
+        <p><strong>Email:</strong> {{leaderInfo.email}}</p>
+        <p><strong>Contact:</strong> {{leaderInfo.contact}}</p>
+      </div>
+    </div>
+    
+    <button class="primary-btn" (click)="leaveContingent()">Leave Contingent</button>
+  </div>
+  }
+  <app-footer></app-footer>
+</div>

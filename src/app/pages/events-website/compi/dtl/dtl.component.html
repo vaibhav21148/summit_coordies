@@ -1,0 +1,45 @@
+<div id="template-container">
+    <app-vanta-bg></app-vanta-bg>
+    <div class="main-container">
+        <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/dtl.png'" [buttons]="compiButtons" [backgroundImage]="BackgroundImages.ACE" (buttonClick)="handleButtonClick($event)"></app-events-bg>      
+      </div>
+        </div>
+        <div class="about-container">
+            <p>
+                Maze of Markets is a first-of-its-kind automated strategy labyrinth where business insight meets
+                puzzle-solving. Teams navigate a dynamic maze filled with market zones, behavioural traps, strategic
+                dilemmas, and breakthrough opportunities — all powered by an automated digital engine with zero manual
+                judging. Participants decode clues, solve market puzzles, make fast decisions with imperfect
+                information, and compete to reach the Central Chamber with the highest Strategic Advantage Score (SAS).
+            </p>
+        </div>
+    </div>
+
+
+
+    <!-- main container ends -->
+    <app-timeline [events]="events"></app-timeline>
+
+
+
+    <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+        <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+        <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+    </div>
+
+
+    <div class="contact-card-container pb-5">
+        <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+        <div class="contact">
+            <app-square-contact [contact]="'9890438497'"
+                [name]="'Shiv Patil'"></app-square-contact>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

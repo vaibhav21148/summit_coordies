@@ -1,0 +1,37 @@
+<div class="card">
+  <!-- Background card shape image -->
+  <img class="card-shape" src="images/cards/contact.png" alt="" draggable="false" />
+
+  <!-- Person photo -->
+  <div class="card-photo">
+    @if(img_style){
+    <img src="{{img_url}}" alt="{{name}}" style="object-position: {{img_style}};" />
+    }@else{
+    <img src="{{img_url}}" alt="{{name}}" />
+    }
+  </div>
+
+  <!-- Info section on the right -->
+  <div class="card-info">
+    <div class="card-name">{{name}}</div>
+    <div class="card-designation">{{designation}}</div>
+
+    <div class="card-icons">
+      @if(email){
+      <a target="_blank" href="mailto:{{email}}" class="card-icon icon-email" aria-label="Email">
+        <i class="bi bi-envelope-fill"></i>
+      </a>
+      }
+      @if(contact){
+      <a target="_blank" href="https://wa.me/{{contact}}" class="card-icon icon-wtsp" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+      </a>
+      }
+      @if(linkedin){
+      <a target="_blank" href="{{linkedin}}" class="card-icon icon-linkedin" aria-label="LinkedIn">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      }
+    </div>
+  </div>
+</div>

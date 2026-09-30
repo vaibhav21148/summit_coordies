@@ -1,0 +1,32 @@
+@import "../../../breakpoints.scss";
+@import "./_form_host.scss";
+@import "./_step-navigation.scss";
+
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  font-family: 'Satoshi', sans-serif !important;
+}
+
+.vanta-bg {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  max-width: 400px;
+  max-height: 200px;
+  margin-bottom: 30px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: $custom-breakpoint-sm) {
+  img {
+    max-width: 300px;
+  }
+}

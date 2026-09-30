@@ -1,0 +1,248 @@
+<div class="reg-form">
+  <div class="left-side">
+    <img src="https://2k21.s3.amazonaws.com/s3uploadapi/mun_logo.png" alt="MUN Logo" class="logo">
+    <div class="content">
+      <h1>MUN Registration</h1>
+      <p>Complete Registration</p>
+    </div>
+    <div class="steps">
+      <div class="step" [class.active]="currentStep === 1">
+        <div class="circle">1</div>
+        <p>Basic Info</p>
+      </div>
+      <div class="step" [class.active]="currentStep === 2">
+        <div class="circle">2</div>
+        <p>Preferences</p>
+      </div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="circle">3</div>
+        <p>Complete Registration</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right-side">
+    <div class="form-content">
+
+      <!-- Step 1: Basic Information -->
+      <div *ngIf="currentStep === 1" class="form-step">
+        <form [formGroup]="basicForm" (ngSubmit)="nextStep()">
+          <div class="form-group">
+            <label>Name *</label>
+            <input type="text" formControlName="name" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" formControlName="email" placeholder="Enter your email address" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Contact Number *</label>
+            <input type="tel" formControlName="contact" placeholder="Enter 10-digit mobile number" required>
+            <div *ngIf="basicForm.get('contact')?.invalid && basicForm.get('contact')?.touched" class="error-message" style="color: red;">
+              Please enter a valid 10-digit phone number
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Date of Birth *</label>
+            <input type="date" formControlName="date_of_birth" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Current Institution *</label>
+            <input type="text" formControlName="current_institution" placeholder="Enter your school/college name" required>
+          </div>
+
+          <div class="form-group">
+            <label>Role *</label>
+            <div class="role-options">
+              <label *ngFor="let role of roles" class="role-option">
+                <input type="radio" formControlName="role" [value]="role.value" (change)="onRoleChange()">
+                {{role.viewValue}}
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" [disabled]="!isStep1Valid()" class="submit-btn">Next</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Preferences -->
+      <div *ngIf="currentStep === 2" class="form-step">
+        <form [formGroup]="preferencesForm" (ngSubmit)="nextStep()">
+          <h2>Committee & Country Preferences</h2>
+          
+          <!-- Preference 1 & 2 (Required for all) -->
+          <div class="preference-group">
+            <h4>Preference 1 *</h4>
+            <div class="form-group">
+              <label>Committee</label>
+              <select formControlName="committee_1" (change)="onCommitteeChange(1)" required>
+                <option value="">Select Committee</option>
+                <option *ngFor="let committee of committees" [value]="committee.value">{{committee.viewValue}}</option>
+              </select>
+            </div>
+            <div class="form-group search-dropdown">
+              <label>{{isAIPPM(preferencesForm.get('committee_1')?.value) ? 'Personality' : 'Country'}}</label>
+              <input type="text" 
+                     [value]="searchTerms[1] || ''"
+                     [placeholder]="isAIPPM(preferencesForm.get('committee_1')?.value) ? 'Search Personality' : 'Search Country'"
+                     (input)="onSearchInput(1, $event)"
+                     (focus)="showDropdown[1] = true"
+                     (blur)="hideDropdown(1)"
+                     [readonly]="preferencesForm.get('committee_1')?.value === 'IPC'"
+                     autocomplete="off"
+                     required>
+              <input type="hidden" formControlName="country_1">
+              <div class="dropdown-list" *ngIf="showDropdown[1] && getFilteredOptions(1).length > 0">
+                <div *ngFor="let option of getFilteredOptions(1)" 
+                     class="dropdown-item"
+                     (mousedown)="selectOption(1, option)">
+                  {{option.viewValue}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="hasError('committee_1', 'duplicate') || hasError('country_1', 'duplicate')" class="error-message" style="color: red; font-size: 12px; margin-top: 5px;">
+              This committee-country combination is already selected
+            </div>
+          </div>
+
+          <div class="preference-group">
+            <h4>Preference 2 *</h4>
+            <div class="form-group">
+              <label>Committee</label>
+              <select formControlName="committee_2" (change)="onCommitteeChange(2)" required>
+                <option value="">Select Committee</option>
+                <option *ngFor="let committee of committees" [value]="committee.value">{{committee.viewValue}}</option>
+              </select>
+            </div>
+            <div class="form-group search-dropdown">
+              <label>{{isAIPPM(preferencesForm.get('committee_2')?.value) ? 'Personality' : 'Country'}}</label>
+              <input type="text" 
+                     [value]="searchTerms[2] || ''"
+                     [placeholder]="isAIPPM(preferencesForm.get('committee_2')?.value) ? 'Search Personality' : 'Search Country'"
+                     (input)="onSearchInput(2, $event)"
+                     (focus)="showDropdown[2] = true"
+                     (blur)="hideDropdown(2)"
+                     [readonly]="preferencesForm.get('committee_2')?.value === 'IPC'"
+                     autocomplete="off"
+                     required>
+              <input type="hidden" formControlName="country_2">
+              <div class="dropdown-list" *ngIf="showDropdown[2] && getFilteredOptions(2).length > 0">
+                <div *ngFor="let option of getFilteredOptions(2)" 
+                     class="dropdown-item"
+                     (mousedown)="selectOption(2, option)">
+                  {{option.viewValue}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="hasError('committee_2', 'duplicate') || hasError('country_2', 'duplicate')" class="error-message" style="color: red; font-size: 12px; margin-top: 5px;">
+              This committee-country combination is already selected
+            </div>
+          </div>
+
+          <!-- Preferences 3 to 6 -->
+          <div class="preference-group" *ngFor="let i of [3,4,5,6]">
+            <h4>Preference {{i}} *</h4>
+            <div class="form-group">
+              <label>Committee</label>
+              <select [formControlName]="'committee_' + i" (change)="onCommitteeChange(i)" required>
+                <option value="">Select Committee</option>
+                <option *ngFor="let committee of committees" [value]="committee.value">{{committee.viewValue}}</option>
+              </select>
+            </div>
+            <div class="form-group search-dropdown">
+              <label>{{isAIPPM(preferencesForm.get('committee_' + i)?.value) ? 'Personality' : 'Country'}}</label>
+              <input type="text" 
+                     [value]="searchTerms[i] || ''"
+                     [placeholder]="isAIPPM(preferencesForm.get('committee_' + i)?.value) ? 'Search Personality' : 'Search Country'"
+                     (input)="onSearchInput(i, $event)"
+                     (focus)="showDropdown[i] = true"
+                     (blur)="hideDropdown(i)"
+                     [readonly]="preferencesForm.get('committee_' + i)?.value === 'IPC'"
+                     autocomplete="off"
+                     required>
+              <input type="hidden" [formControlName]="'country_' + i">
+              <div class="dropdown-list" *ngIf="showDropdown[i] && getFilteredOptions(i).length > 0">
+                <div *ngFor="let option of getFilteredOptions(i)" 
+                     class="dropdown-item"
+                     (mousedown)="selectOption(i, option)">
+                  {{option.viewValue}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="hasError('committee_' + i, 'duplicate') || hasError('country_' + i, 'duplicate')" class="error-message" style="color: red; font-size: 12px; margin-top: 5px;">
+              This committee-country combination is already selected
+            </div>
+          </div>
+          
+
+
+          <div class="form-actions">
+            <button type="button" (click)="prevStep()" class="back-btn">Back</button>
+            <button type="submit" [disabled]="!isStep2Valid()" class="submit-btn">Next</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 3: Additional Details -->
+      <div *ngIf="currentStep === 3" class="form-step">
+        <form [formGroup]="additionalForm" (ngSubmit)="onSubmit()">
+          <h2>Complete Your Registration</h2>
+          
+          <div class="form-group">
+            <label>Previous MUN Experience</label>
+            <textarea formControlName="previous_mun_experience" placeholder="Describe your previous MUN experience (optional)"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label>MUN Portfolio (PDF only)</label>
+            <input type="file" (change)="onFileSelect($event)" accept=".pdf">
+          </div>
+          
+          <div class="form-group">
+            <label>Need Accommodation?</label>
+            <div class="radio-group">
+              <label><input type="radio" formControlName="need_accommodation" [value]="true"> Yes</label>
+              <label><input type="radio" formControlName="need_accommodation" [value]="false"> No</label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>How did you hear about us? *</label>
+            <input type="text" formControlName="referral_source" placeholder="Social media, friends, website, etc." required>
+          </div>
+          
+          <div class="form-group">
+            <label>Coupon Code (Optional)</label>
+            <input type="text" formControlName="coupon_code" placeholder="Enter coupon code if you have one">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" (click)="prevStep()" class="back-btn">Back</button>
+            <button type="submit" [disabled]="!additionalForm.valid || isSubmitting" class="submit-btn">
+              {{isSubmitting ? 'Submitting...' : 'Pay Now'}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog [(visible)]="showKonfhubWidget" [modal]="true" [style]="{width: '95vw', maxWidth: '650px', background: '#121212', borderRadius: '16px'}"
+    [draggable]="false" [resizable]="false" [closable]="true" (onHide)="onCloseKonfhubWidget()">
+    <div style="padding: 10px; text-align: center;">
+      <h3 style="color: white; margin-bottom: 1rem; font-family: var(--gta6-thin-ff); font-size: 1.3rem;">Complete Entre-MUN Payment</h3>
+      <iframe src="https://konfhub.com/widget/id/b270983e-7ba2-4b2b-a9f3-6e2b3ba78871" id="konfhub-widget" title="Register for Entre-MUN" width="100%" height="500" allow="payment" style="border: none; border-radius: 8px; width: 100%; min-height: 500px;"></iframe>
+      <div style="margin-top: 15px; display: flex; justify-content: center;">
+        <button type="button" class="submit-btn" style="max-width: 250px; padding: 10px 20px; font-size: 14px;" (click)="onCloseKonfhubWidget()">
+          Done / Back to Entre-MUN
+        </button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

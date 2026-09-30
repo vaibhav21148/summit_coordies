@@ -1,0 +1,47 @@
+.scroll-tray {
+  white-space: nowrap;
+  display: flex; /* Use flexbox instead of inline-block */
+  gap: 1rem; /* Space between images */
+  justify-content: flex-start; /* Align content to the start */
+  padding-right: 1rem;
+}
+
+.images img {
+  width: 32vw;
+  height: 22vw;
+  border-radius: 0.3rem;
+  margin: 0 1rem;
+  border: 1px solid #FFE100;
+}
+
+.scroll-holder {
+  position: relative;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+}
+
+.scroll-holder .scroll-tray {
+  animation: scroll-try-hero 30s linear infinite;
+}
+
+.scroll-holder .scroll-tray:hover {
+  animation-play-state: paused;
+}
+
+@media only screen and (max-width: 768px) {
+  .images img {
+    width: 90vw;
+    height: 60vw;
+  }
+}
+
+@keyframes scroll-try-hero {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

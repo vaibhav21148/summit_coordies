@@ -1,0 +1,15 @@
+<div class="dropzone" (drop)="onDrop($event)">
+  <input
+    type="file"
+    #actualinput
+    (change)="onFileChange($event)"
+    accept="{{accept.join(',')}}"
+    hidden
+  />
+  <button (click)="actualinput.click()">Choose File</button>
+  <div>
+    <p class="file-name">{{ fileName || "No file selected" }}</p>
+    <p class="info">Formats allowed: {{accept| contentTypeToExtension}}</p>
+  </div>
+  <!-- <div class="overlay"><span>Drop file here</span></div> -->
+</div>

@@ -1,0 +1,13 @@
+<!-- <app-auto-form [options]="options" [questions]="questions"></app-auto-form> -->
+<app-vanta-bg></app-vanta-bg>
+
+<app-auto-form 
+  [options]="options" 
+  [questions]="questions"
+  [steps]="stepNames"
+  [stepQuestions]="stepQuestions"
+  [heading]="heading"
+  [description]="description"
+  [prefillData]="userPrefillData"
+  (regResponse)="onRegistrationComplete($event)">
+</app-auto-form>

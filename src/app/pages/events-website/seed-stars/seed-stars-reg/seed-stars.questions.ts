@@ -1,0 +1,171 @@
+import { Validators } from '@angular/forms';
+import { Question } from '@shared/form/question/question';
+import {
+  SECTOR_CHOICES,
+  COMPANY_TYPE_CHOICES,
+  YES_NO_CHOICES,
+} from '@shared/form/question/question-options';
+
+export const SEED_STARS_QUESTIONS: Question<any>[] = [
+  new Question<string>({
+    controlType: 'textbox',
+    key: 'startup_name',
+    type: 'text',
+    label: 'Name of the Startup',
+    placeholder: 'Enter Name of the Startup',
+    order: 1,
+  }),
+  new Question<string>({
+    controlType: 'list',
+    key: 'cofounders',
+    label: 'Founder/Cofounders',
+    type: 'Cofounder',
+    info: "Name and LinkedIn profile URL of each co-founder<br /><br />Type NA if you don't have a LinkedIn Profile",
+    subQuestions: [
+      new Question<string>({
+        controlType: 'textbox',
+        type: 'text',
+        key: 'name',
+        label: 'Name',
+        placeholder: 'Enter Full Name',
+        order: 9,
+      }),
+      new Question<string>({
+        controlType: 'textbox',
+        type: 'text',
+        key: 'linkedin',
+        label: 'LinkedIn Profile Link',
+        placeholder: 'Enter LinkedIn Profile Link (Type NA if not available)',
+        order: 9,
+      }),
+    ],
+    listTypeOptions: {
+      min: 1,
+      max: 4,
+    },
+    validators: [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(4),
+    ],
+    order: 2,
+  }),
+  new Question<string>({
+    controlType: 'textbox',
+    key: 'email',
+    label: 'Email',
+    type: 'email',
+    placeholder: 'Enter your email',
+    order: 3,
+  }),
+  new Question<string>({
+    controlType: 'textbox',
+    key: 'contact',
+    label: 'Contact Number (WhatsApp preferred)',
+    type: 'tel',
+    placeholder: 'Enter 10-digit Contact Number',
+    validators: [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+      Validators.minLength(10),
+      Validators.maxLength(10),
+    ],
+    order: 4,
+  }),
+  new Question<string>({
+    controlType: 'textarea',
+    key: 'description',
+    label: 'Brief Description of the Startup',
+    placeholder: 'Enter a brief description of your startup, problem statement, and solution',
+    order: 5,
+  }),
+  new Question<string>({
+    controlType: 'dropdown',
+    key: 'sector',
+    label: 'Sector',
+    placeholder: 'Select your sector',
+    options: SECTOR_CHOICES,
+    order: 6,
+  }),
+  new Question<string>({
+    controlType: 'radio',
+    key: 'dpiit_reg',
+    label: 'Is your startup DPIIT Registered?',
+    placeholder: 'Select an option',
+    options: YES_NO_CHOICES,
+    order: 7,
+  }),
+  new Question<string>({
+    controlType: 'textbox',
+    key: 'dpiit_id',
+    type: 'text',
+    label: 'Fill in your DPIIT ID',
+    placeholder: 'Enter DPIIT ID',
+    showIf: (form) => {
+      const val = form?.get('dpiit_reg')?.value;
+      return val === 'yes' || val === 'Yes' || val === true;
+    },
+    validators: [Validators.required],
+    order: 7,
+  }),
+  new Question<string>({
+    controlType: 'textarea',
+    key: 'traction',
+    label: 'Traction / Key Metrics (Optional)',
+    placeholder: 'Mention revenue, user growth, pilot customers, or any notable traction',
+    validators: [],
+    order: 8,
+  }),
+  new Question<string>({
+    controlType: 'dropdown',
+    key: 'reg_status',
+    label: 'Current Registration Status',
+    placeholder: 'Select company registration status',
+    options: COMPANY_TYPE_CHOICES,
+    order: 8,
+  }),
+  new Question<string>({
+    controlType: 'textarea',
+    key: 'is_startup_funded',
+    label: 'Is your startup funded?',
+    placeholder: 'If funded, mention current funding amount in INR and key investors (or "Bootstrapped")',
+    order: 9,
+  }),
+  new Question<string>({
+    controlType: 'textbox',
+    key: 'website',
+    type: 'text',
+    label: 'Website / Demo URL (Optional)',
+    placeholder: 'https://yourstartup.com',
+    validators: [],
+    order: 10,
+  }),
+  new Question<File | null>({
+    controlType: 'file',
+    key: 'pitch_deck',
+    label: 'Upload Pitch Deck',
+    placeholder: 'Upload Pitch Deck (PDF / PPT / PPTX)',
+    order: 11,
+    fileOptions: {
+      accept: [
+        'application/pdf',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'application/vnd.ms-powerpoint',
+      ],
+      max_size: 15 * 1024 * 1024,
+    },
+  }),
+  new Question<File | null>({
+    controlType: 'file',
+    key: 'reg_proof',
+    label: 'Upload Proof of Registration of Startup (Optional)',
+    placeholder: 'Upload Proof of Registration',
+    info: 'Startups that provide proof of registration will be given preference during screening',
+    order: 12,
+    fileOptions: {
+      accept: ['application/pdf', 'image/*'],
+      max_size: 10 * 1024 * 1024,
+    },
+    validators: [],
+  }),
+];

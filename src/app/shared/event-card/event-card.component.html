@@ -1,0 +1,46 @@
+<div class="card">
+  <!-- Background gradient area with event image/wordmark -->
+  <div class="card-banner">
+    <div class="solar-flare-container">
+      <div class="flare-glow"></div>
+      <div class="flare-flame flame-1" [ngStyle]="{'animation-delay': randomDelay1, 'animation-duration': randomDuration1}"></div>
+      <div class="flare-flame flame-2" [ngStyle]="{'animation-delay': randomDelay2, 'animation-duration': randomDuration2}"></div>
+      <div class="flare-flame flame-3" [ngStyle]="{'animation-delay': randomDelay3, 'animation-duration': randomDuration3}"></div>
+    </div>
+    @if(event.big_image){
+      <div class="banner-img-wrapper" style="mix-blend-mode: normal; background: transparent;">
+        <img [src]="event.big_image" [alt]="event.name" class="banner-img-source big-img" />
+      </div>
+    } @else if(event.image || event.logo){
+      <div class="banner-img-wrapper">
+        <img [src]="event.image || event.logo" [alt]="event.name" class="banner-img-source" />
+        <div class="banner-gradient"></div>
+      </div>
+    }
+  </div>
+
+  <!-- Logo overlapping the banner -->
+  <div class="card-logo">
+    <div class="logo-img-wrapper">
+      <img [src]="event.logo" [alt]="event.name + ' logo'" class="logo-img-source" />
+      <div class="logo-gradient"></div>
+    </div>
+  </div>
+
+  <!-- Card body -->
+  <div class="card-body">
+    <h3 class="card-title">{{ event.name }}</h3>
+    <p class="card-desc">{{ event.description | slice:0:100 }}{{ event.description?.length > 100 ? '...' : '' }}</p>
+
+    <div class="card-actions">
+      @if(isRegistrationOpen(event)){
+        @if(hasEventWebsite(event)){
+          <a [routerLink]="getWebsiteUrl(event)" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="cursor: pointer;">Website</a>
+        }
+        <a (click)="eventReg(event)" class="btn btn-outline" style="cursor: pointer;">Register</a>
+      } @else {
+        <a (click)="GetNotified(event)" class="btn btn-outline" style="cursor: pointer;">Get Notified</a>
+      }
+    </div>
+  </div>
+</div>

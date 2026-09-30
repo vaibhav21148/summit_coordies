@@ -1,0 +1,579 @@
+// Coming Soon Overlay
+.coming-soon-overlay {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.coming-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.coming-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10%;
+}
+
+.coming-text {
+  font-family: 'General Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(4rem, 12vw, 188.86px);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  margin: 0;
+  background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.29) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(-9px 9px 4px #00000070);
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .coming-content-wrapper {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .coming-text {
+    text-align: center;
+  }
+}
+
+// Main container
+#template-container .main-container {
+  font-family: 'GTA6-Thin', sans-serif;
+  background-color: black;
+  color: white;
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+// Typography
+#template-container .main-container {
+  p {
+    color: white;
+    font-size: 16px;
+    font-family: 'GTA6-Thin', sans-serif;
+    line-height: 1;
+    margin: 10px;
+  }
+    
+  h2 { font-family: 'GTA6-Heading', sans-serif; }
+  // h3 { font-family: 'GTA6-Medium', sans-serif; }
+  h4 { font-family: 'GTA6-Medium', sans-serif; }
+  strong { font-family: 'GTA6-Medium', sans-serif; }
+}
+
+.heading-primary {
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin: 0 auto 2rem auto;
+  font-family: 'Bebas Neue', sans-serif !important;
+  background: linear-gradient(180deg, #FF7A1A 0%, #994910 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 6vw, 4.2rem);
+  letter-spacing: 2px;
+}
+
+.section-heading {
+  /* Removed old gradient since it is now unified in .heading-primary */
+}
+
+// Stats Cards
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  flex-wrap: nowrap;
+  margin: 0 auto !important;
+  width: 100%;
+  max-width: 1150px;
+}
+
+.stats-container .card-container {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 15px;
+  background-color: #000;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.stats-container .card-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.card-1::before {
+  background-image: url('../../../../public/images/cards/location.jpeg');
+}
+.card-2::before {
+  background-image: url('../../../../public/images/cards/money.jpeg');
+}
+.card-3::before {
+  background-image: url('../../../../public/images/cards/time.webp');
+}
+
+/* Gradient overlay for text readability on hover */
+.stats-container .card-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.stats-container .card-container:hover {
+  border-color: #FF7A1A;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 122, 26, 0.2);
+}
+
+.stats-container .card-container:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.stats-container .card-container:hover::after {
+  opacity: 1;
+}
+
+.stats-container .content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: block; /* Use block to allow absolute positioning of children */
+}
+
+.stats-heading {
+  font-size: 1.5rem !important;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  font-family: 'General Sans', sans-serif;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+  
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.stats-container .card-container:hover .stats-heading {
+  font-size: 1.2rem !important;
+  color: #FF7A1A;
+  top: 15px;
+  transform: translateY(0);
+}
+
+.stats-details {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.stats-container .card-container:hover .stats-details {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.stats-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  font-family: 'General Sans', sans-serif;
+}
+
+.stats-note {
+  font-size: 0.8rem !important;
+  color: #ccc;
+  font-weight: 600;
+  margin-top: 5px !important;
+  font-family: 'General Sans', sans-serif;
+  font-style: italic;
+}
+
+
+// Perks cards
+.why-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.perks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+[data-aos="draw-border"] {
+  height: auto;
+  min-height: 220px;
+  background-color: #000;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  opacity: 1 !important; /* Prevent AOS from hiding the container itself */
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+  }
+  
+  &.aos-animate {
+    .heading1 .word {
+      animation: blurReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: calc(0.8s + (var(--i) * 0.08s));
+    }
+    .text .word {
+      animation: blurReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      animation-delay: calc(1.4s + (var(--i) * 0.04s));
+    }
+  }
+}
+
+@keyframes blurReveal {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* 4 borders using background-size for perfect tracing */
+[data-aos="draw-border"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), /* Top */
+    linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), /* Right */
+    linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), /* Bottom */
+    linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)); /* Left */
+  background-repeat: no-repeat;
+  background-size: 0 1px, 1px 0, 0 1px, 1px 0;
+  background-position: top left, top right, bottom right, bottom left;
+  transition: background-size 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+[data-aos="draw-border"].aos-animate::before {
+  background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+}
+
+.perks-grid .heading1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF7A1A;
+  margin-bottom: 15px;
+  font-family: 'General Sans', sans-serif;
+  /* Reset previous overall transition */
+  opacity: 1;
+  transform: none;
+}
+
+.perks-grid .text {
+  font-size: 1rem;
+  color: #ccc;
+  font-family: 'General Sans', sans-serif;
+  margin: 0;
+  line-height: 1.5;
+  /* Reset previous overall transition */
+  opacity: 1;
+  transform: none;
+}
+
+.perks-grid .word {
+  display: inline-block;
+  opacity: 0;
+  margin-right: 0.25em;
+}
+
+
+// About container
+#template-container .abt-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  p {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 95%;
+  }
+  
+  ul {
+    font-size: 20px;
+    width: 95%;
+    border: 1px solid #fff;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px !important;
+    backdrop-filter: blur(30px);
+    margin-bottom: 0;
+    
+    li {
+      margin-left: 20px !important;
+      margin-bottom: 3px !important;
+    }
+  }
+  
+  .inner-list {
+    border: none;
+    padding: 0 0 0 15px;
+    gap: 3px !important;
+    
+    li {
+      margin-bottom: 2px !important;
+    }
+  }
+}
+
+// Reach section
+.reach {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  text-align: center;
+}
+
+
+.reach-container {
+  display: flex;
+  width: 95%;
+  margin: auto;
+  gap: 2rem;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 2rem;
+  align-items: center;
+  text-align: left;
+}
+
+.reach-content {
+  flex: 1;
+}
+
+.reach-image {
+  flex: 0.5;
+  max-width: 50%;
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
+.reach-heading {
+  font-weight: bold;
+  font-family: 'GTA6-Thin', sans-serif;
+  margin-bottom: 0.5rem;
+  color: #8fa068;
+  font-size: 20px;
+}
+
+.reach-item, .reach-text {
+  margin-bottom: 0.5rem !important;
+  font-family: 'GTA6-Thin', sans-serif;
+  color: white;
+  font-size: 20px !important;
+  line-height: 1.6 !important;
+}
+
+.reach-list {
+  margin-left: 1rem !important;
+  
+  li {
+    margin-bottom: 0.3rem !important;
+    line-height: 1.5 !important;
+  }
+}
+
+.reach-strong {
+  font-family: 'GTA6-Medium', sans-serif;
+}
+
+// Utility classes
+.strikethrough {
+  text-decoration: line-through;
+  color: #ff6b6b;
+}
+
+.link-style {
+  color: #FFE100;
+  text-decoration: underline;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+
+
+
+#template-container .why-container .card-container .cards {
+  width: 260px;
+  height: 100px !important;
+  // min-height: 250px;
+  // background-color: #9397a95c;
+  // background: #C9DEFF;
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+  padding-left: 20px;
+  border-radius: 1rem;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  // border: 0.5px solid white;
+  box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.75);
+}
+#template-container .why-container .card-container .cards .heading1{
+color: #FFE100;
+font-size: 1.2rem;
+}
+#template-container .why-container .card-container .cards .text{
+  text-align: center;
+font-size: 1.2rem;
+}
+
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+    max-width: 100%;
+    align-items: center;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  
+  .perks-grid {
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+  
+  .stats-container .card-container {
+    width: 90%;
+    max-width: 350px;
+    height: 250px !important;
+    min-height: 250px !important;
+    margin: 0 auto 20px auto;
+    flex: none !important;
+  }
+  
+  .reach-image {
+    display: none;
+  }
+  
+  .reach-container {
+    flex-direction: column;
+    text-align: left;
+    padding: 1.5rem 1rem;
+    width: 90%;
+  }
+
+  .reach-item, .reach-text {
+    font-size: 16px !important;
+  }
+
+  .reach-heading {
+    font-size: 18px !important;
+  }
+
+  #template-container .abt-container ul{
+    padding: 20px;
+    width: 100%;
+    gap: 24px !important;
+  }
+}
+

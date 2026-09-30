@@ -1,0 +1,13 @@
+@if(showNavbar){
+}
+<div class="form-container">
+  <app-vanta-bg></app-vanta-bg>
+  <div class="form">
+    <div class="form-border"></div>
+    <div class="form-bg"></div>
+    <ng-content></ng-content>
+  </div>
+</div>
+@if(showFooter){
+<app-footer></app-footer>
+}

@@ -1,0 +1,189 @@
+<div class="reactor-container">
+  <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" class="reactor-svg">
+    <!-- SVG Filters -->
+    <defs>
+      <filter id="softGlow">
+        <feGaussianBlur stdDeviation="2" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="strongGlow">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+      <filter id="coreGlow">
+        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- ==========================================
+         LAYER 1: Background Support Field
+         ========================================== -->
+    <g class="bg-support-layer">
+      <!-- Background Ellipses -->
+      <ellipse *ngFor="let e of bgEllipses; let i = index"
+        cx="500" cy="500"
+        [attr.rx]="e.rx" [attr.ry]="e.ry"
+        fill="none"
+        [attr.stroke]="e.color"
+        [attr.stroke-width]="0.8"
+        [attr.stroke-dasharray]="e.dasharray"
+        [attr.opacity]="e.opacity"
+        [attr.transform]="'rotate(' + e.rotation + ' 500 500)'"
+        [ngClass]="'bg-drift-' + (i % 4)"
+      />
+      <!-- Background Arcs -->
+      <path *ngFor="let a of bgArcs; let i = index"
+        [attr.d]="a.d"
+        fill="none"
+        [attr.stroke]="a.color"
+        [attr.stroke-width]="a.width"
+        [attr.opacity]="a.opacity"
+        [ngClass]="'bg-drift-' + (i % 4)"
+      />
+    </g>
+
+    <!-- ==========================================
+         LAYER 2: Radial Trace Field (38 spokes)
+         ========================================== -->
+    <g class="radial-trace-layer">
+      <line *ngFor="let s of spokes"
+        x1="500" y1="500"
+        [attr.x2]="getSpokeEndX(s)"
+        [attr.y2]="getSpokeEndY(s)"
+        [attr.stroke]="s.color"
+        [attr.stroke-width]="s.width"
+        [attr.opacity]="0.25"
+      />
+    </g>
+
+    <!-- ==========================================
+         LAYER 3: Peripheral Satellite Network
+         ========================================== -->
+    <g class="satellite-layer">
+      <g *ngFor="let sat of satellites; let i = index"
+        [ngClass]="[sat.animClass, sat.pulsing ? 'sat-pulse' : '']">
+        <!-- Circle type -->
+        <ng-container *ngIf="sat.type === 'circle'">
+          <line [attr.x1]="sat.cx - sat.r * 2.5" [attr.y1]="sat.cy"
+                [attr.x2]="sat.cx - sat.r" [attr.y2]="sat.cy"
+                stroke="#993300" stroke-width="0.5" [attr.opacity]="0.6"/>
+          <circle [attr.cx]="sat.cx" [attr.cy]="sat.cy" [attr.r]="sat.r"
+            fill="none" stroke="#FF8A00" stroke-width="0.5" [attr.opacity]="0.5"/>
+        </ng-container>
+        <!-- Target type -->
+        <ng-container *ngIf="sat.type === 'target'">
+          <circle [attr.cx]="sat.cx" [attr.cy]="sat.cy" [attr.r]="sat.r"
+            fill="none" stroke="#FFB400" stroke-width="0.6" [attr.opacity]="0.4"/>
+          <circle [attr.cx]="sat.cx" [attr.cy]="sat.cy" [attr.r]="sat.r * 0.35"
+            fill="#FFB400" [attr.opacity]="0.6" filter="url(#softGlow)"/>
+        </ng-container>
+        <!-- Partial circle type -->
+        <ng-container *ngIf="sat.type === 'partial'">
+          <circle [attr.cx]="sat.cx" [attr.cy]="sat.cy" [attr.r]="sat.r"
+            fill="none" stroke="#993300" stroke-width="0.8"
+            stroke-dasharray="60% 40%" [attr.opacity]="0.5"/>
+        </ng-container>
+      </g>
+    </g>
+
+    <!-- ==========================================
+         LAYER 4: Dominant Tilted Orbit
+         ========================================== -->
+    <g class="dominant-orbit" transform="rotate(35 500 500)">
+      <!-- Outer companion trace -->
+      <ellipse cx="500" cy="500" rx="458" ry="188"
+        fill="none" stroke="#FFB400" stroke-width="0.6"
+        stroke-dasharray="60 340" opacity="0.5"
+        class="energy-flow"/>
+      <!-- Mid companion trace -->
+      <ellipse cx="500" cy="500" rx="454" ry="184"
+        fill="none" stroke="#993300" stroke-width="0.8"
+        opacity="0.4"/>
+      <!-- Primary orbit -->
+      <ellipse cx="500" cy="500" rx="450" ry="180"
+        fill="none" stroke="#FF8A00" stroke-width="2.5"
+        stroke-dasharray="400 600"
+        filter="url(#softGlow)"
+        class="orbit-primary"/>
+      <!-- Tick marks at horizontal extremes -->
+      <rect x="945" y="492" width="20" height="8" fill="#FF8A00" opacity="0.5" rx="1"/>
+      <rect x="35" y="492" width="20" height="8" fill="#FF8A00" opacity="0.5" rx="1"/>
+    </g>
+
+    <!-- Secondary tilted orbit -->
+    <g class="secondary-orbit" transform="rotate(-20 500 500)">
+      <ellipse cx="500" cy="500" rx="380" ry="150"
+        fill="none" stroke="#993300" stroke-width="1.2"
+        stroke-dasharray="300 500" opacity="0.3"
+        class="orbit-secondary"/>
+      <ellipse cx="500" cy="500" rx="384" ry="154"
+        fill="none" stroke="#FFB400" stroke-width="0.4"
+        stroke-dasharray="40 400" opacity="0.4"
+        class="energy-flow-2"/>
+    </g>
+
+    <!-- ==========================================
+         LAYER 5: Inner Mechanical Ring
+         ========================================== -->
+    <g class="inner-ring-layer">
+      <circle cx="500" cy="500" r="130"
+        fill="none" stroke="#FFB400" stroke-width="2"
+        stroke-dasharray="80 40"
+        filter="url(#softGlow)"
+        class="inner-ring"/>
+      <!-- Shutters along inner ring -->
+      <rect *ngFor="let sh of shutters; let i = index"
+        [attr.x]="getShutterX(sh)"
+        [attr.y]="getShutterY(sh)"
+        [attr.width]="sh.w"
+        [attr.height]="sh.h"
+        fill="#FFB400"
+        [attr.transform]="'rotate(' + sh.angle + ' ' + (getShutterX(sh) + sh.w/2) + ' ' + (getShutterY(sh) + sh.h/2) + ')'"
+        [ngClass]="'shutter-pulse-' + (i % 3)"
+        rx="1"/>
+    </g>
+
+    <!-- ==========================================
+         LAYER 6: Central Nucleus Assembly
+         ========================================== -->
+    <g class="nucleus-assembly">
+      <!-- Outer nucleus ring -->
+      <circle cx="500" cy="500" r="32"
+        fill="#000000" stroke="#993300" stroke-width="1.5"/>
+      <!-- Inner nucleus ring -->
+      <circle cx="500" cy="500" r="20"
+        fill="none" stroke="#FF8A00" stroke-width="0.5" opacity="0.5"/>
+      <!-- Core bead -->
+      <circle cx="500" cy="500" r="4.5"
+        fill="#FFB400" filter="url(#strongGlow)"/>
+      <!-- Cross-hairs -->
+      <line x1="485" y1="500" x2="515" y2="500" stroke="#FFB400" stroke-width="0.3" opacity="0.4"/>
+      <line x1="500" y1="485" x2="500" y2="515" stroke="#FFB400" stroke-width="0.3" opacity="0.4"/>
+    </g>
+
+    <!-- ==========================================
+         LAYER 7: Gyroscopic Inner Arcs
+         ========================================== -->
+    <g class="gyro-layer">
+      <ellipse cx="500" cy="500" rx="90" ry="50"
+        fill="none" stroke="#FF5A00" stroke-width="1"
+        opacity="0.4" class="gyro-sweep-1"/>
+      <ellipse cx="500" cy="500" rx="70" ry="35"
+        fill="none" stroke="#FFB400" stroke-width="0.6"
+        stroke-dasharray="30 50" opacity="0.3"
+        class="gyro-sweep-2"/>
+    </g>
+
+  </svg>
+</div>

@@ -1,0 +1,14 @@
+<div class="radio radio-vertical">
+  @for(opt of question.options; track opt.value) {
+  <div>
+    <input
+      [checked]="optionsSelectState[$index]"
+      type="checkbox"
+      [value]="opt.value"
+      (change)="onCheckboxChange($index, $event)"
+      #checkbox
+    />
+    <label (click)="checkbox.click()">{{ opt.viewValue }}</label>
+  </div>
+  }
+</div>

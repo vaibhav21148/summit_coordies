@@ -1,0 +1,270 @@
+<div id="template-container">
+  <!-- <div class="template-navbar" [class.scrolled-nav]="isScrolled">
+  </div> -->
+  <div class="main-container">
+    <app-vanta-bg></app-vanta-bg>
+    <!-- <div class="hero-container" style="
+        text-align: -webkit-center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      ">
+      <div class="logo" style="display: flex; justify-content: center; align-items: center">
+                      
+    </div>
+      <div class="reg-button">
+        <div class="button d-flex flex-column flex-md-row" style="margin-top: 30rem ; gap: 1rem; justify-content: center; align-items: center;">
+          <button routerLink="/ihack/reg" style="margin-top: 0;">Register</button>
+          
+          <button  routerLink="/ihack/sub" style="margin-top: 0;">Submissions</button>
+
+        </div>
+      </div>
+    </div> -->
+
+        <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo" style="display: flex; justify-content: center; align-items: center;">
+        <app-events-bg [backgroundImage]="BackgroundImages.IHACK"  [buttons]="ihackButtons"  logoImage="https://2k21.s3.amazonaws.com/s3uploadapi/i_hack.png"></app-events-bg>     
+         
+      </div>
+      
+    </div>
+
+    <div class="join-container" style="
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        flex-direction: column;
+      ">
+      <div style="display: flex; margin: auto; justify-content: center">
+                         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;"></div>
+        <h2 class="heading-primary">
+          What is i-HACK?
+        </h2>
+      </div>
+    </div>
+    <div class="about-container">
+      <p>
+        <span
+          class="event-name-highlight">i-Hack</span> are a series of hackathons held during IIT Bombay's E-Summit,
+        organized by E-Cell, which bring together aspiring product managers,
+        strategists, growth specialists, developers, designers, innovators and
+        future entrepreneurs from across India. This hackathon fosters
+        collaboration within the developer community, offering a platform to
+        create innovative, real-world solutions in a high-energy environment.
+      </p>
+      <!-- <h2>
+          Your startup dream starts here
+        </h2> -->
+    </div>
+    <div class="line" style="
+        display: flex;
+        margin-top: 2rem;
+        margin-bottom: -4rem;
+        justify-content: center;
+      ">
+      <hr style="width: 80%; color: white; height: 5px" />
+    </div>
+    <div class="why-container pt-4">
+         <h2 class="heading-primary">
+          Why i-HACK?
+        </h2>
+      <div class="card-container">
+        <div class="cards" id="ev1">
+          <app-evervault-card>
+            <img src="images/events/info-icons/rupee.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Exciting Cash prizes and internship opportunities</p>
+          </div>
+        </div>
+        <div class="cards" id="ev2">
+          <app-evervault-card>
+            <img src="images/events/info-icons/medal.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Validation and mentorship from Industry experts</p>
+          </div>
+        </div>
+        <div class="cards" id="ev3">
+          <app-evervault-card>
+            <img src="images/events/info-icons/film_camera.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">
+            Build Real-World Impact
+            </p>
+          </div>
+        </div>
+        <div class="cards" id="ev4">
+          <app-evervault-card>
+            <img src="images/events/info-icons/people.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Guaranteed certificates to build your accolades</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-container pt-4">
+      <h3 class="heading-primary">TRACKS</h3>
+
+    </div>
+
+
+    <div class="hack-card-container">
+    
+
+      <div class="hack-card">
+        <div class="hack-content">
+          <div class="hack-pic">
+            <img src="https://2k21.s3.amazonaws.com/s3uploadapi/GitLab_logo_2.svg.png" alt="">
+          </div>
+          <div class="hack-details">
+            <h3>GitLab’s CodeForge Track</h3>
+            <p>Code, merge, and innovate together; create real-world solutions in this high-energy GitLab-powered hackathon.</p>
+            <div class="reg-button">
+              <a href="https://drive.google.com/file/d/1bMpKFxrH9oO9alE6haRvNwA15VNVtQEO/view?usp=sharing" target="_blank"
+                class="button mt-3">
+                <button>Problem Statement</button>
+              </a>
+            </div>
+            <small>*The timeline, cash prize structure and other relevant details are mentioned in the attached document
+            </small>
+
+          </div>
+          <div class="track-details-container">
+            <p><i class="bi bi-coin"></i> &nbsp; INR 2,00,000</p>
+            <p><i class="bi bi-people-fill"></i> &nbsp; 1-3 people</p>
+            <p><i class="bi bi-globe"></i> &nbsp; Hybrid</p>
+            <p><i class="bi bi-tags-fill"></i> &nbsp; Innovation, Development</p>
+          </div>
+        </div>
+      </div>
+            <div class="hack-card">
+        <div class="hack-content">
+          <div class="hack-pic">
+            <img src="https://2k21.s3.amazonaws.com/s3uploadapi/admob.png" alt="google admob">
+          </div>
+          <div class="hack-details">
+            <h3>Google AdMob App Development Challenge</h3>
+            <p>Develop innovative mobile applications integrated with Google AdMob SDK to create engaging user experiences while implementing effective monetization strategies.</p>
+            <div class="reg-button">
+              <a href="https://drive.google.com/file/d/1rVKY0qYoke1MR_bdH1dV_B23aOp56cRk/view?usp=sharing" target="_blank"
+                class="button mt-3" >
+                <button>Problem Statement</button>
+              </a>
+            </div>
+            <small>*The timeline, cash prize structure and other relevant details are mentioned in the attached document
+            </small>
+
+          </div>
+          <div class="track-details-container">
+            <p><i class="bi bi-coin"></i>   INR 2,00,000</p>
+            <p><i class="bi bi-people-fill"></i>   1-4 people</p>
+            <p><i class="bi bi-globe"></i>   Hybrid</p>
+            <p><i class="bi bi-tags-fill"></i>   Mobile Development, AdMob</p>
+          </div>
+        </div>
+      </div>
+      <div class="hack-card">
+        <div class="hack-content">
+          <div class="hack-pic">
+            <img src="https://2k21.s3.amazonaws.com/s3uploadapi/cipla.jpeg" alt="">
+          </div>
+          <div class="hack-details">
+            <h3>Cipla's Datapulse Track</h3>
+            <p>Driving innovation through data intelligence, consumer insight, and technology to power growth in healthcare ecosystems.</p>
+            <div class="reg-button">
+              <a href="https://docs.google.com/presentation/d/1bP78WZKkErBpMBfJfPgoV6e5ZXbwhYrg/edit?usp=sharing&ouid=104599800188244926435&rtpof=true&sd=true" target="_blank"
+                class="button mt-3">
+                <button>Problem Statement</button>
+              </a>
+            </div>
+            <small>*The timeline, cash prize structure and other relevant details are mentioned in the attached document
+            </small>
+
+          </div>
+          <div class="track-details-container">
+            <p><i class="bi bi-coin"></i> &nbsp; INR 1,00,000</p>
+            <p><i class="bi bi-people-fill"></i> &nbsp; 1-3 people</p>
+            <p><i class="bi bi-globe"></i> &nbsp; Hybrid</p>
+            <p><i class="bi bi-tags-fill"></i> &nbsp; Data, Innovation</p>
+          </div>
+        </div>
+      </div>
+                  <div class="hack-card">
+        <div class="hack-content">
+          <div class="hack-pic">
+            <img src="https://2k21.s3.amazonaws.com/esummit26/sponsors/KRAFTON_Logo_Black.png" alt="google admob">
+          </div>
+          <div class="hack-details">
+            <h3>KRAFTON India Game Development Challenge</h3>
+            <p>Design and prototype innovative, original, and market-viable game concepts, demonstrating strong technical and artistic execution for the Indian and global gaming community.</p>
+            <div class="reg-button">
+              <a href="https://docs.google.com/document/d/1x9rNYCcxQmXlzxl43vKPKfx4m3DZfv_DrD0upTVCjWQ/edit?usp=sharing" target="_blank"
+                class="button mt-3" >
+                <button>Problem Statement</button>
+              </a>
+            </div>
+            <small>*The timeline, cash prize structure and other relevant details are mentioned in the attached document
+            </small>
+
+          </div>
+          <div class="track-details-container">
+            <p><i class="bi bi-coin"></i>   INR 1,00,000</p>
+            <p><i class="bi bi-people-fill"></i>   2-4 people</p>
+            <p><i class="bi bi-globe"></i>   Hybrid</p>
+            <p><i class="bi bi-tags-fill"></i>   Game Development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="gallery-container pt-4">
+      <h3 class="heading-primary">GALLERY</h3>
+      <div class="gallery-comp-container">
+        <app-carousel [imageURLs]="carouselImages"></app-carousel>
+      </div>
+    </div>
+
+
+  <!-- <app-timeline [events]="events"></app-timeline> -->
+
+  <div class="faq-container pt-5" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="ihack-faqs"></app-accordion>
+  </div>
+
+  <div class="contact-card-container pt-5 pb-5">
+    <h3 class="heading-primary">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'917020782116'" [email]="'kartikpadiya@ecell.in'" [linkedin]="
+          'http://linkedin.com/in/kartik-padiya-8117431a0'
+        " [img_url]="'https://2k21.s3.amazonaws.com/images/padiya_sTVgRwP.png'" [name]="'Kartik Padiya'"
+        [designation]="'Marketing Head'"></app-square-contact>
+      <!-- <app-square-contact [contact]="'918459403210'" [email]="'ved@ecell.in'" [linkedin]="
+          'http://linkedin.com/in/vedvpatil'
+        " [img_url]="'https://2k21.s3.amazonaws.com/images/ved.png'" [name]="'Ved Patil'"
+        [designation]="'Marketing Head'"></app-square-contact> -->
+      <app-square-contact [contact]="'918005567454'" [email]="'surendra@ecell.in'" [linkedin]="
+          'https://www.linkedin.com/in/surendrachoudhary095/'
+        " [img_url]="'https://2k21.s3.amazonaws.com/images/suri_website_final.png'" [name]="'Surendra Choudhary'"
+        [designation]="'Events & PR Head'"></app-square-contact>  
+        </div>
+  </div>
+      <!-- main container ends below -->
+  </div>
+  <app-footer></app-footer>
+</div>

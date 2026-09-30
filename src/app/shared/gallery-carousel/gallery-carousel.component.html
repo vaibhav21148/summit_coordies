@@ -1,0 +1,29 @@
+<div class="carousel-container">
+  <div class="carousel-wrapper">
+    <div class="carousel-track" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+      <div class="carousel-slide" *ngFor="let image of images; let i = index">
+        <img [src]="image.image" [alt]="image.name || 'Gallery Image'" class="carousel-image" />
+        <div class="carousel-caption" *ngIf="image.name">
+          <p>{{ image.name }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <button class="carousel-btn prev-btn" (click)="prev()" [disabled]="images.length <= 1">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    
+    <button class="carousel-btn next-btn" (click)="next()" [disabled]="images.length <= 1">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+  
+  <div class="carousel-dots" *ngIf="images.length > 1">
+    <button 
+      class="dot" 
+      *ngFor="let image of images; let i = index" 
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)">
+    </button>
+  </div>
+</div>

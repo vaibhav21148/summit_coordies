@@ -1,0 +1,59 @@
+// body,html {
+//   background-color: black;
+// }
+#mySidenav{
+font-family: var(--gta6-bold-ff);
+}
+#mySidenav button {
+    position: fixed;
+    top: 50%;
+    margin-top: -55px;
+    right: -40px;
+    transition: 0.3s;
+    // padding: 30px;
+    width: 100px;
+    height: 110px;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+    border: none;
+    z-index: 100 !important;
+    // padding-left: 40px;
+    transform: rotate(-90deg);
+    padding-bottom: 70px;
+    border: 2px solid #FF7A1A;
+    background: radial-gradient(circle at top, #373737, #000000);
+}
+
+  
+
+  #mySidenav button:hover {
+    right: 0;
+    cursor: pointer;
+    background-color: #1f1f1f;
+  // padding-left: 20px;
+  padding-top: 20px;
+
+  }
+
+  #mysidenav:hover{
+    cursor: pointer;
+  }
+  #passes {
+    // top: 20px;
+    // background-color: #A26CE5;
+    background-color: #ffc300;
+  }
+
+  @media screen and (max-width:480px) {
+    .sidenav p{
+      display: none;
+
+    }
+    #mySidenav button {
+      right: -60px;
+    height: 95px;
+    width: 80px;
+    }
+  }

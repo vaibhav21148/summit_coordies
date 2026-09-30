@@ -1,0 +1,25 @@
+@if(!showWidget) {
+<app-auto-form 
+  [options]="options" 
+  [questions]="questions"
+  [steps]="stepNames"
+  [stepQuestions]="stepQuestions"
+  [prefillData]="userPrefillData"
+  [heading]="heading"
+  [description]="description"
+  (regResponse)="onRegistrationComplete($event)">
+</app-auto-form>
+} @else {
+<div class="widget-container">
+  <h2>Complete Your Payment</h2>
+  <p>Your registration was successful! Please complete your payment below:</p>
+  <app-konfhub-widget 
+    [userEmail]="userEmail" 
+    [userName]="userName"
+    [accommodationId]="accommodationId"
+    [numberOfMales]="numberOfMales"
+    [numberOfFemales]="numberOfFemales"
+    (paymentCompleted)="onPaymentCompleted()">
+  </app-konfhub-widget>
+</div>
+}

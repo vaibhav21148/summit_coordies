@@ -1,0 +1,42 @@
+<div class="auth-page-wrapper" [class.has-bg]="!!bgImage">
+<div class="reg-form" [class.image-bg-form]="!!bgImage" [style.border]="bgImage ? 'none' : ''" [style.outline]="bgImage ? 'none' : ''" [style.boxShadow]="bgImage ? 'none' : ''" [style.overflow]="bgImage ? 'hidden' : ''">
+    @if (!bgImage) {
+    <div class="left-side">
+        <img src="pseudo_plogo.svg" alt="E-Summit Logo" class="logo">
+
+        <div class="content">
+            <h1>{{ heading }}</h1>
+            <p>{{ description }}</p>
+        </div>
+
+        <div class="steps">
+            @for(step of steps; track $index) {
+            <div class="step" [class.active]="currentStep === $index + 1">
+                <div class="circle">{{ $index + 1 }}</div>
+                <p>{{ step }}</p>
+            </div>
+            }
+        </div>
+    </div>
+    } @else {
+    <div class="left-side-spacer">
+        <div class="spacer-top">
+            <img src="pseudo_plogo.svg" alt="E-Summit Logo" class="joint-logo">
+        </div>
+        <div class="spacer-bottom">
+            @if(bgImage === 'login') {
+                <h1 class="spacer-text">Login</h1>
+            } @else if(bgImage === 'register') {
+                <h1 class="spacer-text">Register</h1>
+            }
+        </div>
+    </div>
+    }
+
+    <div class="right-side" [ngStyle]="{'background': bgImage ? 'transparent' : ''}">
+        <div class="form-content">
+            <ng-content></ng-content>
+        </div>
+    </div>   
+</div>
+</div>

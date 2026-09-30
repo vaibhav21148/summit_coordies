@@ -1,0 +1,8 @@
+<div class="card">
+  <img [src]="getImageUrl(speaker)" [alt]="speaker?.name || 'speaker'" class="speaker-img" (error)="onImgError($event)">
+  <img src="images/cards/speaker.png" alt="card frame" class="card-frame">
+  <div class="content">
+    <h2>{{ speaker?.name }}</h2>
+    <p>{{ speaker?.designation }}</p>
+  </div>
+</div>

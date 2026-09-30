@@ -1,0 +1,185 @@
+<div id="template-container">
+  <!-- <div class="template-navbar" [class.scrolled-nav]="isScrolled">
+  </div> -->
+<app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo" style="display: flex; justify-content: center; align-items: center;">
+        <app-events-bg [backgroundImage]="BackgroundImages.IJF"  [buttons]="ijfButtons"></app-events-bg>     
+         
+      </div>
+    </div>
+
+    <div class="about-container">
+              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;"></div>
+      <p>
+        Recruiting the right people is crucial for a startup or company’s success. Finding the most suitable intern or
+        job profile can be tedious and challenging for both companies and applicants. <br> The <span
+          class="event-name-highlight">Internship and Job Fair </span> provides a one-stop solution for companies to
+        hire the best talent from some of the most premium colleges in India.
+
+      <p>
+        We witness top students from across the nation participating as finalists in our prestigious initiatives like
+        the National Entrepreneurship Challenge (NEC) and the Campus Ambassador Program. These students have mastered
+        diverse skill sets through rigorous competitions and hands-on experiences, making them highly competent and
+        ready to contribute effectively to any organization.
+
+      </p>
+    </div>
+    <div class="statwork-container">
+
+      <div class="stats-container pt-4">
+        <div class="card-container">
+          <div class="cards" id="ev1">
+            <app-evervault-card>
+              <img src="images/events/info-icons/road-map.png" alt="" width="185px" />
+            </app-evervault-card>
+            <div class="content">
+              <p class="heading">Companies</p>
+              <p class="text">20+</p>
+            </div>
+          </div>
+          <div class="cards" id="ev2">
+            <app-evervault-card>
+              <img src="images/events/info-icons/notes.png" alt="" width="185px" />
+            </app-evervault-card>
+            <div class="content">
+              <p class="heading">Applicants</p>
+              <p class="text">1000+</p>
+            </div>
+          </div>
+          <div class="cards" id="ev3">
+            <app-evervault-card>
+              <img src="images/events/info-icons/ppl-connect.png" alt="" width="185px" />
+            </app-evervault-card>
+            <div class="content">
+              <p class="heading">Offers</p>
+              <p class="text">200+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="why-container pt-4">
+      <div class="heading-two-line">
+        <span class="line-secondary"> Selection Procedure</span>
+      </div>
+      <div class="selection-container pt-5">
+
+        <div class="selection">
+          <div class="cards">
+            <div class="main">01</div>
+            <div class="content">
+              <div class="heading">Registration</div>
+              <div class="text">
+                Filling the registration form with all the required fields for recruiter or applicant respectively
+              </div>
+            </div>
+          </div>
+          <div class="cards">
+            <div class="main">02</div>
+            <div class="content">
+              <div class="heading">Application & Screening</div>
+              <div class="text">
+                Recruiters will open an application form with job descriptions, then registered students and graduates
+                will apply for further screening.
+              </div>
+            </div>
+          </div>
+          <div class="cards">
+            <div class="main">03</div>
+            <div class="content">
+              <div class="heading">Final Interviews</div>
+              <div class="text">
+                Selected applicants will be interviewed in-person by companies on 2nd Feb'25 at IIT-Bombay campus
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- main container ends -->
+
+    <app-timeline [events]="events"></app-timeline>
+
+
+<!-- 
+
+  <div class="timeline-container pt-5">
+    <h3 class="heading-primary">Timeline</h3>
+    <div class="timeline">
+      <ul>
+        <li *ngFor="let event of events">
+          <div class="contentline">
+            <h3>{{ event.status }}</h3>
+          </div>
+          <div class="time">
+            <h4>{{ event.date }}</h4>
+          </div>
+        </li>
+        <div style="clear:both;"></div>
+      </ul>
+    </div>
+  </div> -->
+
+
+  <!-- new timeline end -->
+
+
+
+  <div class="speakers-container pt-5">
+    <h3 class="heading-primary">OUR RECRUITERS</h3>
+
+    <app-sponsorcard [sponsors]="speakers || []"></app-sponsorcard>
+  </div>
+
+
+  <div class="faq-container pt-5" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="ijf-faqs"></app-accordion>
+</div>
+
+  <div class="contact-card-container pt-5 pb-5">
+    <h3 class="heading-primary">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'+917738447760'" [email]="'mehul@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/mehul-bafna-849390294/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/mehul_website.png'" [name]="'Mehul Bafna'"
+        [designation]="'Events & PR Head'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+
+<!-- expo detail popup -->
+<div class="incubator_popup flex justify-content-center">
+  <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '5000px': '500px', '1199px': '60vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="header font-bold white-space-nowrap">{{
+          expo_title
+          }}</span>
+      </div>
+    </ng-template>
+
+    <p class="m-0 content">
+      {{ expo_description }}
+    </p>
+  </p-dialog>
+</div>
+<!-- expo detail popup -->

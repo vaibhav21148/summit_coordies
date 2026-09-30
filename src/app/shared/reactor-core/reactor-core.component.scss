@@ -1,0 +1,212 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.reactor-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.reactor-svg {
+  width: 130%;
+  height: 130%;
+  max-width: none;
+  opacity: 1;
+}
+
+/* ===========================================
+   BACKGROUND DRIFT ANIMATIONS
+   =========================================== */
+
+.bg-drift-0 {
+  animation: bgDrift0 180s linear infinite;
+}
+.bg-drift-1 {
+  animation: bgDrift1 220s linear infinite reverse;
+}
+.bg-drift-2 {
+  animation: bgDrift2 150s linear infinite;
+}
+.bg-drift-3 {
+  animation: bgDrift3 280s linear infinite reverse;
+}
+
+@keyframes bgDrift0 {
+  from { transform: rotate(0deg); transform-origin: 500px 500px; }
+  to   { transform: rotate(360deg); transform-origin: 500px 500px; }
+}
+@keyframes bgDrift1 {
+  from { transform: rotate(0deg); transform-origin: 500px 500px; }
+  to   { transform: rotate(360deg); transform-origin: 500px 500px; }
+}
+@keyframes bgDrift2 {
+  from { transform: rotate(0deg); transform-origin: 500px 500px; }
+  to   { transform: rotate(360deg); transform-origin: 500px 500px; }
+}
+@keyframes bgDrift3 {
+  from { transform: rotate(0deg); transform-origin: 500px 500px; }
+  to   { transform: rotate(360deg); transform-origin: 500px 500px; }
+}
+
+/* ===========================================
+   DOMINANT ORBIT
+   =========================================== */
+
+.dominant-orbit {
+  animation: heavyRotation 38s ease-in-out infinite;
+  transform-origin: 500px 500px;
+}
+
+.orbit-primary {
+  animation: orbitDash 20s linear infinite;
+}
+
+.secondary-orbit {
+  animation: heavyRotation 52s ease-in-out infinite reverse;
+  transform-origin: 500px 500px;
+}
+
+.orbit-secondary {
+  animation: orbitDash 28s linear infinite;
+}
+
+@keyframes heavyRotation {
+  0%   { transform: rotate(35deg); }
+  50%  { transform: rotate(55deg); }
+  100% { transform: rotate(35deg); }
+}
+
+@keyframes orbitDash {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -1000; }
+}
+
+/* ===========================================
+   ENERGY FLOW (moving blips)
+   =========================================== */
+
+.energy-flow {
+  animation: energyPacket 2s linear infinite;
+}
+
+.energy-flow-2 {
+  animation: energyPacket 3s linear infinite reverse;
+}
+
+@keyframes energyPacket {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -400; }
+}
+
+/* ===========================================
+   INNER MECHANICAL RING
+   =========================================== */
+
+.inner-ring {
+  animation: innerRingSpin 25s linear infinite;
+  transform-origin: 500px 500px;
+}
+
+@keyframes innerRingSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ===========================================
+   SHUTTER PULSES
+   =========================================== */
+
+.shutter-pulse-0 {
+  animation: shutterTravel 6s ease-in-out infinite;
+}
+.shutter-pulse-1 {
+  animation: shutterTravel 6s ease-in-out infinite 2s;
+}
+.shutter-pulse-2 {
+  animation: shutterTravel 6s ease-in-out infinite 4s;
+}
+
+@keyframes shutterTravel {
+  0%, 100% { opacity: 0.3; filter: brightness(1); }
+  50%      { opacity: 1.0; filter: brightness(1.8); }
+}
+
+/* ===========================================
+   NUCLEUS ASSEMBLY
+   =========================================== */
+
+.nucleus-assembly {
+  animation: nucleusJitter 14s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+  transform-origin: 500px 500px;
+}
+
+@keyframes nucleusJitter {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(35px, -30px); }
+  50%      { transform: translate(-20px, 25px); }
+  75%      { transform: translate(25px, 15px); }
+}
+
+/* ===========================================
+   GYROSCOPIC SWEEPS
+   =========================================== */
+
+.gyro-sweep-1 {
+  animation: gyroSweep1 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  transform-origin: 500px 500px;
+}
+
+.gyro-sweep-2 {
+  animation: gyroSweep2 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  transform-origin: 500px 500px;
+}
+
+@keyframes gyroSweep1 {
+  0%   { transform: rotate(0deg) scaleY(1); }
+  25%  { transform: rotate(90deg) scaleY(0.7); }
+  50%  { transform: rotate(180deg) scaleY(1.2); }
+  75%  { transform: rotate(270deg) scaleY(0.8); }
+  100% { transform: rotate(360deg) scaleY(1); }
+}
+
+@keyframes gyroSweep2 {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(-180deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* ===========================================
+   SATELLITE NETWORK
+   =========================================== */
+
+.sat-rotate {
+  animation: satOrbit 200s linear infinite;
+  transform-origin: 500px 500px;
+}
+
+.sat-static {
+  /* No animation */
+}
+
+.sat-pulse {
+  animation: satPulse 4s ease-in-out infinite;
+}
+
+@keyframes satOrbit {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes satPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}

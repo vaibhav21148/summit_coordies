@@ -1,0 +1,15 @@
+<div class="otp-container">
+  <div class="otp-input">
+    @for( box of otp;track $index ){
+    <input
+      type="text"
+      maxlength="1"
+      class="otp-box"
+      [(ngModel)]="otp[$index]"
+      (input)="moveToNextBox($index)"
+      (keydown)="onBackSpace($event, $index)"
+      (click)="onClick($event)"
+    />
+    }
+  </div>
+</div>

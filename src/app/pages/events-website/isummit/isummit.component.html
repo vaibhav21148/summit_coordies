@@ -1,0 +1,134 @@
+<div id="template-container">
+  <div class="main-container">
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo hero-logo-wrapper"
+        style="position: relative; width: 100%; height: 100vh; overflow: hidden; background-color: black; display: flex; justify-content: center; align-items: flex-end;">
+
+        <!-- Full Background Image -->
+        <div id="hero-bg"></div>
+
+        <!-- Smooth Dark Vignette Overlay -->
+        <div
+          style="position: absolute; bottom: 0; left: 0; width: 100%; height: 70vh; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(30,10,0,0.8) 50%, transparent 100%); z-index: 2; pointer-events: none;">
+        </div>
+
+        <!-- Center Content: Logo and Register Button -->
+        <div class="hero-center-content"
+          style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-bottom: 13vh;">
+          <img src="images/isummit_logo.svg" class="hero-logo-img" alt="Incubator Summit"
+            style="width: 48vw; min-width: 440px; max-width: 720px; height: auto; margin-bottom: 25px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(255,122,26,0.35)); will-change: transform, opacity;" />
+
+          <button *ngFor="let btn of isummitButtons" class="btn hero-action-btn"
+            (click)="onButtonClick(btn.clickHandler)">
+            {{ btn.text }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reveal-wrapper" style="position: relative; width: 100%; padding-top: 10vh; margin-top: 0;">
+      <div id="reveal-content" style="position: relative; width: 100%;">
+
+        <div style="position: relative;">
+          <div class="join-container"
+            style="display: flex; margin: auto; justify-content: center; flex-direction: column; position: relative; z-index: 1;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;">
+            </div>
+            <div style="display: flex; margin: auto; justify-content: center">
+              <h2
+                style="padding-top: 10px; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;"
+                class="heading-primary">
+                INCUBATOR SUMMIT<br> <strong>FAST-TRACK YOUR STARTUP’S INCUBATION JOURNEY</strong>
+              </h2>
+            </div>
+          </div>
+          <div class="about-container">
+            <p style="text-align: center;">
+              Startups thrive with incubation, but why wait months for approval? Skip the bottleneck—register for the
+              <span class="event-name-highlight">Incubator Summit</span> and fast-track your journey!
+              <br><br>
+              No lengthy processes, no hassle—just <strong>quick decisions and instant progress!</strong>
+            </p>
+            <h2 style="text-align: center; max-width: 90vw;">
+              <strong>Your incubation journey starts here!</strong>
+            </h2>
+          </div>
+
+          <div class="line" style="display: flex; margin-bottom: 2rem; justify-content: center">
+            <hr style="width: 80%; color: white; height: 5px;">
+          </div>
+
+          <!-- Why ISummit Section (3x2 Grid) -->
+          <div class="why-container pt-3">
+            <h3 class="heading-primary why-heading"
+              style="margin-bottom: 0.75rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;">
+              <span>Why attend Incubator Summit?</span>
+            </h3>
+            <div class="why-cards-grid" id="why-cards-container">
+              <div *ngFor="let item of why_isummit" class="why-card">
+                <div class="icon-wrapper">
+                  <img [src]="item.image" [alt]="item.title" />
+                </div>
+                <h4 class="card-title">{{ item.title }}</h4>
+                <p class="card-description">{{ item.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Timeline Section -->
+      <app-timeline [events]="events" [heading]="'Startup Selection Timeline & Procedure'"></app-timeline>
+
+      <div class="gallery-container pt-5">
+        <h3 class="heading-primary"
+          style="margin-bottom: 0rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;">
+          Past Incubators</h3>
+        <div class="card-container investors">
+          <app-speaker-card *ngFor="let speaker of speakers" [speaker]="speaker"></app-speaker-card>
+        </div>
+      </div>
+
+      <!-- FAQs Section -->
+      <div class="faq-container pt-5" *ngIf="faqs && faqs.length > 0">
+        <h3 class="heading-primary"
+          style="margin-bottom: -1rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;">
+          FAQs</h3>
+        <app-accordion [items]="faqs" accordionId="isummit-faqs"></app-accordion>
+      </div>
+
+      <!-- Contact Us Section -->
+      <div class="contact-card-container pb-5">
+        <h3 class="heading-primary"
+          style="margin-bottom: 0; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; text-align: center;">
+          Contact Us</h3>
+        <div class="contact">
+          <app-square-contact [contact]="'9351102913'" [email]="'manas@ecell.in'"
+            [linkedin]="'https://www.linkedin.com/in/manas-gupta-bb487b317/'"
+            [img_url]="'https://2k21.s3.amazonaws.com/images/WhatsApp_Image_2026-09-05_at_5_u1jPIId.28.58_PM__1_-removebg-preview.png'"
+            [name]="'Manas Gupta'" [designation]="'Events & PR Head'">
+          </app-square-contact>
+        </div>
+      </div>
+
+      <!-- Platinum Pass Note -->
+      <p
+        style="color: rgba(255,255,255,0.7); margin: 20px; font-style: italic; max-width: 900px; text-align: center; margin-left: auto; margin-right: auto; font-family: 'Satoshi', sans-serif;">
+        <strong>*Note:</strong> Access to the <strong>Incubator Summit</strong> is available exclusively through the
+        <strong>Platinum Pass for E-Summit'26</strong>.<br>All final decisions regarding selection
+        and participation rest solely with E-Cell IIT Bombay.
+      </p>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

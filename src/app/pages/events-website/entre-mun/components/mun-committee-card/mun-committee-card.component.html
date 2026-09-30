@@ -1,0 +1,15 @@
+<div class="committees">
+    <div class="committee" *ngFor="let committee of committees">
+        <div class="committee-card"> 
+            <div class="img">
+                <img [src]="committee.image" [alt]="committee.name" class="committee-image">
+            </div>
+            <div class="card-info">
+                <div class="title">{{ committee.name }}</div>
+            </div>
+            <button class="agenda-btn" (click)="onShowAgenda(committee)">
+                View Agenda
+            </button>
+        </div>
+    </div>
+</div>

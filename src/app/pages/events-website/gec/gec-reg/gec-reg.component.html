@@ -1,0 +1,10 @@
+<app-auto-form 
+  [questions]="questions" 
+  [options]="options"
+  [steps]="stepNames"
+  [stepQuestions]="stepQuestions"
+  [prefillData]="userPrefillData"
+  heading="GEC Registration"
+  description="Complete your registration for Global Entrepreneurship Conclave (GEC)"
+  (regResponse)="onRegistrationComplete($event)">
+</app-auto-form>

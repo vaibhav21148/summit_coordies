@@ -1,0 +1,28 @@
+<div class="vanta-bg">
+  <app-auth-layout 
+    [currentStep]="currentStep" 
+    [steps]="steps" 
+    [heading]="heading" 
+    [description]="description">
+    @if(currentStep === 1 && showSkipButton) {
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <button type="button" class="text-white" (click)="onSkipClick()" style="padding: 0.5rem 1rem; background: #ff6b6b; border: none; border-radius: 4px; cursor: pointer;">
+          Skip to Nominations
+        </button>
+      </div>
+    }
+    <app-int-auto-form 
+      #autoForm
+      [questions]="currentStepQuestions" 
+      [allQuestions]="questions"
+      [extraData]="getFinalData()" 
+      [options]="modifiedOptions"
+      [currentStep]="currentStep"
+      [totalSteps]="steps.length"
+      [prefillData]="prefillData"
+      (regResponse)="handleStepResponse($event)"
+      (previousStep)="previousStep()" 
+      style="width: 100%;">
+    </app-int-auto-form>
+  </app-auth-layout>
+</div>

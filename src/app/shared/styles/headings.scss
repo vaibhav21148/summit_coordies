@@ -1,0 +1,119 @@
+// Secondary heading - Section titles
+.heading-secondary {
+  @extend .heading-base;
+  font-size: 3rem;
+  font-weight: 500;
+  color: white;
+  
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1.8rem;
+  }
+}
+
+// Tertiary heading - Subsection titles
+.heading-tertiary {
+  @extend .heading-base;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #702ac6;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1.4rem;
+  }
+}
+
+// Timeline heading
+.heading-timeline {
+  @extend .heading-base;
+  font-size: 4rem;
+  font-weight: 800;
+  background-image: linear-gradient(180deg, #7200ff 12.81%, #1e0044 80.5%);
+  color: transparent;
+  background-clip: text;
+  text-align: left;
+  padding-left: 50px;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2.5rem;
+    padding-left: 20px;
+  }
+}
+
+// FAQ heading
+.heading-faq {
+  @extend .heading-base;
+  font-size: 4rem;
+  font-weight: 400;
+  color: #702ac6;
+  text-align: left;
+  padding-left: 50px;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2.5rem;
+    padding-left: 20px;
+  }
+}
+
+// Contact heading
+.heading-contact {
+  @extend .heading-base;
+  font-size: 3rem;
+  font-weight: 400;
+  // background-image: linear-gradient(180deg, #FFE100 50%, #5C5100 100%);
+  text-align: left;
+  // padding-left: 50px;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    font-size: 2.2rem;
+    padding-left: 20px;
+  }
+}
+
+// Two-line heading with different colors
+.heading-two-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .line-primary {
+    @extend .heading-secondary;
+    color: white;
+    margin-bottom: 0;
+  }
+
+  .line-secondary {
+    @extend .heading-primary;
+    margin-bottom: 0;
+  }
+}
+
+// Event name highlight
+.heading-event-highlight {
+  background-image: linear-gradient(180deg, #9b5fd9 50%, #caa9ed 100%);
+  color: transparent;
+  background-clip: text;
+}
+
+// Utility classes
+.heading-left { text-align: left !important; }
+.heading-center { text-align: center !important; }
+.heading-mb-0 { margin-bottom: 0 !important; }
+.heading-mb-1 { margin-bottom: 1rem !important; }
+.heading-mb-2 { margin-bottom: 2rem !important; }

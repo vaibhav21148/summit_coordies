@@ -1,0 +1,45 @@
+<div id="template-container">
+  <app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/corporate_duel.png'"
+          [buttons]="compiButtons" [backgroundImage]="BackgroundImages.COMPI"
+          (buttonClick)="handleButtonClick($event)"></app-events-bg>
+      </div>
+    </div>
+    <div class="about-container">
+      <p>
+        Picture this: the spotlight’s on you - a finalist in the ultimate entrepreneurial face-off. The stage crackles
+        with energy as you and your rival prepare to represent dueling giants (think Swiggy vs. Zomato, Apple vs.
+        Samsung). It’s not just a battle of ideas - it’s war. You’ll unleash your most powerful pitches, outwit your
+        opponent with razor-sharp comebacks, and fight to sway the judges in your favor. Every argument counts, every
+        word matters, and one slip could cost you the crown.
+      </p>
+    </div>
+  </div>
+
+  <!-- main container ends -->
+  <app-timeline [events]="events"></app-timeline>
+
+  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+  </div>
+
+
+  <div class="contact-card-container pb-5">
+    <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'9587110555'" [name]="'Khushboo'">
+      </app-square-contact>
+    </div>
+  </div>
+
+
+  <app-footer></app-footer>
+</div>

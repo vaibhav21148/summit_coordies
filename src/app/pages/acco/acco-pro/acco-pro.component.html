@@ -1,0 +1,75 @@
+<div id="template-container">
+<app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+                      
+    </div>
+      <div class="reg-button">
+        <div class="button d-flex flex-column flex-md-row" style="margin-top: 20rem ; gap: 1rem;">
+          <!-- <button routerLink="/acco/reg" style="margin-top: 0;">Register for Student</button> -->
+          <!-- <button routerLink="acco/pro" style="margin-top: 0;">Register for Professional</button> -->
+          <h3>Accommodation for Startups
+            and Professionals ↓</h3>
+
+        </div>
+      </div>
+    </div>
+    <div class="about-container">
+      <h3>Terms & Conditions</h3>
+      <p class="border-class">
+        We are providing accommodation outside IIT Bombay in partner hotels at discounted rates, the payment has to be
+        done to the hotel itself and they are to be consulted directly regarding any query on the given contact details.
+        E-Cell does not bear responsibility for any unfortunate mishap at partner hotels, and the hotels themselves are
+        solely responsible.
+      </p>
+    </div>
+    <div class="about1-container">
+      <h3>HOTELS</h3>
+      <div class="hotel-container">
+        <table>
+          <tr>
+            <th>S.No.</th>
+            <th>Hotel Name</th>
+            <th>Hotel Address</th>
+            <th>E-Summit Rates(Per Night)</th>
+            <th>Hotel Contact</th>
+          </tr>
+          <tr *ngFor="let hotel of hotels; let i = index;">
+            <td>{{ i+1 }}</td>
+            <td>{{ hotel.hotel_name }}</td>
+            <td>{{ hotel.hotel_address }}</td>
+            <td [innerHTML]="hotel.hotel_rates">
+              <!-- {{hotel.hostel_rates}} -->
+            </td>
+            <td>
+              {{ hotel.poc_contact }} <br />
+              {{ hotel.poc_name }} <br />
+              {{ hotel.poc_email }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="contact-card-container pt-5 pb-5">
+    <h3>Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'+919975064172'" [email]="'prathamsonekar@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/pratham-sonekar-bb75a9257/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/pratham.jpg'" [name]="'Pratham Sonekar'"
+        [designation]="'Operations Head'"></app-square-contact>
+      <app-square-contact [contact]="'+917302741563'" [email]="'yashguptak@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/yash-gupta-9b2639281/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/yash.jpg'" [name]="'Yash Gupta'"
+        [designation]="'Operations Head'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+
+</div>

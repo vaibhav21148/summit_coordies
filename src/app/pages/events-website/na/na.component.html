@@ -1,0 +1,117 @@
+<div id="template-container">
+  <div class="main-container">
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo hero-logo-wrapper"
+        style="position: relative; width: 100%; height: 100vh; overflow: hidden; background-color: black; display: flex; justify-content: center; align-items: flex-end;">
+
+        <!-- Full Background Image -->
+        <div id="hero-bg"></div>
+
+        <!-- Smooth Dark Vignette Overlay -->
+        <div
+          style="position: absolute; bottom: 0; left: 0; width: 100%; height: 70vh; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(30,10,0,0.8) 50%, transparent 100%); z-index: 2; pointer-events: none;">
+        </div>
+
+        <!-- Center Content: Logo and Register Button -->
+        <div class="hero-center-content"
+          style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-bottom: 12vh;">
+          <img src="images/networking_arena.png" class="hero-logo-img" alt="Networking Arena"
+            style="width: 25vw; min-width: 250px; max-width: 400px; height: auto; margin-bottom: 20px; opacity: 0; transform: translateY(30px);" />
+
+          <button *ngFor="let btn of naButtons" class="btn hero-action-btn" (click)="onButtonClick(btn.clickHandler)">
+            {{ btn.text }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reveal-wrapper" style="position: relative; width: 100%; padding-top: 10vh; margin-top: 0;">
+      <div id="reveal-content" style="position: relative; width: 100%;">
+
+        <div style="position: relative;">
+
+          <div class="about-container">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;">
+            </div>
+
+            <p>
+              Curious where the most anticipated convergence of connections, insights, and collaborations happens for
+              startups, investors, mentors, incubators, students, and professionals across the country?
+            </p>
+            <p>Welcome to <span class="event-name-highlight">Networking Arena</span> – the ultimate space designed to
+              fuel meaningful interactions, spark new ideas, and build lasting partnerships.</p>
+            <p>
+              With multiple dedicated arenas for one-on-one discussions, you'll have the opportunity to connect with
+              industry leaders, gain actionable insights, and make the most of your journey in the startup ecosystem.
+              Don't miss out – <span class="event-name-highlight">Register now</span> and be part of this unparalleled
+              networking experience!
+            </p>
+          </div>
+
+          <div class="line" style="display: flex; margin-bottom: -0.5rem; justify-content: center">
+            <hr style="width: 80%; color: white; height: 5px;">
+          </div>
+
+          <div class="details-container pt-5">
+            <h3 class="heading-primary">DETAILS OF EVENTS IN ARENA</h3>
+            <div class="cards-container pt-4">
+              <div class="flip-card" *ngFor="let event of arena_events_details; let i = index">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image-wrapper">
+                      <img [src]="event.image" [alt]="event.title" />
+                    </div>
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="image-wrapper">
+                      <img [src]="event.image" [alt]="event.title" class="back-bg" />
+                      <div class="back-content">
+                        <h4 class="back-title">{{ event.title }}</h4>
+                        <p class="back-description">{{ event.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-timeline [events]="events"></app-timeline>
+
+      <div class="speakers-container pt-5 pb-4">
+        <h3 class="heading-primary">OUR PREVIOUS SPEAKERS AND INVESTORS</h3>
+        <div class="card-container speakers"
+          style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+          <app-speaker-card *ngFor="let speaker of speakers" [speaker]="speaker"></app-speaker-card>
+        </div>
+      </div>
+
+      <div class="faq-container pt-5" *ngIf="faqs && faqs.length > 0">
+        <h3 class="heading-primary">FAQs</h3>
+        <app-accordion [items]="faqs" accordionId="na-faqs"></app-accordion>
+      </div>
+
+      <div class="contact-card-container pt-5 pb-5">
+        <h3 class="heading-primary">Contact Us</h3>
+        <div class="contact">
+          <app-square-contact [contact]="'918708714591'" [email]="'milan@ecell.in'"
+            [linkedin]="'https://www.linkedin.com/in/milan-bhujeja-2431a3313/'"
+            [img_url]="'https://2k21.s3.amazonaws.com/images/file_0000000039e881f581b3d176b4f39ed0.png'"
+            [name]="'Milan Bhujeja'" [designation]="'Events & PR Head'"></app-square-contact>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

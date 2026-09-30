@@ -1,0 +1,188 @@
+<div id="template-container">
+  <div class="main-container">
+    <div class="hero-container" style="
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    ">
+      <div class="logo hero-logo-wrapper"
+        style="position: relative; width: 100%; height: 100vh; overflow: hidden; background-color: black; display: flex; justify-content: center; align-items: flex-end;">
+
+        <!-- Full Background Image -->
+        <div id="hero-bg"></div>
+
+        <!-- Smooth Dark Vignette Overlay -->
+        <div
+          style="position: absolute; bottom: 0; left: 0; width: 100%; height: 70vh; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(30,10,0,0.8) 50%, transparent 100%); z-index: 2; pointer-events: none;">
+        </div>
+
+        <!-- Center Content: Logo, Heading, Tagline, Register Button -->
+        <div class="hero-center-content"
+          style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; margin-bottom: 12vh;">
+
+          <img src="images/seedstars_logo.png" class="hero-logo-img" alt="Seed Stars Logo"
+            style="width: 44vw; min-width: 340px; max-width: 580px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(255,122,26,0.35)); will-change: transform, opacity;" />
+
+          <p class="hero-tagline"
+            style="color: rgba(255,255,255,0.92); font-size: 25px; text-align: center; margin: 0 20px 28px 20px; line-height: 1.5; font-family: 'Satoshi', sans-serif; white-space: nowrap; will-change: transform, opacity;">
+            Recognizing the hurdles faced by startups, we offer a solution for your funding concerns!
+          </p>
+
+          <button *ngFor="let btn of seedstarsButtons" class="btn hero-action-btn"
+            (click)="onButtonClick(btn.clickHandler)">
+            {{ btn.text }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reveal-wrapper" style="position: relative; width: 100%; padding-top: 8vh; margin-top: 0;">
+      <div id="reveal-content" style="position: relative; width: 100%;">
+
+        <div style="position: relative;">
+          <!-- About Seed Stars -->
+          <div class="join-container"
+            style="display: flex; margin: auto; justify-content: center; flex-direction: column; position: relative; z-index: 1;">
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;">
+            </div>
+            <div style="display: flex; margin: auto; justify-content: center">
+              <h2 class="about-heading" style="padding-top: 15px; text-align: center; text-transform: uppercase;">
+                ABOUT SEED STARS<br> <strong>CONNECTING STARTUPS WITH EXCEPTIONAL INVESTORS</strong>
+              </h2>
+            </div>
+          </div>
+          <div class="about-container">
+            <p style="text-align: center;">
+              Introducing <span class="event-name-highlight">Seed Stars</span>, an exclusive startup funding event at
+              <strong>E-Summit 2026</strong> that
+              connects startups with exceptional VCs and investors. Here, startups can build valuable connections,
+              engage in networking opportunities, explore potential funding discussions with investors, and tap into
+              a wealth of expertise that will drive their venture to the next level of success.
+            </p>
+            <h2 style="text-align: center; max-width: 90vw;">
+              <strong>Your next funding milestone starts here!</strong>
+            </h2>
+          </div>
+
+          <div class="line" style="display: flex; margin-bottom: -0.5rem; justify-content: center">
+            <hr style="width: 80%; color: white; height: 5px;">
+          </div>
+
+          <!-- Why Attend Seed Stars Section (3x2 Grid) -->
+          <div class="why-container pt-3">
+            <h3 class="heading-primary why-heading"
+              style="margin-bottom: 0.75rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+              WHY ATTEND SEED STARS?
+            </h3>
+            <div class="why-cards-grid" id="why-cards-container">
+              <div *ngFor="let item of why_seedstars" class="why-card">
+                <div class="icon-wrapper">
+                  <img [src]="item.image" [alt]="item.title" />
+                </div>
+                <h4 class="card-title">{{ item.title }}</h4>
+                <p class="card-description">{{ item.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Selection Procedure Section -->
+      <div class="selection-container pt-5 pb-5">
+        <h3 class="heading-primary selection-heading"
+          style="margin-bottom: 2.5rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+          SELECTION PROCEDURE
+        </h3>
+        <div class="selection-steps-row">
+          <div *ngFor="let proc of selection_procedure" class="selection-step-item">
+            <div class="step-num">{{ proc.step }}</div>
+            <div class="step-title">{{ proc.title }}</div>
+            <div class="step-desc">{{ proc.description }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Section -->
+      <app-timeline [events]="events" [heading]="'Timeline'"></app-timeline>
+
+      <!-- Past Investors Section -->
+      <div class="gallery-container pt-5">
+        <h3 class="heading-primary"
+          style="margin-bottom: 2rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+          PAST INVESTORS
+        </h3>
+
+        <div class="investors-four-grid">
+          <div *ngFor="let inv of investors" class="investor-square-card">
+            <div class="investor-img-wrapper">
+              <img [src]="inv.image" [alt]="inv.name" class="investor-img" />
+            </div>
+            <div class="investor-info">
+              <h4 class="investor-name">{{ inv.name }}</h4>
+              <p class="investor-designation">{{ inv.designation }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past Startups Section (4 cards in single row on desktop, 2x2 on mobile) -->
+      <!-- <div class="startups-container pt-5 pb-5">
+        <h3 class="heading-primary"
+          style="margin-bottom: 2rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+          PAST STARTUPS AT SEED STARS
+        </h3>
+
+        <div class="startups-four-grid">
+          <div *ngFor="let startup of pastStartups" class="startup-card">
+            <div class="startup-logo-wrapper">
+              <img [src]="startup.logo" [alt]="startup.name" class="startup-logo-img" />
+            </div>
+            <div class="startup-info">
+              <h4 class="startup-name">{{ startup.name }}</h4>
+              <p class="startup-category">{{ startup.category }}</p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- FAQs Section -->
+      <div class="faq-container pt-4" *ngIf="faqs && faqs.length > 0">
+        <h3 class="heading-primary"
+          style="margin-bottom: -1rem; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+          FAQS
+        </h3>
+        <app-accordion [items]="faqs" accordionId="seedstars-faqs"></app-accordion>
+      </div>
+
+      <!-- Contact Us Section -->
+      <div class="contact-card-container pb-5">
+        <h3 class="heading-primary"
+          style="margin-bottom: 0; background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%); font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center;">
+          CONTACT US
+        </h3>
+        <div class="contact">
+          <app-square-contact [contact]="'8767749189'" [email]="'shreeya@ecell.in'"
+            [linkedin]="'https://www.linkedin.com/in/shreeya-tade-7a0344332/'"
+            [img_url]="'https://2k21.s3.ap-south-1.amazonaws.com/summiit_shreeya.png'" [name]="'SHREEYA TADE'"
+            [designation]="'Events & PR Head'">
+          </app-square-contact>
+        </div>
+      </div>
+
+      <!-- Platinum Pass Note -->
+      <p
+        style="color: rgba(255,255,255,0.7); margin: 20px; font-style: italic; max-width: 900px; text-align: center; margin-left: auto; margin-right: auto; font-family: 'Satoshi', sans-serif;">
+        <strong>*Note:</strong> Access to <strong>Seed Stars</strong> is available exclusively through the
+        <strong>Platinum Pass for E-Summit 2026</strong>.<br>All final decisions regarding selection
+        and participation rest solely with E-Cell IIT Bombay.
+      </p>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

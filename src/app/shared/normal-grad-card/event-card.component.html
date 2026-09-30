@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="img-container">
+    <div class="event-heading">
+      <p class="title" aria-hidden="true"><span>{{ event.name }}</span>
+        <svg width="106" height="106" viewBox="0 0 106 106" fill="none" preserveAspectRatio="none" stroke="#3b3b3b"
+          class="go-to-icon" xmlns="http://www.w3.org/2000/svg">
+          <line x1="4.01966" y1="101.656" x2="101.541" y2="4.13494" stroke-width="11.0648" />
+          <line x1="99.9705" y1="98.5273" x2="99.9706" y2="1.00591" stroke-width="11.0648" />
+          <line x1="7.98145" y1="5.97006" x2="105.503" y2="5.97006" stroke-width="11.0648" />
+        </svg>
+      </p>
+    </div>
+    <img [src]="event.image" alt="" class="img" />
+  </div>
+  <div class="info-cta-container">
+    <p class="title" aria-hidden="false" style="color: #212529 !important;">{{event.name}}</p>
+    <p class="info">
+      {{ event.metadata }}
+    </p>
+    <!-- <div class="buttons">
+      @if(!event.tag){
+      <a (click)="GetNotified(event)" class="action">Get Notified</a>
+      }@else{
+      @if(event.registrations_open){
+      <a (click)="eventReg(event)" class="action">Register</a>
+      }
+      <a routerLink="/{{ event.tag }}" class="website">Website</a>
+      }
+    </div> -->
+  </div>
+</div>

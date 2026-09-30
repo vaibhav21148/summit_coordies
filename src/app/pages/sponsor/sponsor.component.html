@@ -1,0 +1,85 @@
+<div id="template-container">
+  <app-gravity-bg></app-gravity-bg>
+  <div class="template-navbar" [class.scrolled-nav]="isScrolled">
+  </div>
+  <div class="main-container" style="padding-bottom: 1px;">
+
+    <!--
+    <div class="details-container pt-5">
+      <h1 class="page-heading" style="margin-bottom: 0;">SPONSORS</h1>
+    </div>
+    -->
+
+      <!--
+      <div class="sponsor-container">
+        <div *ngIf="sponsors['sponsor']?.length">
+          <app-sponsorcard [sponsors]="sponsors['sponsor'] || []"></app-sponsorcard>
+        </div>
+
+        <div *ngIf="sponsors['eurekasponsor']?.length" style="text-align: center;">
+          <div class="line" style="display: flex; margin-top: 1rem; justify-content: center; z-index: 59999;">
+            <hr style="width: 80vw; color: white; height: 10px;">
+          </div>
+          <h3 class="heading-primary" style="margin-bottom: 1rem;">Eureka! Sponsors</h3>
+          <app-sponsorcard [sponsors]="sponsors['eurekasponsor'] || []"></app-sponsorcard>
+        </div>
+
+        <div *ngIf="sponsors['fnb']?.length" style="text-align: center;">
+          <div class="line" style="display: flex; margin-top: 1rem; justify-content: center; z-index: 59999;">
+            <hr style="width: 80vw; color: white; height: 10px;">
+          </div>
+          <h3 class="heading-primary" style="margin-bottom: 1rem;">FnB Partners</h3>
+          <app-sponsorcard [sponsors]="sponsors['fnb'] || []"></app-sponsorcard>
+        </div>
+
+        <div *ngIf="sponsors['media']?.length" style="text-align: center;">
+          <div class="line" style="display: flex; margin-top: 1rem; justify-content: center; z-index: 59999;">
+            <hr style="width: 80vw; color: white; height: 10px;">
+          </div>
+          <h3 class="heading-primary" style="margin-bottom: 1rem;">Media Associates</h3>
+          <app-sponsorcard [sponsors]="sponsors['media'] || []"></app-sponsorcard>
+        </div>
+
+        <div *ngIf="sponsors['associate']?.length" style="text-align: center;">
+          <div class="line"
+            style="display: flex; margin-top: 1rem; margin-bottom: 1rem; justify-content: center; z-index: 59999;">
+            <hr style="width: 80vw; color: white; height: 10px;">
+          </div>
+          <h3 class="heading-primary">Associates</h3>
+          <app-sponsorcard [sponsors]="sponsors['associate'] || []"></app-sponsorcard>
+        </div>
+      </div>
+      -->
+
+    <!--
+    <div class="line"
+      style="display: flex; margin-top: 1rem; margin-bottom: 1rem; justify-content: center; z-index: 59999;">
+      <hr style="width: 80vw; color: white; height: 10px;">
+    </div>
+    -->
+
+  <div class="contact-card-container pt-5 pb-5" style="position: relative; z-index: 100;">
+    <h2 class="contact-section-heading">For Sponsorship Opportunities</h2>
+    <div class="contact">
+      @for(member of markiData; track $index){
+      <app-square-contact [contact]="member.contact" [email]="member.mail"
+        [linkedin]="member.linkedin" [img_url]="member.profile" [name]="member.name"
+        [designation]="member.designation"></app-square-contact>
+      }
+    </div>
+    <h2 class="contact-section-heading">For Media Associations</h2>
+    <div class="contact">
+      @for(member of mediaData; track $index){
+      <app-square-contact [contact]="member.contact" [email]="member.mail"
+        [linkedin]="member.linkedin" [img_url]="member.profile" [name]="member.name"
+        [designation]="member.designation"></app-square-contact>
+      }
+    </div>
+  </div>
+  <!-- contact ends -->
+  </div>
+  <!-- main container ends -->
+  <div style="position: relative; z-index: 100;">
+    <app-footer></app-footer>
+  </div>
+</div>

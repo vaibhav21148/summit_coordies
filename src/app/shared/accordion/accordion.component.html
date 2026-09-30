@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <ul class="accordion" role="tablist">
+    <li class="accordion__item" 
+        *ngFor="let item of items; let i = index"
+        role="tab"
+        [attr.aria-expanded]="activeIndex === i"
+        [attr.aria-controls]="'accordion-content-' + i"
+        [attr.id]="'accordion-header-' + i">
+      
+      <div class="label" 
+           (click)="toggleAccordion(i)"
+           (keydown.enter)="toggleAccordion(i)"
+           (keydown.space)="toggleAccordion(i)"
+           tabindex="0"
+           role="button"
+           [attr.aria-expanded]="activeIndex === i">
+        
+        <span class="number">{{ item.number }}</span>
+        <h3 class="title">{{ item.title }}</h3>
+        
+        <div class="action__buttons">
+          <div class="accordion__arrow" 
+               [class.rotated]="activeIndex === i">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" stroke="currentColor" stroke-width="1.5" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+</svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="content" 
+           role="tabpanel"
+           [attr.id]="'accordion-content-' + i"
+           [attr.aria-labelledby]="'accordion-header-' + i">
+        <p class="paragraph" [innerHTML]="item.content"></p>
+      </div>
+    </li>
+  </ul>
+</div>

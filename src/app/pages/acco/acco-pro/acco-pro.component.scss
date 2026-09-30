@@ -1,0 +1,82 @@
+#template-container .reg-button h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(194, 146, 37, 1);
+  font-size: 35px;
+  margin: 0;
+  padding: 0;
+  // font-size: 25px;
+  z-index: 999;
+}
+
+// about container
+#template-container .about1-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#template-container .about1-container .hotel-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+}
+#template-container .about1-container .hotel-container table {
+  width: 90%;
+  border: 1px solid #a26ce5;
+  border-collapse: collapse;
+}
+#template-container .about1-container .hotel-container table tr th {
+  color: black !important;
+  border: 1px solid #fff;
+  text-align: center;
+  padding: 10px;
+  background-color: #a26ce5;
+}
+
+#template-container .about1-container .hotel-container table tr td {
+  border: 1px solid #a26ce5;
+  padding: 10px;
+  text-align: center;
+}
+#template-container
+  .about1-container
+  .hotel-container
+  table
+  tr
+  td:nth-child(4) {
+  width: 30%;
+}
+#template-container .about1-container .hotel-container table tr:nth-child(odd) {
+  background-color: #1e1e1e;
+}
+#template-container
+  .about1-container
+  .hotel-container
+  table
+  tr:nth-child(even) {
+  background-color: #313131;
+}
+// about container
+
+@media screen and (max-width: 786px) {
+  #template-container .about1-container p {
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+  }
+  #template-container .about1-container {
+    gap: 15px;
+  }
+}
+// first

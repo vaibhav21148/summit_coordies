@@ -1,0 +1,40 @@
+<div id="template-container">
+  <app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/bid_and_build.png'" [buttons]="compiButtons" [backgroundImage]="BackgroundImages.BID" (buttonClick)="handleButtonClick($event)"></app-events-bg>      
+      </div>
+    </div>
+    <div class="about-container">
+      <p>
+        Do you know the real secret to a startup's success? It's all about assembling an incredible team! In this
+        exciting competition, we're exploring the fascinating world of team dynamics. Get ready to strategize like a
+        pro, bidding your way to build the ultimate dream team. Every decision you make will pave the path to your
+        startup's triumph. It's time to <span class="event-name-highlight">Bid, Build, and conquer</span> your way to victory!
+      </p>
+    </div>
+  </div>
+
+  <!-- main container ends -->
+  <app-timeline [events]="events"></app-timeline>
+
+  <div class="faq-container">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+  </div>
+
+  <div class="contact-card-container pb-5">
+    <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'7385020667'" [name]="'Manasi Rudsamudra'"></app-square-contact>
+
+      <app-square-contact [contact]="'8010269771'" [name]="'Rujula Rahate'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

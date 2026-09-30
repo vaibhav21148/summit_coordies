@@ -1,0 +1,232 @@
+<div id="template-container">
+  <div class="main-container">
+    <app-vanta-bg></app-vanta-bg>
+    <div class="hero-container" style="text-align: -webkit-center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;">
+      <!-- <app-na-logo></app-na-logo> -->
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+
+        <!-- <a routerLink="/na">
+          <img src="/images/logos/na-logo.png" alt="" />
+        </a> -->
+      </div>
+
+      <!-- <div class="reg-button">
+          <div class="button mt-3">
+
+            <button routerLink="/expo/query">Query Form</button>
+          </div>
+        </div> -->
+
+    </div>
+    <div class="about-container">
+      <p>
+        <span class="event-name-highlight">Workshops </span> provide a unique opportunity to learn from distinguished
+        trainers, expanding skill sets and offering invaluable insights for career advancement. 22nd E-Summit has to
+        offer a variety of workshops ranging from Finance to Technology taken by industry experts across the world.
+
+        <!-- <p>
+          The Startup Expo is open to all E-Summit visitors!
+        </p> -->
+    </div>
+
+    <div class="why-container pt-4">
+      <h2 class="heading-primary">
+        Why enroll for
+        Workshops at 22nd E-Summit ? </h2>
+      <div class="card-container">
+        <div class="cards" id="ev1">
+          <app-evervault-card>
+            <img src="images/events/ws/ws3.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Exclusive Learning Opportunity</p>
+          </div>
+        </div>
+        <div class="cards" id="ev2">
+          <app-evervault-card>
+            <img src="images/events/ws/ws4.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Expert Trainers</p>
+          </div>
+        </div>
+        <div class="cards" id="ev3">
+          <app-evervault-card>
+            <img src="images/events/ws/ws6.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">
+              Invaluable Insights
+            </p>
+          </div>
+        </div>
+        <div class="cards" id="ev4">
+          <app-evervault-card>
+            <img src="images/events/ws/ws5.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Applicability to Ventures</p>
+          </div>
+        </div>
+        <div class="cards" id="ev5">
+          <app-evervault-card>
+            <img src="images/events/ws/ws1.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Transformative Learning Experience</p>
+          </div>
+        </div>
+        <div class="cards" id="ev6">
+          <app-evervault-card>
+            <img src="images/events/ws/ws2.png" alt="" width="185px" />
+          </app-evervault-card>
+          <div class="content">
+            <p class="text">Career Enhancement</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- statwork end -->
+    <!-- <div class="workshop-container pt-4">
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>NUMBER OF REFERRALS</th>
+            <th>DISCOUNT</th>
+          </tr>
+          <tr>
+            <td>3 to 5</td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <td>5 or more</td>
+            <td>20%</td>
+          </tr>
+        </table>
+      </div>
+    </div> -->
+    <div class="workshop-container pt-4">
+      <h3 class="heading-primary" style="margin-bottom: -2rem;">WORKSHOPS
+      </h3>
+      <div class="workshop-grid">
+        <div class="workshop-card" *ngFor="let item of workshop; let i = index">
+
+
+          <div class="workshop-content">
+            <div class="header">
+              <span class="tag">{{ item.tag }}</span>
+              <h3 class="title">{{ item.workshop_name }}</h3>
+              <!-- <p class="by">by {{ item.workshopby }}</p> -->
+            </div>
+
+            <p class="description">{{ item.description }}</p>
+
+            <div class="meta">
+              <span class="price"> ₹ {{ item.price }}</span>
+              <span class="date">{{ item.date | date:'dd MMMM y' || 'TBA' }}</span>
+              <span class="time" *ngIf="item.start_time && item.end_time">{{ formatTime(item.start_time) }} - {{
+                formatTime(item.end_time) }}</span>
+              <span class="location-tag" [class.online]="item.is_online">
+                <i class="fa fa-map-marker"></i> {{ item.is_online ? 'Online' : 'IIT Bombay' }}
+              </span>
+            </div>
+
+
+            <div class="actions">
+              <button class="btn know-more" (click)="ShowDetails(i)">Know More</button>
+              <button class="btn register" (click)="navigateToRegistration()">
+                Register
+              </button>
+            </div>
+          </div>
+
+          <div class="workshop-logo">
+            <img [src]="item.background || 'images/events/ws/default-workshop.png'" alt="{{item.workshop_name}} logo" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="workshop-container">
+    <h3>
+      <!-- <span class="green">Why enrol for</span><br /> -->
+      <span class="heading-primary" style="margin-bottom: -2rem;">INCENTIVE PARTNER</span>
+    </h3>
+    <app-sponsorcard
+      [sponsors]="[{id: 1, name: 'ENDRAJEET CLASSES', image: 'https://2k21.s3.amazonaws.com/s3uploadapi/WhatsApp_Image_2025-10-27_at_09.41.06.jpeg', link: 'https://www.ecell.in/esummit/workshops', type: 'Workshops', title: 'Workshops'},]">
+    </app-sponsorcard>
+
+  </div>
+
+  <!-- main container ends -->
+
+
+  <app-timeline [events]="events"></app-timeline>
+
+
+  <!-- new timeline end -->
+
+  <!--
+    <div class="faq-container pt-5">
+      <h3 class="heading-faq">FAQs</h3>
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item" *ngFor="let faq of faqs; let i = index">
+          <h2 class="accordion-header" [id]="'flush-heading' + i">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false"
+              [attr.aria-controls]="'flush-collapse' + i">
+              {{ faq.question }}
+            </button>
+          </h2>
+          <div [id]="'flush-collapse' + i" class="accordion-collapse collapse"
+            [attr.aria-labelledby]="'flush-heading' + i" [attr.data-bs-parent]="'#accordionFlushExample'">
+            <div class="accordion-body">
+              {{ faq.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  <div class="contact-card-container pt-5 pb-5">
+    <h3 class="heading-primary">Contact Us</h3>
+    <div class="contact">
+
+      <app-square-contact [contact]="'916375028382'" [email]="'mridul@ecell.in'" [linkedin]="
+          'https://www.linkedin.com/in/mridul-mantri'
+        " [img_url]="'https://2k21.s3.amazonaws.com/images/mantri.png'" [name]="'Mridul Mantri'"
+        [designation]="'Marketing Head'"></app-square-contact>
+      <app-square-contact [contact]="'+918058352005'" [email]="'rohit@ecell.in'"
+        [linkedin]="'https://www.linkedin.com/in/rohitsharma005/'"
+        [img_url]="'https://2k21.s3.amazonaws.com/images/rohit_website_img.png'" [name]="'Rohit Sharma'"
+        [designation]="'Events & PR Head'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+
+
+
+<!-- know more popup -->
+<div class="commitee_popup flex justify-content-center">
+  <p-dialog header="Header" [(visible)]="visible" [modal]="true" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '5000px': '800px', '1199px': '60vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="header font-bold white-space-nowrap">{{this.innerworkshopname}}</span>
+      </div>
+    </ng-template>
+
+    <div class="m-0 content-container" [innerHTML]="innerpopup">
+
+    </div>
+  </p-dialog>
+</div>
+<!-- know more popup -->

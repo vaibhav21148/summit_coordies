@@ -1,0 +1,35 @@
+<div class="carousel-section">
+  <h2>{{ title }}</h2>
+  
+  <div class="carousel-container">
+    <!-- Left Track (moving left) -->
+    <div class="carousel-track left-track">
+      <div 
+        *ngFor="let item of leftItems" 
+        class="carousel-item"
+        [ngClass]="type"
+      >
+        <img [src]="item.image" [alt]="item.name" />
+        <div *ngIf="type === 'investors'" class="item-info">
+          <p class="name">{{ item.name }}</p>
+          <p class="designation">{{ item.designation }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Track (moving right) -->
+    <div class="carousel-track right-track">
+      <div 
+        *ngFor="let item of rightItems" 
+        class="carousel-item"
+        [ngClass]="type"
+      >
+        <img [src]="item.image" [alt]="item.name" />
+        <div *ngIf="type === 'investors'" class="item-info">
+          <p class="name">{{ item.name }}</p>
+          <p class="designation">{{ item.designation }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

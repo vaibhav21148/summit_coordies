@@ -1,0 +1,674 @@
+<div class="mun-dash page-view">
+  <app-vanta-bg></app-vanta-bg>
+  
+  <div *ngIf="pageState === pageStates.LOADING" class="centered-content loading">
+    <div class="loading-spinner"></div>
+    <p>Loading your MUN group...</p>
+  </div>
+  
+  <div *ngIf="pageState === pageStates.EMPTY" class="centered-content empty">
+    <h2>No MUN Group Found</h2>
+    <p>You don't have a MUN group yet. Create one to get started!</p>
+    <div class="action-buttons">
+      <button class="primary-btn" (click)="getGroup()">Refresh</button>
+      <button class="primary-btn create-btn" *ngIf="canCreateGroup" (click)="createGroup()">Create MUN Group</button>
+    </div>
+  </div>
+  
+  <div *ngIf="pageState === pageStates.PAID_INDIVIDUAL" class="centered-content paid-individual">
+    <div class="success-card">
+      <i class="bi bi-patch-check-fill success-icon"></i>
+      <h2>Entre-MUN Registration Confirmed</h2>
+      <p class="subtitle">Your individual registration and payment have been successfully verified!</p>
+
+      <!-- Payment Summary Block -->
+      <div class="payment-info-box">
+        <div class="payment-info-item">
+          <span class="label">Payment Status:</span>
+          <span class="badge status-verified"><i class="bi bi-check-circle-fill"></i> Successfully Paid</span>
+        </div>
+        <div class="payment-info-item">
+          <span class="label">Amount Paid:</span>
+          <span class="value amount-highlight">₹{{ munStatus?.amount_paid || registrationData?.payment_details?.amount_paid || 2200 }}</span>
+        </div>
+        <div class="payment-info-item" *ngIf="munStatus?.payment_id || registrationData?.payment_details?.payment_id">
+          <span class="label">Payment ID:</span>
+          <span class="value code-val">{{ munStatus?.payment_id || registrationData?.payment_details?.payment_id }}</span>
+        </div>
+        <div class="payment-info-item" *ngIf="munStatus?.order_id || registrationData?.payment_details?.order_id">
+          <span class="label">Booking Ref:</span>
+          <span class="value code-val">{{ munStatus?.order_id || registrationData?.payment_details?.order_id }}</span>
+        </div>
+        <div class="payment-info-item" *ngIf="munStatus?.payment_date || registrationData?.payment_details?.payment_date">
+          <span class="label">Payment Date:</span>
+          <span class="value">{{ (munStatus?.payment_date || registrationData?.payment_details?.payment_date) | date:'medium' }}</span>
+        </div>
+      </div>
+
+      <!-- Registered Details -->
+      <div class="registration-summary-box" *ngIf="registrationData?.registration">
+        <h3>Delegate Details</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="label">Name:</span>
+            <span class="value">{{ registrationData?.registration?.name }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Email:</span>
+            <span class="value">{{ registrationData?.registration?.email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Contact:</span>
+            <span class="value">{{ registrationData?.registration?.contact }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Role:</span>
+            <span class="value" style="text-transform: capitalize;">{{ registrationData?.registration?.role }} Student</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Institution:</span>
+            <span class="value">{{ registrationData?.registration?.current_institution }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Accommodation:</span>
+            <span class="value">{{ registrationData?.registration?.need_accommodation ? 'Requested (Yes)' : 'No' }}</span>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="pref-summary" *ngIf="registrationData?.preferences && registrationData?.preferences?.length">
+          <h4>Selected Preferences:</h4>
+          <div class="pref-tags">
+            <div *ngFor="let pref of registrationData?.preferences" class="pref-tag">
+              <span class="pref-num">#{{ pref.preference_number }}</span>
+              <span class="pref-name">{{ pref.committee }} - {{ pref.country }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="primary-btn" (click)="getGroup()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh Status
+        </button>
+        <button class="primary-btn alt-btn" (click)="router.navigate(['/entremun'])">
+          <i class="bi bi-house-door"></i> Back to Entre-MUN
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="pageState === pageStates.LEADER" class="leader-view">
+    <div class="institution-header">
+      <h1 class="institution-name">{{groupData?.institution_name}}</h1>
+      <p class="leader-subtitle">Group Leader Dashboard</p>
+    </div>
+    
+    <div class="leader-actions" *ngIf="!groupData?.is_paid">
+      <div class="add-member-section">
+        <h3>Add New Member</h3>
+        <div class="add-member-form">
+          <input 
+            type="email" 
+            placeholder="Enter member's email address" 
+            [(ngModel)]="member_email" 
+            [disabled]="loading"
+            class="member-email-input"
+            (keyup.enter)="addMember()" />
+          <button 
+            class="add-btn" 
+            (click)="addMember()" 
+            [disabled]="loading || !member_email.trim()">
+            {{loading ? 'Adding...' : 'Add Member'}}
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="members-section">
+      <h3>Current Members</h3>
+      <div class="members-list" *ngIf="membersData?.mun_members">
+        <div 
+          *ngFor="let member of membersData?.mun_members" 
+          class="member-card-wide"
+          [class.leader-card]="member.profile?.email === groupData?.leader?.email"
+          [class.editing]="editingMember?.id === member.id">
+          
+          <!-- View Mode -->
+          <div *ngIf="editingMember?.id !== member.id" class="member-view-mode">
+            <div class="member-basic-info">
+              <div class="member-name">
+                <span *ngIf="member.profile && member.registered">{{member.profile.firstName}} {{member.profile.lastName}}</span>
+                <span *ngIf="!member.registered" class="unregistered-text">E-Summit Registration Pending</span>
+              </div>
+              <div class="member-email">{{member.email}}</div>
+              <div class="member-contact" *ngIf="member.profile && member.registered">
+                <i class="bi bi-telephone"></i> {{member.profile.contact}}
+              </div>
+              <div class="status-badges">
+                <span class="badge leader-badge" *ngIf="member.profile?.email === groupData?.leader?.email">LEADER</span>
+                <span class="badge member-badge" *ngIf="member.profile?.email !== groupData?.leader?.email && member.registered">MEMBER</span>
+                <span class="badge invited-badge" *ngIf="!member.registered">E-SUMMIT PENDING</span>
+              </div>
+            </div>
+            
+            <div class="member-details" *ngIf="member.registered && member.registration">
+              <div class="detail-row">
+                <span class="label">MUN Registration Details:</span>
+                <span class="value status-badge" [class.complete]="member.details_completed" [class.incomplete]="!member.details_completed">
+                  {{member.details_completed ? 'Complete' : 'Incomplete'}}
+                </span>
+              </div>
+              <div class="detail-row">
+                <span class="label">Role:</span>
+                <span class="value">{{member.registration.role}}</span>
+              </div>
+              <div class="detail-row" *ngIf="member.registration.date_of_birth">
+                <span class="label">DOB:</span>
+                <span class="value">{{member.registration.date_of_birth | date:'shortDate'}}</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">Accommodation:</span>
+                <span class="value">{{member.registration.need_accommodation ? 'Yes' : 'No'}}</span>
+              </div>
+              <div class="detail-row" *ngIf="member.registration.previous_mun_experience">
+                <span class="label">Experience:</span>
+                <span class="value">{{member.registration.previous_mun_experience}}</span>
+              </div>
+              <div class="preferences-row" *ngIf="member.registration.preferences?.length">
+                <span class="label">Preferences:</span>
+                <div class="pref-list">
+                  <span *ngFor="let pref of member.registration.preferences" class="pref-item">
+                    {{pref.preference_number}}. {{pref.committee}} - {{pref.country}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="member-actions">
+              <button class="edit-btn" *ngIf="member.registered && (!groupData?.is_paid || canEditAfterPayment())" (click)="editMemberDetails(member)" [disabled]="loading">
+                <i class="bi bi-pencil"></i> Edit
+              </button>
+              <button class="remove-btn" *ngIf="member.profile?.email !== groupData?.leader?.email && !groupData?.is_paid" (click)="removeMember(member.id)" [disabled]="loading">
+                <i class="bi bi-trash"></i> Remove
+              </button>
+              <span class="you-indicator" *ngIf="member.profile?.email === groupData?.leader?.email">YOU</span>
+            </div>
+          </div>
+          
+          <!-- Edit Mode -->
+          <div *ngIf="editingMember?.id === member.id" class="member-edit-mode">
+            <div class="edit-header">
+              <h4>Editing: {{member.profile?.firstName}} {{member.profile?.lastName}}</h4>
+              <button class="close-edit-btn" (click)="cancelEdit()">
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+            
+            <div class="edit-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Name: <span class="required-star">*</span></label>
+                  <input 
+                    type="text" 
+                    [(ngModel)]="editForm.name" 
+                    class="form-control"
+                    [class.error]="!editForm.name?.trim()"
+                    placeholder="Enter full name"
+                    maxlength="100">
+                </div>
+                <div class="form-group">
+                  <label>Contact: <span class="required-star">*</span></label>
+                  <input 
+                    type="tel" 
+                    [(ngModel)]="editForm.contact" 
+                    class="form-control"
+                    [class.error]="!editForm.contact?.trim()"
+                    placeholder="10-digit mobile number"
+                    maxlength="10">
+                </div>
+                <div class="form-group">
+                  <label>Date of Birth: <span class="required-star">*</span></label>
+                  <input 
+                    type="date" 
+                    [(ngModel)]="editForm.date_of_birth" 
+                    class="form-control"
+                    [class.error]="!editForm.date_of_birth">
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Role: <span class="required-star">*</span></label>
+                  <select 
+                    [(ngModel)]="editForm.role" 
+                    (change)="onRoleChange()" 
+                    class="form-control"
+                    [class.error]="!editForm.role">
+                    <option value="">Select Role</option>
+                    <option value="college">College Student</option>
+                    <option value="school">School Student</option>
+                  </select>
+                </div>
+                <div class="form-group checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="editForm.need_accommodation">
+                    <span class="checkmark"></span>
+                    Need Accommodation
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Previous MUN Experience:</label>
+                <textarea 
+                  [(ngModel)]="editForm.previous_mun_experience" 
+                  class="form-control" 
+                  rows="3"
+                  placeholder="Describe your previous MUN experience (optional)"
+                  maxlength="500"></textarea>
+                <small class="char-count">{{editForm.previous_mun_experience?.length || 0}}/500 characters</small>
+              </div>
+              
+              <div class="form-group">
+                <label>MUN Portfolio (Optional):</label>
+                <input 
+                  type="file" 
+                  (change)="onFileSelected($event)" 
+                  class="form-control file-input" 
+                  accept=".pdf,.doc,.docx">
+                <small class="file-help">
+                  <i class="bi bi-info-circle"></i>
+                  Upload your MUN portfolio (PDF, DOC, DOCX - Max 5MB)
+                </small>
+              </div>
+              
+              <div class="preferences-section">
+                <h5>Committee Preferences: <span class="required-star">*</span> ({{getRequiredPreferences()}} required)</h5>
+                <div class="preferences-note">
+                  <i class="bi bi-lightbulb"></i>
+                  <span>List your preferred committees and countries in order of preference</span>
+                </div>
+                <div class="preference-item" *ngFor="let pref of editForm.preferences; let i = index">
+                  <div class="pref-inputs">
+                    <span class="pref-number">{{i + 1}}.</span>
+                    <select 
+                      [(ngModel)]="pref.committee" 
+                      class="form-control"
+                      [class.error]="!pref.committee"
+                      (change)="onCommitteeChange(i)">
+                      <option value="">Select Committee</option>
+                      <option *ngFor="let committee of getAvailableCommittees(i)" [value]="committee.value">{{committee.viewValue}}</option>
+                    </select>
+                    <div class="search-dropdown" style="position: relative;">
+                      <input type="text" 
+                             [value]="searchTerms[i] || ''"
+                             [placeholder]="isAIPPM(pref.committee) ? 'Search Personality' : 'Search Country'"
+                             (input)="onSearchInput(i, $event)"
+                             (focus)="showDropdown[i] = true"
+                             (blur)="hideDropdown(i)"
+                             class="form-control"
+                             [class.error]="(!pref.country && !isAIPPM(pref.committee)) || (!pref.personality && isAIPPM(pref.committee))"
+                             autocomplete="off">
+                      <div class="dropdown-list" 
+                           *ngIf="showDropdown[i] && getFilteredOptions(i).length > 0"
+                           style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-radius: 4px; max-height: 200px; overflow-y: auto; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div *ngFor="let option of getFilteredOptions(i)" 
+                             class="dropdown-item"
+                             (mousedown)="selectOption(i, option)"
+                             tabindex="0"
+                             (keydown.enter)="selectOption(i, option)"
+                             (keydown.space)="selectOption(i, option)"
+                             style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #eee; color: #333;">
+                          {{option.viewValue}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-validation-summary" *ngIf="editForm.name || editForm.contact || editForm.date_of_birth">
+                <small class="validation-note">
+                  <i class="bi bi-asterisk"></i>
+                  Fields marked with <span class="required-star">*</span> are required
+                </small>
+              </div>
+              
+              <div class="edit-actions">
+                <button class="cancel-btn" (click)="cancelEdit()" [disabled]="loading">
+                  <i class="bi bi-x-circle"></i> Cancel
+                </button>
+                <button 
+                  class="save-btn" 
+                  (click)="saveMemberDetails()" 
+                  [disabled]="loading">
+                  <i class="bi bi-check-circle"></i>
+                  {{loading ? 'Saving...' : 'Save Changes'}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-section" *ngIf="!groupData?.is_paid">
+      <h3>Payment Summary</h3>
+      <div class="payment-card">
+        <div class="payment-details">
+          <div class="payment-row">
+            <span class="payment-label" style="color: black;">MUN Registration Complete:</span>
+            <span class="payment-value">{{getReadyMembersCount()}}</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label" style="color: black;">Rate per Member:</span>
+            <span class="payment-value">₹2,200</span>
+          </div>
+          <div class="payment-row total">
+            <span class="payment-label">Total Amount:</span>
+            <span class="payment-value total-amount">₹{{(getTotalAmount() / 100).toLocaleString()}}</span>
+          </div>
+        </div>
+        
+        <div class="discount-section">
+          <input 
+            type="text" 
+            id="couponCode"
+            [(ngModel)]="couponCode"
+            placeholder="Enter discount code (optional)"
+            maxlength="100"
+            class="coupon-input"
+            [disabled]="loading" />
+          <button 
+            type="button" 
+            class="apply-coupon-btn"
+            (click)="applyCoupon()"
+            [disabled]="!couponCode.trim() || loading">
+            Apply
+          </button>
+          <div id="discountMessage" class="discount-message" [innerHTML]="discountMessage"></div>
+        </div>
+        
+        <button 
+          class="pay-btn" 
+          (click)="processPayment()"
+          [disabled]="getReadyMembersCount() === 0 || loading">
+          <i class="bi bi-credit-card"></i>
+          {{getReadyMembersCount() === 0 ? 'Complete MUN Registration First' : 'Pay ₹' + (getTotalAmount() / 100).toLocaleString()}}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="groupData?.is_paid" class="payment-complete">
+      <div class="success-card">
+        <i class="bi bi-check-circle-fill success-icon"></i>
+        <h3>Payment Complete!</h3>
+        <p>Your MUN group registration is complete. All members are now registered for the event.</p>
+      </div>
+    </div>
+    
+    <div class="danger-zone" *ngIf="!groupData?.is_paid">
+      <h4>Danger Zone</h4>
+      <p  style="color: black;">Deleting the group will remove all member registrations permanently.</p>
+      <button class="danger-btn" (click)="deleteGroup()" [disabled]="loading">
+        <i class="bi bi-trash"></i> Delete Group
+      </button>
+    </div>
+    
+    <div *ngIf="groupData?.is_paid" class="payment-notice">
+      <i class="bi bi-info-circle"></i>
+      <span>Group cannot be deleted after payment completion.</span>
+    </div>
+  </div>
+  
+
+  
+  <div *ngIf="pageState === pageStates.MEMBER" class="member-view">
+    <div class="institution-header">
+      <h1 class="institution-name">{{groupData?.institution_name}}</h1>
+      <p class="member-subtitle">Group Member Dashboard</p>
+    </div>
+    
+    <div class="leader-info-card">
+      <h3>Group Leader</h3>
+      <div class="leader-details">
+        <div class="leader-name">
+          <i class="bi bi-person-fill"></i>
+          <span>{{groupData?.leader?.firstName}} {{groupData?.leader?.lastName}}</span>
+        </div>
+        <div class="leader-email">
+          <i class="bi bi-envelope-fill"></i>
+          <a href="mailto:{{groupData?.leader?.email}}">{{groupData?.leader?.email}}</a>
+        </div>
+        <div class="leader-contact" *ngIf="groupData?.leader?.contact">
+          <i class="bi bi-telephone-fill"></i>
+          <a href="tel:{{groupData?.leader?.contact}}">{{groupData?.leader?.contact}}</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="member-registration-section" *ngIf="registrationData">
+      <h3>Your Registration Details</h3>
+      
+      <!-- View Mode -->
+      <div class="registration-card" *ngIf="registrationData.registration && editingMember?.id !== 0">
+        <div class="registration-field">
+          <label>Name:</label>
+          <span>{{registrationData.registration.name}}</span>
+        </div>
+        <div class="registration-field">
+          <label>Email:</label>
+          <span>{{registrationData.registration.email}}</span>
+        </div>
+        <div class="registration-field">
+          <label>Contact:</label>
+          <span>{{registrationData.registration.contact}}</span>
+        </div>
+        <div class="registration-field" *ngIf="registrationData.registration.date_of_birth">
+          <label>Date of Birth:</label>
+          <span>{{registrationData.registration.date_of_birth | date}}</span>
+        </div>
+        <div class="registration-field">
+          <label>Role:</label>
+          <span>{{registrationData.registration.role}}</span>
+        </div>
+        <div class="registration-field">
+          <label>Institution:</label>
+          <span>{{registrationData.registration.current_institution}}</span>
+        </div>
+        <div class="registration-field">
+          <label>Need Accommodation:</label>
+          <span>{{registrationData.registration.need_accommodation ? 'Yes' : 'No'}}</span>
+        </div>
+        <div class="registration-field" *ngIf="registrationData.registration.previous_mun_experience">
+          <label>Previous MUN Experience:</label>
+          <span>{{registrationData.registration.previous_mun_experience}}</span>
+        </div>
+
+        <div class="registration-status">
+          <div class="status-item">
+            <span class="status-label">MUN Registration Details:</span>
+            <span class="status-badge" [class.complete]="registrationData.registration.is_details_completed" [class.incomplete]="!registrationData.registration.is_details_completed">
+              {{registrationData.registration.is_details_completed ? 'Complete' : 'Incomplete'}}
+            </span>
+          </div>
+        </div>
+        
+        <div class="preferences-section" *ngIf="registrationData.preferences && registrationData.preferences.length > 0">
+          <h4>Committee Preferences</h4>
+          <div class="preferences-list">
+            <div *ngFor="let pref of registrationData.preferences" class="preference-item">
+              <span class="preference-number">{{pref.preference_number}}.</span>
+              <span class="preference-details">{{pref.committee}} - {{pref.country}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="registration-actions">
+          <button class="complete-btn" (click)="editSelfDetails()" *ngIf="!registrationData.registration.is_details_completed">
+            <i class="bi bi-pencil-square"></i> Complete MUN Registration
+          </button>
+          <button class="edit-btn" (click)="editSelfDetails()" *ngIf="registrationData.registration.is_details_completed && (!groupData?.is_paid || canEditAfterPayment())">
+            <i class="bi bi-pencil"></i> Edit Details
+          </button>
+        </div>
+      </div>
+      
+      <!-- Edit Mode for Self -->
+      <div *ngIf="editingMember?.id === 0" class="member-edit-mode self-edit">
+        <div class="edit-header">
+          <h4>{{registrationData.registration ? 'Editing Your Details' : 'Complete MUN Registration'}}</h4>
+          <button class="close-edit-btn" (click)="cancelEdit()">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        
+        <div class="edit-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name: <span class="required-star">*</span></label>
+              <input 
+                type="text" 
+                [(ngModel)]="editForm.name" 
+                class="form-control"
+                [class.error]="!editForm.name?.trim()"
+                placeholder="Enter full name"
+                maxlength="100">
+            </div>
+            <div class="form-group">
+              <label>Contact: <span class="required-star">*</span></label>
+              <input 
+                type="tel" 
+                [(ngModel)]="editForm.contact" 
+                class="form-control"
+                [class.error]="!editForm.contact?.trim()"
+                placeholder="10-digit mobile number"
+                maxlength="10">
+            </div>
+            <div class="form-group">
+              <label>Date of Birth: <span class="required-star">*</span></label>
+              <input 
+                type="date" 
+                [(ngModel)]="editForm.date_of_birth" 
+                class="form-control"
+                [class.error]="!editForm.date_of_birth">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Role: <span class="required-star">*</span></label>
+              <select 
+                [(ngModel)]="editForm.role" 
+                (change)="onRoleChange()" 
+                class="form-control"
+                [class.error]="!editForm.role">
+                <option value="">Select Role</option>
+                <option value="college">College Student</option>
+                <option value="school">School Student</option>
+              </select>
+            </div>
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="editForm.need_accommodation">
+                <span class="checkmark"></span>
+                Need Accommodation
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Previous MUN Experience:</label>
+            <textarea 
+              [(ngModel)]="editForm.previous_mun_experience" 
+              class="form-control" 
+              rows="3"
+              placeholder="Describe your previous MUN experience (optional)"
+              maxlength="500"></textarea>
+            <small class="char-count">{{editForm.previous_mun_experience?.length || 0}}/500 characters</small>
+          </div>
+          
+          <div class="form-group">
+            <label>MUN Portfolio (Optional):</label>
+            <input 
+              type="file" 
+              (change)="onFileSelected($event)" 
+              class="form-control file-input" 
+              accept=".pdf,.doc,.docx">
+            <small class="file-help">
+              <i class="bi bi-info-circle"></i>
+              Upload your MUN portfolio (PDF, DOC, DOCX - Max 5MB)
+            </small>
+          </div>
+          
+          <div class="preferences-section">
+            <h5>Committee Preferences: <span class="required-star">*</span> ({{getRequiredPreferences()}} required)</h5>
+            <div class="preferences-note">
+              <i class="bi bi-lightbulb"></i>
+              <span>List your preferred committees and countries in order of preference</span>
+            </div>
+            <div class="preference-item" *ngFor="let pref of editForm.preferences; let i = index">
+              <div class="pref-inputs">
+                <span class="pref-number">{{i + 1}}.</span>
+                <select 
+                  [(ngModel)]="pref.committee" 
+                  class="form-control"
+                  [class.error]="!pref.committee">
+                  <option value="">Select Committee</option>
+                  <option *ngFor="let committee of getCommittees()" [value]="committee.value">{{committee.viewValue}}</option>
+                </select>
+                <select 
+                  [(ngModel)]="pref.country" 
+                  class="form-control"
+                  [class.error]="!pref.country">
+                  <option value="">Select Country</option>
+                  <option *ngFor="let country of countriesList" [value]="country.value">{{country.viewValue}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-validation-summary">
+            <small class="validation-note">
+              <i class="bi bi-asterisk"></i>
+              Fields marked with <span class="required-star">*</span> are required
+            </small>
+          </div>
+          
+          <div class="edit-actions">
+            <button class="cancel-btn" (click)="cancelEdit()" [disabled]="loading">
+              <i class="bi bi-x-circle"></i> Cancel
+            </button>
+            <button 
+              class="save-btn" 
+              (click)="saveMemberDetails()" 
+              [disabled]="loading">
+              <i class="bi bi-check-circle"></i>
+              {{loading ? 'Saving...' : 'Save Changes'}}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="no-registration" *ngIf="!registrationData.registration">
+        <p>You haven't completed your MUN Registration yet.</p>
+        <button class="primary-btn" (click)="editSelfDetails()">
+          <i class="bi bi-plus-circle"></i> Complete MUN Registration
+        </button>
+      </div>
+    </div>
+    
+    <div class="member-actions">
+      <button class="leave-btn" *ngIf="!groupData?.is_paid" (click)="leaveGroup()" [disabled]="loading">
+        <i class="bi bi-box-arrow-left"></i> Leave Group
+      </button>
+      <div *ngIf="groupData?.is_paid" class="payment-notice">
+        <i class="bi bi-info-circle"></i>
+        <span>Cannot leave group after payment completion.</span>
+      </div>
+    </div>
+  </div>
+  
+  <app-footer></app-footer>
+</div>

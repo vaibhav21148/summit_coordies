@@ -1,0 +1,44 @@
+<div id="template-container">
+  <app-vanta-bg></app-vanta-bg>
+  <div class="main-container">
+    <div class="hero-container" style="text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
+      <div class="logo" style="display:flex; justify-content: center; align-items: center;">
+        <app-events-bg  [logoImage]="'images/events/compi/fish_tank.png'" [buttons]="compiButtons"
+          [backgroundImage]="BackgroundImages.BID" (buttonClick)="handleButtonClick($event)"></app-events-bg>
+      </div>
+    </div>
+    <div class="about-container">
+      <p>
+        Gear up for the ultimate entrepreneurial showdown - the <span class="event-name-highlight">Fish Tank</span> Competition, a high-voltage simulation of
+        Shark Tank! Step into the shoes of visionary founders and sharp-witted investors as you navigate the thrilling
+        world of startups, strategy, and funding. Experience an action-packed journey filled with innovation, persuasive
+        pitching, and the relentless pursuit of investment success.
+      </p>
+    </div>
+  </div>
+
+
+
+  <!-- main container ends -->
+  <app-timeline [events]="events"></app-timeline>
+
+
+
+  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+    <h3 class="heading-primary" style="margin-bottom: -1rem;">FAQs</h3>
+    <app-accordion [items]="faqs" accordionId="expo-faqs"></app-accordion>
+  </div>
+
+
+  <div class="contact-card-container pb-5">
+    <h3 class="heading-primary" style="margin-bottom: 0;">Contact Us</h3>
+    <div class="contact">
+      <app-square-contact [contact]="'8960289476'" [name]="'Om Kranti'"></app-square-contact>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

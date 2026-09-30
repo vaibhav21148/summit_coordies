@@ -1,0 +1,132 @@
+@import "../../../../shared/auth-layout/auth-layout.component.scss";
+
+.payment-container {
+  @extend .reg-form;
+}
+
+.payment-content {
+  padding: 2rem;
+  
+  h2 {
+    color: white;
+    font-family: var(--gta6-thin-ff);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.loading {
+  text-align: center;
+  color: white;
+  font-family: var(--gta6-thin-ff);
+  padding: 2rem;
+}
+
+.registration-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  .workshop-info {
+    flex: 1;
+    
+    h3 {
+      color: #FF7A1A;
+      font-family: var(--gta6-thin-ff);
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    
+    .amount {
+      color: white;
+      font-family: var(--gta6-thin-ff);
+      margin: 0.25rem 0;
+      font-weight: 500;
+    }
+    
+    .status {
+      margin: 0.25rem 0;
+      font-family: var(--gta6-thin-ff);
+      font-size: 0.9rem;
+      
+      &.paid {
+        color: #28a745;
+      }
+      
+      &.unpaid {
+        color: #ffc107;
+      }
+    }
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.pay-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #FF7A1A;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--gta6-thin-ff);
+
+  &:hover:not(:disabled) {
+    background: #E56608;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(255, 122, 26, 0.4);
+  }
+
+  &:disabled {
+    background: grey;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.paid-badge {
+  color: #28a745;
+  font-weight: 500;
+  font-family: var(--gta6-thin-ff);
+}
+
+.no-registrations {
+  text-align: center;
+  color: white;
+  font-family: var(--gta6-thin-ff);
+  padding: 2rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  .back-btn {
+    padding: 12px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--gta6-thin-ff);
+
+    &:hover {
+      border-color: #FF7A1A;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}

@@ -1,0 +1,378 @@
+.main-container {
+  background-color: black;
+  color: white;
+  font-family: 'Satoshi', sans-serif;
+  min-height: 100vh;
+}
+
+#hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('public/images/isummit.jpeg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  transform: scale(0.75);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.heading-primary {
+  font-family: 'Bebas Neue', sans-serif !important;
+  background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+.event-name-highlight {
+  color: #FF7A1A !important;
+}
+
+.hero-action-btn {
+  position: relative !important;
+  border: 2px solid #FF7A1A !important;
+  color: #FF7A1A !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  padding: 10px 32px !important;
+  min-width: 220px !important;
+  font-size: 1.1rem !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  text-transform: uppercase !important;
+  font-family: 'Satoshi', sans-serif !important;
+  opacity: 0;
+  transform: translateY(20px);
+  overflow: hidden !important;
+  z-index: 1 !important;
+  transition: color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease !important;
+
+  &::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, #FF9A42 0%, #FF7A1A 50%, #D45800 100%) !important;
+    z-index: -1 !important;
+    transform: translateY(-100%) !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  &:hover {
+    color: #FFFFFF !important;
+    border-color: #FF7A1A !important;
+    box-shadow: 0 0 25px rgba(255, 122, 26, 0.6) !important;
+
+    &::before {
+      transform: translateY(0) !important;
+    }
+  }
+}
+
+.about-container {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 2rem;
+  margin: 0 auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    padding-top: 200px;
+    z-index: 1;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  p {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 80%;
+    line-height: 1.6;
+    color: #FFFFFF;
+    font-family: 'Satoshi', sans-serif;
+    margin: 0 auto;
+
+    strong {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-family: 'Satoshi', sans-serif;
+    text-align: center;
+    max-width: 90vw;
+    margin: 0 auto;
+
+    strong {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+  }
+}
+
+.why-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 90px 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.why-heading {
+  font-size: 3.5rem !important;
+  margin-bottom: 12px !important;
+}
+
+.why-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  width: 100%;
+  max-width: 1140px;
+  margin: 20px auto 0 auto;
+}
+
+.why-card {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 122, 26, 0.3);
+  border-radius: 26px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  padding: 40px 24px 34px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: 'Satoshi', sans-serif;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.35s ease, box-shadow 0.35s ease !important;
+
+  &:hover {
+    transform: translateY(-8px) scale(1.04) !important;
+    z-index: 5 !important;
+    border-color: rgba(255, 122, 26, 0.85) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 122, 26, 0.35) !important;
+  }
+
+  .icon-wrapper {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #f0f0f5 0%, #c4c4cf 50%, #90909c 100%);
+    border: 2.5px solid #FF7A1A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -3px 6px rgba(0, 0, 0, 0.3), 0 0 14px rgba(255, 122, 26, 0.25);
+    margin-bottom: 22px;
+    flex-shrink: 0;
+
+    img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    }
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    line-height: 1.35;
+    font-family: 'Satoshi', sans-serif;
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.68);
+    font-family: 'Satoshi', sans-serif;
+    margin: 0;
+  }
+}
+
+.gallery-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+  padding: 0 20px;
+
+  h3 {
+    font-size: 3.5rem !important;
+  }
+
+  .card-container.investors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    margin-top: 39px;
+  }
+}
+
+.faq-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  padding: 0 20px;
+  text-align: center;
+
+  h3 {
+    font-size: 3.5rem !important;
+  }
+}
+
+.contact-card-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 60px auto 0 auto;
+  padding: 0 20px;
+  text-align: center;
+
+  h3 {
+    font-size: 3.5rem !important;
+  }
+
+  .contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 28px;
+  }
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 1024px) {
+  .why-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 760px;
+  }
+
+  .why-heading,
+  .gallery-container h3,
+  .faq-container h3,
+  .contact-card-container h3 {
+    font-size: 2.8rem !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .why-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 380px;
+  }
+
+  .why-card {
+    min-height: auto;
+    padding: 32px 20px 28px 20px;
+  }
+
+  .why-heading,
+  .gallery-container h3,
+  .faq-container h3,
+  .contact-card-container h3 {
+    font-size: 2.2rem !important;
+  }
+
+  .about-container p {
+    font-size: 1rem;
+  }
+
+  .about-container h2 {
+    font-size: 1.4rem;
+  }
+
+  .hero-logo-img {
+    width: 86vw !important;
+    min-width: 290px !important;
+    max-width: 480px !important;
+    margin-bottom: 24px !important;
+  }
+}
+
+::ng-deep app-timeline {
+  .heading-primary {
+    font-family: 'Bebas Neue', sans-serif !important;
+    background-image: linear-gradient(180deg, #FF7A1A 0%, #994910 100%) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    color: transparent !important;
+  }
+
+  .timeline-line {
+    background: #FF7A1A !important;
+  }
+
+  .timeline-card {
+    border: 1px solid #FF7A1A !important;
+    box-shadow: 0 4px 12px rgba(255, 122, 26, 0.1) !important;
+    background: rgba(18, 18, 24, 0.85) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+
+  .timeline-card:hover .phase-number {
+    box-shadow: 0 4px 15px rgba(255, 122, 26, 0.3) !important;
+  }
+
+  .phase-number {
+    background: linear-gradient(135deg, #FF7A1A, #b35512) !important;
+    color: #FFFFFF !important;
+    font-family: 'Satoshi', sans-serif !important;
+    font-weight: 700 !important;
+  }
+
+  .timeline-title {
+    font-family: 'Satoshi', sans-serif !important;
+    color: #FFFFFF !important;
+  }
+
+  .timeline-date {
+    font-family: 'Satoshi', sans-serif !important;
+    color: #FF7A1A !important;
+  }
+
+  .timeline-circle {
+    box-shadow: 0 0 0 0 rgba(255, 122, 26, 0.7) !important;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="sponsors">
+    <div class="sponsor" *ngFor="let sponsor of sponsors">
+        <div class="sponsor-card"> 
+        <div class="img">
+            <a [href]="sponsor.link" target="_blank" class="sponsor-image-container">
+                <img [src]="sponsor.image" [alt]="sponsor.name" class="sponsor-image">
+            </a>
+        </div>
+        <div class="card-info">
+            <div class="title">{{ sponsor.name || "TITLE" }}</div>
+        </div>
+        </div>
+                        <div class="name" *ngIf="sponsor?.title">
+                {{ sponsor.title }}
+            </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<nav class="fullscreen-navbar" [class.scrolled]="isScrolled" [class.hidden]="isHidden">
+  <a class="nav-brand" href="https://www.ecell.in" target="_blank" rel="noopener noreferrer">
+    <img id="ecell-logo" src="images/favicon/logo.webp" alt="E-Cell Logo" draggable="false" />
+  </a>
+
+  <!-- <div class="center-logo" [class.hidden]="isHomePage">
+    <a routerLink="/">
+      <img src="images/logos/logo-element.svg" alt="Sorry Marki" draggable="false" [style.transform]="'rotate(' + logoRotation + 'deg)'"/>
+    </a>
+  </div> -->
+
+  <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="fullscreen-menu" [class.active]="menuOpen">
+    <div class="backdrop">
+      <app-reactor-core
+        style="width: 100%; height: 100%; display: block; position: absolute; top: 0; left: 0; z-index: 1;">
+      </app-reactor-core>
+    </div>
+
+    <div class="menu-section">
+      <ul class="menu-items" (mouseleave)="setHoveredItem(null)">
+        <li><a routerLink="/" (click)="toggleMenu()" (mouseenter)="setHoveredItem(0)">Home</a></li>
+        <li><a routerLink="/events" (click)="toggleMenu()" (mouseenter)="setHoveredItem(1)">Events</a></li>
+        <li><a routerLink="/acco" (click)="toggleMenu()" (mouseenter)="setHoveredItem(2)">Accommodation</a></li>
+        <li><a routerLink="/sponsors" (click)="toggleMenu()" (mouseenter)="setHoveredItem(3)">Sponsors</a></li>
+        <li><a routerLink="/speakers" (click)="toggleMenu()" (mouseenter)="setHoveredItem(4)">Speakers</a></li>
+        <!-- <li><a routerLink="/coming-soon" (click)="toggleMenu()" (mouseenter)="setHoveredItem(5)">Agenda</a></li> -->
+        <li><a routerLink="/contact" (click)="toggleMenu()" (mouseenter)="setHoveredItem(6)">Contact Us</a></li>
+        @if (!isLoggedIn) {
+        <li><a routerLink="/register" (click)="toggleMenu()" (mouseenter)="setHoveredItem(7)"
+            style="cursor: pointer;">Register</a></li>
+        <li><a routerLink="/login" (click)="toggleMenu()" (mouseenter)="setHoveredItem(8)"
+            style="cursor: pointer;">Login</a></li>
+        } @else {
+        <li><a routerLink="/dashboard" (click)="toggleMenu()" (mouseenter)="setHoveredItem(7)">Dashboard</a></li>
+        <li><a (click)="logout()" (mouseenter)="setHoveredItem(8)">Logout</a></li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

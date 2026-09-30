@@ -1,0 +1,39 @@
+<div
+  class="wrapper"
+  (mousemove)="onMouseMove($event)"
+>
+  <div class="card-pattern">
+    <div class="overlay"></div>
+    <div
+      class="gradient"
+      [ngStyle]="{
+        'mask-image':
+          'radial-gradient(250px at ' + mouseX + 'px ' + mouseY + 'px, white, transparent)',
+        '-webkit-mask-image':
+          'radial-gradient(250px at ' + mouseX + 'px ' + mouseY + 'px, white, transparent)'
+      }"
+    ></div>
+
+    <div
+      class="text-overlay"
+      [ngStyle]="{
+        'mask-image':
+          'radial-gradient(250px at ' + mouseX + 'px ' + mouseY + 'px, white, transparent)',
+        '-webkit-mask-image':
+          'radial-gradient(250px at ' + mouseX + 'px ' + mouseY + 'px, white, transparent)'
+      }"
+    >
+      <p>{{ randomString }}</p>
+    </div>
+  </div>
+
+  <div class="center-content">
+    <div class="circle">
+      <div class="blur-bg"></div>
+      <div class="content-wrapper">
+        <ng-content></ng-content>
+        <!-- <span *ngIf="text">{{ text }}</span> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,355 @@
+// @import "../../../../styles.scss";
+@import "../../../../breakpoints.scss";
+
+:host {
+  font-family: 'Satoshi', sans-serif !important;
+  --primary-color: #FF7A1A;
+  --text-color: #FFFFFF;
+  --placeholder-color: rgba(255, 255, 255, 0.45);
+  --border-color: rgba(255, 255, 255, 0.18);
+  --input-area-bg-color: rgba(255, 255, 255, 0.05);
+
+  --label-color: #FFFFFF;
+  --info-color: #FF7A1A;
+  --tooltip-color: white;
+  --tooltip-bg-color: #222228;
+
+  --input-bg-color: #1e1e24;
+  --input-border-color: rgba(255, 255, 255, 0.18);
+  --input-color: var(--text-color);
+
+  --input-focus-border-color: #FF7A1A;
+
+  --input-disabled-bg-color: #141418;
+
+  --radio-bg-color: #1e1e24;
+  --radio-border-color: rgba(255, 255, 255, 0.25);
+  --radio-checked-color: #FF7A1A;
+  --select-bg-color: #1e1e24;
+  --select-border-color: rgba(255, 255, 255, 0.18);
+  --error-color: #ff4d4d;
+  --textarea-bg-color: #1e1e24;
+  --textarea-border-color: rgba(255, 255, 255, 0.18);
+  --remove-button-bg-color: transparent;
+  --remove-button-color: #ff4d4d;
+  --add-button-bg-color: #FF7A1A;
+  --add-button-color: #FFFFFF;
+  --add-button-border-color: #FF7A1A;
+  --submit-button-bg-color: #FF7A1A;
+  --submit-button-color: #FFFFFF;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="tel"] {
+  background: var(--input-bg-color);
+  border: 1.5px solid var(--input-border-color);
+  border-radius: 10px;
+  color: var(--input-color) !important;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+  height: 48px;
+  padding: 0 16px;
+  transition: all 0.25s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus {
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.25) !important;
+  outline: none !important;
+  border-color: var(--input-focus-border-color) !important;
+  background: #24242c;
+}
+
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="number"]:disabled,
+input[type="date"]:disabled,
+input[type="tel"]:disabled {
+  background: var(--input-disabled-bg-color);
+  border: 1.5px solid var(--input-border-color);
+  color: var(--placeholder-color) !important;
+  cursor: not-allowed;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.radio {
+  display: flex;
+  gap: 24px;
+  padding-left: 4px;
+  align-items: center;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 1rem;
+}
+
+.radio.radio-vertical {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio > * {
+  display: flex;
+  align-items: center;
+}
+
+.radio-option,
+.radio > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: 'Satoshi', sans-serif !important;
+}
+
+.radio input[type="radio"],
+.radio input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  background-color: var(--radio-bg-color);
+  border: 2px solid var(--radio-border-color);
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  transition: all 0.2s ease;
+
+  &::before {
+    content: "";
+    width: 9px;
+    height: 5px;
+    transform: scale(0) rotate(-45deg);
+    border-left: 2.5px solid #000000;
+    border-bottom: 2.5px solid #000000;
+    margin-top: -2px;
+    transition: transform 0.15s ease-in-out;
+  }
+
+  &:checked {
+    color: var(--radio-checked-color);
+    background-color: var(--radio-checked-color);
+    border-color: var(--radio-checked-color);
+    box-shadow: 0 0 10px rgba(255, 122, 26, 0.4);
+
+    &::before {
+      transform: scale(1) rotate(-45deg);
+    }
+  }
+
+  &:hover {
+    border-color: var(--radio-checked-color);
+  }
+}
+
+.field-note {
+  font-size: 0.85rem;
+  color: #ff9b50;
+  margin-top: 6px;
+  font-weight: 500;
+  font-family: 'Satoshi', sans-serif !important;
+  line-height: 1.4;
+}
+
+select {
+  background: var(--select-bg-color);
+  border: 1.5px solid var(--select-border-color);
+  border-radius: 10px;
+  color: var(--input-color) !important;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+  height: 48px;
+  appearance: auto;
+  padding: 0 14px;
+  transition: all 0.25s ease;
+}
+
+select:focus {
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.25) !important;
+  outline: none !important;
+  border-color: var(--input-focus-border-color) !important;
+  background: #24242c;
+  appearance: auto;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--placeholder-color) !important;
+  font-family: 'Satoshi', sans-serif !important;
+  font-style: normal;
+  font-size: 0.98rem;
+}
+
+.form-label {
+  color: var(--label-color);
+  font-family: 'Satoshi', sans-serif !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.form-label span {
+  color: #FF7A1A;
+  font-weight: 700;
+}
+
+.error {
+  color: var(--error-color);
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 0.95rem;
+}
+
+.is-invalid {
+  border-color: var(--error-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25) !important;
+}
+
+.is-invalid:focus {
+  border-color: var(--error-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25) !important;
+}
+
+textarea {
+  width: 100%;
+  min-height: 110px;
+  background: var(--textarea-bg-color);
+  border: 1.5px solid var(--textarea-border-color);
+  border-radius: 10px;
+  color: var(--input-color) !important;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 12px 16px;
+  transition: all 0.25s ease;
+}
+
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(255, 122, 26, 0.25) !important;
+  outline: none !important;
+  border-color: var(--input-focus-border-color) !important;
+  background: #24242c;
+  padding: 12px 16px;
+}
+
+.custom-select option {
+  background: #1e1e24;
+  color: #FFFFFF;
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.list-item-questions {
+  flex-grow: 1;
+}
+
+.list-item button {
+  background-color: var(--remove-button-bg-color);
+  color: var(--remove-button-color) !important;
+  // font-weight: 600;
+  text-transform: uppercase;
+  padding: 0;
+  font-size: 1.4rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+button.add {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: var(--submit-btn-bg);
+  color: black !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 18px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button.add:hover {
+  background-color: var(--submit-btn-hover-bg);
+  color: white !important;
+  border: 1px solid white;
+}
+
+.remove input::placeholder {
+  color: var(--input-color) !important;
+  font-style: normal;
+}
+
+.label-container .tooltip-button:first-of-type {
+  margin-inline-start: 0.5rem;
+}
+
+.info-button,
+.error-button {
+  display: none;
+}
+
+.info-button .tooltip,
+.error-button .tooltip {
+  font-size: smaller;
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 200px;
+  width: max-content;
+  opacity: 1; //Side-effect of angular animations
+}
+
+.info-button .tooltip {
+  background-color: var(--tooltip-bg-color);
+  color: black;
+}
+
+.error-button .tooltip {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.info-button:hover .tooltip,
+.error-button:hover .tooltip {
+  display: block;
+}
+
+@media screen and (min-width: $custom-breakpoint-lg) {
+  .info-button .info-tooltip {
+    max-width: 250px;
+  }
+}

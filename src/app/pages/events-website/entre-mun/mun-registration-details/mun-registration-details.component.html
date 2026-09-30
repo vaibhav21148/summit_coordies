@@ -1,0 +1,202 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-3xl mx-auto px-4">
+    <!-- Header -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">Complete MUN Registration</h1>
+          <p class="text-gray-600 mt-1">Fill in your personal details and committee preferences</p>
+        </div>
+        <button 
+          (click)="goBack()"
+          class="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium">
+          ← Back
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center py-8">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+      <p class="mt-4 text-gray-600">Loading...</p>
+    </div>
+
+    <!-- Registration Form -->
+    <div *ngIf="registration && !loading" class="space-y-6">
+      <!-- Group Info (if applicable) -->
+      <div *ngIf="groupInfo" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-blue-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+          <div>
+            <p class="text-sm font-medium text-blue-800">Group Registration</p>
+            <p class="text-sm text-blue-700">Institution: {{ groupInfo.institution_name }}</p>
+            <p class="text-sm text-blue-700">Leader: {{ groupInfo.leader_name }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Basic Info (Read-only) -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">Basic Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <p class="text-gray-900 bg-gray-50 px-3 py-2 rounded-md">{{ registration.name }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <p class="text-gray-900 bg-gray-50 px-3 py-2 rounded-md">{{ registration.email }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Contact</label>
+            <p class="text-gray-900 bg-gray-50 px-3 py-2 rounded-md">{{ registration.contact }}</p>
+          </div>
+          <div *ngIf="groupInfo">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Institution</label>
+            <p class="text-gray-900 bg-gray-50 px-3 py-2 rounded-md">{{ groupInfo.institution_name }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Details -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+            <input 
+              type="date" 
+              [(ngModel)]="formData.date_of_birth"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Role *</label>
+            <select 
+              [(ngModel)]="formData.role"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required>
+              <option value="">Select Role</option>
+              <option value="college">College Student</option>
+              <option value="school">School Student</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <label class="flex items-center">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="formData.need_accommodation"
+              class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+            <span class="ml-2 text-sm text-gray-700">I need accommodation</span>
+          </label>
+        </div>
+
+        <div class="mt-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Previous MUN Experience</label>
+          <textarea 
+            [(ngModel)]="formData.previous_mun_experience"
+            rows="3"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Describe your previous MUN experience (optional)"></textarea>
+        </div>
+
+        <div class="mt-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">How did you hear about us?</label>
+          <input 
+            type="text" 
+            [(ngModel)]="formData.referral_source"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Social media, friend, website, etc.">
+        </div>
+      </div>
+
+      <!-- Committee Preferences -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-semibold text-gray-900">Committee Preferences</h2>
+          <button 
+            type="button"
+            (click)="addPreference()"
+            class="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">
+            Add Preference
+          </button>
+        </div>
+        <p class="text-sm text-gray-600 mb-6">Please select at least 3 preferences in order of priority. All preferences are required.</p>
+        
+        <div class="space-y-6">
+          <div *ngFor="let pref of formData.preferences; let i = index" class="border border-gray-200 rounded-lg p-4">
+            <div class="flex justify-between items-center mb-3">
+              <h3 class="font-medium text-gray-900">Preference {{ i + 1 }} *</h3>
+              <button 
+                *ngIf="formData.preferences.length > 3"
+                type="button"
+                (click)="removePreference(i)"
+                class="text-red-600 hover:text-red-800 text-sm font-medium">
+                Remove
+              </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Committee</label>
+                <select 
+                  [(ngModel)]="pref.committee"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required>
+                  <option value="">Select Committee</option>
+                  <option *ngFor="let committee of committees" [value]="committee">{{ committee }}</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                <select 
+                  [(ngModel)]="pref.country"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required>
+                  <option value="">Select Country</option>
+                  <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="flex justify-end space-x-4">
+          <button 
+            (click)="goBack()"
+            class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+            Cancel
+          </button>
+          <button 
+            (click)="saveDetails()"
+            [disabled]="loading"
+            class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50">
+            Save Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Completion Status -->
+      <div *ngIf="registration.is_details_completed" class="bg-green-50 border border-green-200 rounded-lg p-4">
+        <div class="flex items-center">
+          <svg class="h-5 w-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          <div>
+            <p class="text-sm font-medium text-green-800">Details Completed</p>
+            <p class="text-sm text-green-700">Your MUN registration details are complete and ready for payment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

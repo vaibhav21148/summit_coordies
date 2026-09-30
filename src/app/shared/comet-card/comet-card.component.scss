@@ -1,0 +1,28 @@
+.perspective {
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+//   border-radius: 16px;
+  border-radius: 2rem;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+  box-shadow: rgba(0, 0, 0, 0.01) 0px 520px 146px 0px,
+              rgba(0, 0, 0, 0.04) 0px 333px 133px 0px,
+              rgba(0, 0, 0, 0.26) 0px 83px 83px 0px,
+              rgba(0, 0, 0, 0.29) 0px 21px 46px 0px;
+
+  // &:hover {
+  //   transform: scale(1.05) translateZ(50px);
+  // }
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.6;
+}
