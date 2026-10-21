@@ -2,51 +2,32 @@
   <!-- <div class="template-navbar" [class.scrolled-nav]="isScrolled">
   </div> -->
   <div class="main-container">
-    <app-vanta-bg></app-vanta-bg>
-    <!-- <div class="hero-container" style="
-        text-align: -webkit-center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      ">
-      <div class="logo" style="display: flex; justify-content: center; align-items: center">
-                      
-    </div>
-      <div class="reg-button">
-        <div class="button d-flex flex-column flex-md-row" style="margin-top: 30rem ; gap: 1rem; justify-content: center; align-items: center;">
-          <button routerLink="/ihack/reg" style="margin-top: 0;">Register</button>
-          
-          <button  routerLink="/ihack/sub" style="margin-top: 0;">Submissions</button>
+    <div class="hero-container">
+      <div class="logo hero-logo-wrapper">
+        <!-- Full Background Image -->
+        <div id="hero-bg" [style.backgroundImage]="'url(' + BackgroundImages.IHACK + ')'">
+        </div>
 
+        <!-- Smooth Dark Vignette Overlay -->
+        <div class="hero-vignette-overlay">
+        </div>
+
+        <!-- Center Content: Logo and Action Buttons -->
+        <div class="hero-center-content">
+          <img src="images/i_hack.png" alt="i-HACK" class="hero-logo-img" />
+
+          <div class="hero-buttons-wrapper">
+            <a *ngFor="let btn of ihackButtons" class="btn hero-action-btn"
+              [routerLink]="btn.routerLink ? btn.routerLink : null">
+              {{ btn.text }}
+            </a>
+          </div>
         </div>
       </div>
-    </div> -->
-
-        <div class="hero-container" style="
-      text-align: -webkit-center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    ">
-      <div class="logo" style="display: flex; justify-content: center; align-items: center;">
-        <app-events-bg [backgroundImage]="BackgroundImages.IHACK"  [buttons]="ihackButtons"  logoImage="https://2k21.s3.amazonaws.com/s3uploadapi/i_hack.png"></app-events-bg>     
-         
-      </div>
-      
     </div>
 
-    <div class="join-container" style="
-        display: flex;
-        margin: auto;
-        justify-content: center;
-        flex-direction: column;
-      ">
+    <div class="join-container" id="about">
       <div style="display: flex; margin: auto; justify-content: center">
-                         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0) 100%); pointer-events: none; z-index: -1;"></div>
         <h2 class="heading-primary">
           What is i-HACK?
         </h2>
@@ -66,49 +47,42 @@
           Your startup dream starts here
         </h2> -->
     </div>
-    <div class="line" style="
-        display: flex;
-        margin-top: 2rem;
-        margin-bottom: -4rem;
-        justify-content: center;
-      ">
-      <hr style="width: 80%; color: white; height: 5px" />
+    <div class="line">
+      <hr />
     </div>
-    <div class="why-container pt-4">
+    <div class="why-container pt-4" id="why-ihack">
          <h2 class="heading-primary">
           Why i-HACK?
         </h2>
       <div class="card-container">
         <div class="cards" id="ev1">
-          <app-evervault-card>
-            <img src="images/events/info-icons/rupee.png" alt="" width="185px" />
-          </app-evervault-card>
+          <div class="icon-wrapper">
+            <img src="images/events/info-icons/rupee.png" alt="Cash prizes and internship opportunities" />
+          </div>
           <div class="content">
             <p class="text">Exciting Cash prizes and internship opportunities</p>
           </div>
         </div>
         <div class="cards" id="ev2">
-          <app-evervault-card>
-            <img src="images/events/info-icons/medal.png" alt="" width="185px" />
-          </app-evervault-card>
+          <div class="icon-wrapper">
+            <img src="images/events/info-icons/medal.png" alt="Validation and mentorship" />
+          </div>
           <div class="content">
             <p class="text">Validation and mentorship from Industry experts</p>
           </div>
         </div>
         <div class="cards" id="ev3">
-          <app-evervault-card>
-            <img src="images/events/info-icons/film_camera.png" alt="" width="185px" />
-          </app-evervault-card>
+          <div class="icon-wrapper">
+            <img src="images/events/info-icons/film_camera.png" alt="Build Real-World Impact" />
+          </div>
           <div class="content">
-            <p class="text">
-            Build Real-World Impact
-            </p>
+            <p class="text">Build Real-World Impact</p>
           </div>
         </div>
         <div class="cards" id="ev4">
-          <app-evervault-card>
-            <img src="images/events/info-icons/people.png" alt="" width="185px" />
-          </app-evervault-card>
+          <div class="icon-wrapper">
+            <img src="images/events/info-icons/people.png" alt="Guaranteed certificates" />
+          </div>
           <div class="content">
             <p class="text">Guaranteed certificates to build your accolades</p>
           </div>
@@ -116,7 +90,7 @@
       </div>
     </div>
 
-    <div class="why-container pt-4">
+    <div class="why-container pt-4" id="tracks">
       <h3 class="heading-primary">TRACKS</h3>
 
     </div>
@@ -232,7 +206,7 @@
     </div>
 
 
-    <div class="gallery-container pt-4">
+    <div class="gallery-container pt-4" id="gallery">
       <h3 class="heading-primary">GALLERY</h3>
       <div class="gallery-comp-container">
         <app-carousel [imageURLs]="carouselImages"></app-carousel>
@@ -242,12 +216,12 @@
 
   <!-- <app-timeline [events]="events"></app-timeline> -->
 
-  <div class="faq-container pt-5" *ngIf="faqs && faqs.length > 0">
+  <div class="faq-container pt-5" id="faqs" *ngIf="faqs && faqs.length > 0">
     <h3 class="heading-primary">FAQs</h3>
     <app-accordion [items]="faqs" accordionId="ihack-faqs"></app-accordion>
   </div>
 
-  <div class="contact-card-container pt-5 pb-5">
+  <div class="contact-card-container pt-5 pb-5" id="contact">
     <h3 class="heading-primary">Contact Us</h3>
     <div class="contact">
       <app-square-contact [contact]="'917020782116'" [email]="'kartikpadiya@ecell.in'" [linkedin]="
