@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { RouterLink } from '@angular/router';
@@ -18,6 +20,7 @@ import { AccordionComponent } from '@shared/accordion/accordion.component';
 import { VantaBgComponent } from "@shared/vanta-bg/vanta-bg.component";
 import { EventsBgComponent } from "@shared/events-bg/events-bg.component";
 import { BackgroundImages } from '@constants/enums/background_images_enums';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-ihack',
@@ -38,7 +41,7 @@ import { BackgroundImages } from '@constants/enums/background_images_enums';
   templateUrl: './ihack.component.html',
   styleUrl: './ihack.component.scss',
 })
-export class IhackComponent implements OnInit {
+export class IhackComponent implements OnInit, AfterViewInit {
 
   // showSpline = true;
 
@@ -65,6 +68,18 @@ export class IhackComponent implements OnInit {
     { text: 'Register', routerLink: '/ihack/reg' },
     { text: 'Make Submission', routerLink: '/ihack/sub' },
   ];
+  currentYear: number = new Date().getFullYear();
+
+  scrollToSection(sectionId: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: any) {
     const scrollY = window.scrollY;
@@ -77,11 +92,12 @@ export class IhackComponent implements OnInit {
     private dataService: GeneralDataService
   ) {}
   ngOnInit() {
-    // AOS.init({
-    //   duration: 800,
-    //   easing: 'ease-in-out',
-    //   // once: true  // animate only once
-    // });
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false,
+      offset: -100
+    });
     this.getFaqs();
     this.getInvestors();
     this.responsiveOptions = [
@@ -113,9 +129,29 @@ export class IhackComponent implements OnInit {
     ];
   }
 
-  // ngAfterViewInit() {
-  //   this.initTimelines();
-  // }
+  ngAfterViewInit() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const introTl = gsap.timeline({
+      defaults: { ease: 'power3.out' }
+    });
+
+    introTl
+      .fromTo('#hero-bg',
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1.2, ease: 'power2.out' }
+      )
+      .fromTo('.hero-logo-img',
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo('.hero-action-btn',
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.75, stagger: 0.1, ease: 'power3.out' },
+        '-=0.6'
+      );
+  }
 
   RegDeadline() {
     Swal.fire({
