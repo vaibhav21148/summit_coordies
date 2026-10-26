@@ -1,14 +1,13 @@
-// #template-container .reg-button h3 {
-//   text-align: center;
-//   margin-bottom: 20px;
-//   color: rgba(194, 146, 37, 1);
-//   font-size: 35px;
-//   margin: 0;
-//   padding: 0;
-//   // font-size: 25px;
-//   z-index: 999;
-//   margin-top: 2rem;
-// }
+#template-container .reg-button h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FF8C00;
+  font-size: 35px;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+  margin-top: 2rem;
+}
 
 // app-spline-logo {
 //   z-index: 5;
@@ -813,7 +812,7 @@
 //   align-self: flex-start;
 //   text-align: left;
 //   margin-bottom: 20px;
-//   color: #702ac6;
+//   color: #FF8C00;
 //   font-size: 4rem;
 //   margin: 0;
 //   padding: 0;
@@ -821,97 +820,126 @@
 //   font-family: "Fellix", sans-serif;
 //   font-weight: 400;
 // }
+#template-container .faq-container h3.heading-primary {
+  color: #FF8C00 !important;
+  background: none !important;
+  -webkit-text-fill-color: #FF8C00 !important;
+}
+/* Extra FAQ container */
+#template-container .extra-faqs {
+  width: 80%;
+  max-width: 1200px;
+  margin: 30px auto;
+}
 
-// #template-container .faq-container .accordion {
-//   width: 60%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-//   gap: 15px;
-// }
-// #template-container .faq-container .accordion .accordion-item {
-//   width: 100%;
-//   color: #333;
-//   font-size: 17px;
-//   font-weight: 400;
-//   margin: 0;
-//   overflow: hidden;
-//   text-align: center;
-// }
-// // #template-container .faq-container .accordion .accordion-header:focus {
-// //   box-shadow: none;
-// //   outline: none;
-// //   border: 1px solid #cded09;
-// // }
-// // #template-container .faq-container .accordion .accordion-item:focus {
-// //   box-shadow: none;
-// //   outline: none;
-// //   border: 1px solid #cded09;
-// // }
-// #template-container .faq-container .accordion .accordion-header {
-//   padding: 0;
-// }
-// #template-container
-//   .faq-container
-//   .accordion
-//   .accordion-item
-//   .accordion-button {
-//   background-color: transparent;
-//   color: #702ac6;
-//   font-size: 20px;
-//   font-weight: 600;
-//   margin: 0;
-//   padding: 15px;
-//   border: none;
-//   transition: background-color 0.3s ease, color 0.3s ease;
-//   text-align: center;
-//   align-items: center;
-//   justify-content: center;
-// }
-// #template-container
-//   .faq-container
-//   .accordion
-//   .accordion-item
-//   .accordion-collapse {
-//   background-color: transparent;
-//   color: black;
-//   transition: max-height 0.4s ease-in-out;
-//   text-align: center;
-//   display: none;
-// }
-// #template-container
-//   .faq-container
-//   .accordion
-//   .accordion-item
-//   .accordion-collapse.show {
-//   display: block;
-// }
-// #template-container .faq-container .accordion .accordion-item .accordion-body {
-//   padding: 15px;
-//   font-size: 16px;
-//   line-height: 1.5;
-//   color: black;
-//   text-align: center;
-// }
+/* FAQ card */
+#template-container .extra-faq-item {
+  background: #000 !important;
+  border: 1px solid #FF8C00 !important;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+  overflow: hidden;
+}
 
-// // #template-container
-// //   .faq-container
-// //   .accordion
-// //   .accordion-item
-// //   .accordion-button:focus {
-// //   // border: none;
-// //   outline: none;
-// //   box-shadow: none;
-// // }
-// // #template-container
-// //   .faq-container
-// //   .accordion
-// //   .accordion-item
-// //   .accordion-button::after {
-// //     display: none;
-// // }
-// // faq container
+/* Question button */
+#template-container .extra-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+
+  padding: 15px 5px;
+  background: transparent !important;
+  background-color: transparent !important;
+
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Question number */
+#template-container .faq-number {
+  flex: 0 0 35px;
+  color: #FF8C00 !important;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Question text */
+#template-container .faq-question-text {
+  flex: 1;
+  color: #fff !important;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Arrow */
+#template-container .faq-arrow {
+  color: #FF8C00 !important;
+  font-size: 30px;
+  font-weight: bold;
+  transition: transform 0.25s ease;
+}
+
+/* Answer */
+#template-container .extra-faq-answer {
+  padding: 10px 40px 20px 45px;
+  color: #fff !important;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Remove default focus and hover styling */
+#template-container .extra-faq-question:hover,
+#template-container .extra-faq-question:focus,
+#template-container .extra-faq-question:active {
+  background: transparent !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  #template-container .extra-faqs {
+    width: 94%;
+  }
+
+  #template-container .extra-faq-item {
+    padding: 8px 12px;
+  }
+
+  #template-container .extra-faq-question {
+    gap: 15px;
+    padding: 12px 0;
+  }
+
+  #template-container .faq-number {
+    flex-basis: 25px;
+    font-size: 21px;
+  }
+
+  #template-container .faq-question-text {
+    font-size: 17px;
+  }
+
+  #template-container .faq-arrow {
+    font-size: 24px;
+  }
+
+  #template-container .extra-faq-answer {
+    padding: 8px 10px 15px;
+    font-size: 16px;
+  }
+}
+
+
 
 // // contact container
 // #template-container .contact-card-container {
@@ -1017,13 +1045,13 @@
 //   // #template-container .hero-container {
 //   //   scale: 1.3;
 //   // }
-//   #template-container .hero-container .reg-button {
-//     // bottom: 15%;
-//     // left: 50%;
-//     // transform: translate(-50%, 10%);
-//     display: flex;
-//     flex-direction: column;
-//     gap: 20px;
+  // #template-container .hero-container .reg-button {
+// bottom: 15%;
+//   left: 50%;
+//     transform: translate(-50%, 10%);
+   //  display: flex;
+   // flex-direction: column;
+   //  gap: 20px;
 //   }
 //   #template-container .hero-container .reg-button .header {
 //     display: flex;
@@ -1127,9 +1155,9 @@
 //   //   transform: translate(50%, -40%);
 //   //   width: 90%;
 //   // }
-//   // #template-container .hero-container {
-//   //   scale: 1.3;
-//   // }
+ //#template-container .hero-container {
+  // scale: 1.3;
+ //}
 //   // #template-container .hero-container .background .top-left {
 //   //   position: absolute;
 //   //   top: 0;
@@ -1538,3 +1566,100 @@
 // .plam .features small {
 //   font-size: 1px;
 // }
+
+/* Compi orange theme — color changes only */
+/* =========================================
+   COMPI ORANGE THEME
+   ========================================= */
+
+#template-container {
+  --compi-orange: #FF8C00;
+  --compi-orange-light: #FFB347;
+}
+
+/* 1. Cash Prize: Upto INR 1 Lakh */
+#template-container .about-container h3.heading-primary {
+  color: #FF8C00;
+  background: none;
+}
+
+/* 2. Competitions highlighted inside the paragraph */
+#template-container .about-container .event-name-highlight {
+  color: #FF8C00;
+}
+
+/* 3. Competitions section heading */
+#template-container .details-container > h3.heading-primary {
+  color: #FF8C00;
+  background: none;
+}
+
+/* 4. Contact Us heading */
+#template-container .contact-card-container > h3.heading-primary {
+  color: #FF8C00;
+  background: none;
+}
+
+/* 5. Know More buttons: fill, border/frame, and text */
+#template-container .details-container .cards .know-more button {
+  background: #FF8C00;
+  color: #000000;
+  border: 2px solid #FFB347;
+  border-radius: 8px;
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+}
+
+/* 6. Know More button hover */
+#template-container .details-container .cards .know-more button:hover {
+  background: #E67E00;
+  border-color: #FF8C00;
+  color: #FFFFFF;
+}
+
+:host ::ng-deep .reg-button button {
+  background: #FF8C00 !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border: 2px solid #FF8C00 !important;
+}
+#template-container .contact-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+  background: #000;
+}
+
+#template-container .contact-card-container .contact {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.hero-register {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+}
+
+.hero-register button {
+  padding: 12px 30px;
+  font-size: 20px;
+  font-weight: 600;
+  background: #FF8C00;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hero-register button:hover {
+  background: #E67E00;
+}

@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://4cqs2zpl07.ucarecd.net/73b12e34-9154-4e4e-a2d9-208106176178/-/preview/1919x1260/');
+   // background-image: url('https://4cqs2zpl07.ucarecd.net/73b12e34-9154-4e4e-a2d9-208106176178/-/preview/1919x1260/');
     background-position: center;
     background-size: cover;
     backdrop-filter: blur(12px);
