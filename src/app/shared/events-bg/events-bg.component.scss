@@ -1,5 +1,5 @@
 .events-bg-container {
-  position: absolute;
+  position: relative;
   top: 0;
   right: 0;
   height: 100vh;
@@ -26,25 +26,18 @@
 
 .circle1 {
 position: absolute;
-  right: -250px;
-  top: 0;
-  transform: translateY(-30%);
-  width: 1400px;
-  height: 1500px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: #1e1e1e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
 }
 
-.circle4 {
-  width: 1300px;
-  height: 1400px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: transparent;
+ .circle4 {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -54,17 +47,9 @@ position: absolute;
   object-fit: cover;
   // image-rendering: pixelated;
   // border-radius: 50%;
-  animation: parallaxMove 20s ease-in-out infinite;
+  animation: none ;
 }
 
-@keyframes parallaxMove {
-  0%, 100% {
-    transform: scale(1) translateY(0);
-  }
-  50% {
-    transform: scale(1.05) translateY(-10px);
-  }
-}
 
 .left-circle {
   position: absolute;
@@ -74,9 +59,8 @@ position: absolute;
   width: 800px;
   height: 800px;
   border-radius: 50%;
-  border: 2px solid #FFF;
-  background: radial-gradient(39.32% 33.69% at 99.05% 42.5%, #3B3B3B 0%, #000 100%);
-  z-index: 1;
+  border: none;
+  background: transparent;
   display: flex;
   justify-content: flex-end;
   padding-top: 0rem;
@@ -84,18 +68,19 @@ position: absolute;
   padding-left: 52rem;
 }
 
-.logo{
-  width: 630px;
-  height: 70%;
-  transform: scale(0.7);
+.logo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-
 .logo img{
-  max-width: 550px;
-  height: 80%;
-  // transform: scale(0.8);
-  object-fit: contain;
+    width: 450px;
+    max-width: 80vw;
+    height: auto;
 }
 
 
