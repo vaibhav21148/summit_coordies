@@ -47,12 +47,12 @@ body {
 
 // app-root,
 // #template-container,
-// .main-container {
-//   background-color: #000 !important;
-// }
+.main-container {
+   background-color: #000 !important;
+ }
 
 .dashboard-container{
-  background-color: transparent !important;
+  background-color: #000 !important; //changed
 }
 
 

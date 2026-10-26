@@ -1,5 +1,5 @@
 <div id="template-container">
-<app-vanta-bg></app-vanta-bg>
+  <app-vanta-bg></app-vanta-bg>
   <div class="main-container">
     <div class="hero-container" style="text-align: -webkit-center;
       display: flex;
@@ -10,7 +10,11 @@
       <div class="logo" style="display:flex; justify-content: center; align-items: center;">
         <app-events-bg  [logoImage]="'images/events/compi/compi_logo.png'" [buttons]="compiButtons" [backgroundImage]="BackgroundImages.BID" (buttonClick)="handleButtonClick($event)"></app-events-bg>      
       </div>
-
+      <div class="hero-register">
+  <button (click)="handleButtonClick('compireg')">
+    REGISTER
+  </button>
+</div>
     </div>
     <div class="about-container">
       <h3 class="heading-primary" style="margin-bottom: -1rem;">Cash Prize: Upto INR 1 Lakh</h3>
@@ -38,7 +42,7 @@
   </div>
 
 
-  <div class="faq-container" *ngIf="faqs && faqs.length > 0">
+  <div class="faq-container" >
     <h3 class="heading-primary pt-4" style="margin-bottom: -1rem;">FAQs</h3>
     <app-accordion [items]="faqs" accordionId="compi-faqs"></app-accordion>
   </div>
